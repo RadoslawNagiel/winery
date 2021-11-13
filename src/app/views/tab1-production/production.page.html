@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tworzone wina </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tworzone wina</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ng-container *ngFor="let wine of wines">
+    <app-wines-list [wine]="wine"></app-wines-list>
+  </ng-container>
+</ion-content>

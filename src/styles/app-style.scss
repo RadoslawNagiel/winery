@@ -1,0 +1,35 @@
+:root {
+  --primary-color: #7a1616;
+  --secondary-color: #c72424;
+  --light-color: #fb7878;
+  --text-color: #ffffff;
+  --icon-color: #ffffff;
+  --icon-selected-color: #bbbbbb;
+
+  --ion-font-family: "Mohave", sans-serif;
+  --ion-text-color: var(--text-color);
+}
+
+ion-header {
+  text-align: center;
+  --ion-background-color: var(--primary-color);
+}
+
+ion-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+ion-content {
+  --ion-background-color: var(--light-color);
+}
+
+ion-tabs {
+  --ion-background-color: var(--primary-color);
+}
+
+ion-tab-button {
+  --color: var(--icon-color);
+  --color-selected: var(--light-color);
+}
