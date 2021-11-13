@@ -4,3 +4,34 @@
   padding: 20px;
   margin: 10px 40px;
 }
+
+.demijohn-text {
+  position: absolute;
+  width: 100%;
+  bottom: 0.75rem;
+  text-align: center;
+}
+
+.header-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.date-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+hr {
+  border: 1px solid var(--text-color);
+  background-color: var(--text-color);
+  border-radius: 10px;
+}
+
+.standard-button {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: 600;
+}

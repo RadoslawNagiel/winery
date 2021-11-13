@@ -1,0 +1,29 @@
+<div class="standard-frame">
+  <div class="flex">
+    <div class="w-1/4 relative">
+      <img src="assets/icons/Demijohn.svg" />
+      <div class="demijohn-text header-text">{{ wine.capacity }}l.</div>
+    </div>
+    <div class="w-3/4 pl-2">
+      <span class="header-text">{{ wine.name }}</span>
+      <hr class="my-1" />
+      <span class="date-text">{{ wine.createDate | date: "dd.MM.yyyy" }}</span>
+    </div>
+  </div>
+
+  <span class="header-text py-4">Składniki</span>
+  <div class="pl-2 items-center" *ngFor="let ingredient of wine.ingredients">
+    - {{ ingredient.name }}: {{ ingredient.weight }} kg.
+  </div>
+
+  <span class="header-text py-4">Etapy produkcji</span>
+  <div class="pl-2 items-center" *ngFor="let stage of wine.productStages">
+    <ion-checkbox [(ngModel)]="stage.done"></ion-checkbox>
+    {{ stage.date | date: "dd.MM.yyyy" }} -
+    {{ stage.name }}
+  </div>
+
+  <div class="pt-4">
+    <span class="standard-button" (click)="backClick()">Cofnij</span>
+  </div>
+</div>

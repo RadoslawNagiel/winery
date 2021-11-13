@@ -10,8 +10,31 @@
       <ion-title size="large">Tworzone wina</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div class="h-2"></div>
+  <ng-container *ngIf="page === 'wines'">
+    <div class="w-full flex justify-end pt-2 pr-10 pb-1">
+      <img
+        class="w-10 h-10"
+        (click)="newWineClick()"
+        src="assets/icons/Add-button.svg"
+      />
+    </div>
+    <ng-container *ngFor="let wine of wines">
+      <app-wines-list
+        [wine]="wine"
+        (onWineSelect)="showWine($event)"
+      ></app-wines-list>
+    </ng-container>
+  </ng-container>
 
-  <ng-container *ngFor="let wine of wines">
-    <app-wines-list [wine]="wine"></app-wines-list>
+  <ng-container *ngIf="page === 'show-wine'">
+    <app-show-wine
+      [wine]="selectedWine"
+      (onBackClick)="showWineList()"
+    ></app-show-wine>
+  </ng-container>
+
+  <ng-container *ngIf="page === 'new-wine'">
+    <app-add-wine (onBackClick)="showWineList()"></app-add-wine>
   </ng-container>
 </ion-content>

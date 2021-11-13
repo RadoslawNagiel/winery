@@ -4,15 +4,12 @@
   --light-color: #fb7878;
   --text-color: #ffffff;
   --icon-color: #ffffff;
-  --icon-selected-color: #bbbbbb;
-
-  --ion-font-family: "Mohave", sans-serif;
-  --ion-text-color: var(--text-color);
+  --input-text-color: #5f5f5f;
 }
 
 ion-header {
   text-align: center;
-  --ion-background-color: var(--primary-color);
+  --ion-background-color: var(--primary-color) !important;
 }
 
 ion-title {
@@ -25,11 +22,45 @@ ion-content {
   --ion-background-color: var(--light-color);
 }
 
-ion-tabs {
-  --ion-background-color: var(--primary-color);
+ion-tab-bar {
+  --ion-background-color: var(--primary-color) !important;
 }
 
 ion-tab-button {
   --color: var(--icon-color);
   --color-selected: var(--light-color);
+}
+
+ion-datetime {
+  border-radius: 6px;
+  background-color: var(--text-color) !important;
+  color: var(--input-text-color) !important;
+  --padding-top: 2px;
+  --padding-end: 5px;
+  --padding-bottom: 2px;
+  --padding-start: 5px;
+}
+
+.sc-ion-input-md-h {
+  --padding-top: 2px;
+  --padding-end: 5px;
+  --padding-bottom: 2px;
+  --padding-start: 5px;
+}
+
+ion-input {
+  border-radius: 6px;
+  --background: var(--text-color) !important;
+  --color: var(--input-text-color) !important;
+}
+
+ion-range {
+  border-radius: 10px;
+  --bar-height: 5px;
+  --bar-border-radius: 10px;
+}
+
+ion-checkbox {
+  --border-color: var(--primary-color);
+  --background: var(--text-color);
 }

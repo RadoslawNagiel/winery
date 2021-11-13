@@ -1,0 +1,15 @@
+.picker-wrapper {
+  background-color: var(--primary-color) !important;
+}
+
+.picker-button {
+  color: var(--text-color) !important;
+}
+
+.picker-opt {
+  color: #c4c4c4 !important;
+}
+
+.picker-opt.picker-opt-selected {
+  color: var(--text-color) !important;
+}
