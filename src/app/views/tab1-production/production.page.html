@@ -19,9 +19,9 @@
         src="assets/icons/Add-button.svg"
       />
     </div>
-    <ng-container *ngFor="let wine of wines">
+    <ng-container *ngFor="let wine of inProgressWines; index as i">
       <app-wines-list
-        [wine]="wine"
+        [wineIndex]="i"
         (onWineSelect)="showWine($event)"
       ></app-wines-list>
     </ng-container>
@@ -29,7 +29,7 @@
 
   <ng-container *ngIf="page === 'show-wine'">
     <app-show-wine
-      [wine]="selectedWine"
+      [wineIndex]="selectedWineIndex"
       (onBackClick)="showWineList()"
     ></app-show-wine>
   </ng-container>

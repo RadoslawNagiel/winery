@@ -2,17 +2,33 @@ export interface Wine {
   name: string;
   createDate: number;
   capacity: number;
-  productStages: ProductStage[];
-  ingredients: Ingredient[];
-}
-
-export interface ProductStage {
-  name: string;
-  done: boolean;
-  date: number;
+  power: number;
+  sweetness: Sweetness;
+  recipe: recipe;
+  stagesDone: boolean[];
 }
 
 export interface Ingredient {
   name: string;
   weight: number;
+}
+
+export enum Sweetness {
+  Wytrawne,
+  Półwytrawne,
+  Półsłodkie,
+  Słodkie,
+}
+
+export interface recipe {
+  name: string;
+  description: string;
+  ingredients: Ingredient[];
+  productStages: ProductStage[];
+}
+
+export interface ProductStage {
+  name: string;
+  description: string;
+  date: number;
 }

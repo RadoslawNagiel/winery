@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { WINES } from "./const";
+import { DataService } from "src/app/services/data.service";
 import { Wine } from "src/app/utils/interfaces";
 
 @Component({
@@ -8,15 +8,18 @@ import { Wine } from "src/app/utils/interfaces";
   styleUrls: ["production.page.scss"],
 })
 export class ProductionPage {
-  wines = WINES;
+  inProgressWines: Wine[] = [];
   page = `wines`;
 
-  selectedWine: Wine;
+  selectedWineIndex: number;
 
-  constructor() {}
+  constructor(private readonly dataService: DataService) {
+    this.dataService.loadWines();
+    this.inProgressWines = this.dataService.inProgressWines;
+  }
 
-  showWine(wine: Wine) {
-    this.selectedWine = wine;
+  showWine(wineIndex: number) {
+    this.selectedWineIndex = wineIndex;
     this.page = `show-wine`;
   }
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
+import { DataService } from "src/app/services/data.service";
 import { Wine } from "src/app/utils/interfaces";
 
 @Component({
@@ -8,14 +9,17 @@ import { Wine } from "src/app/utils/interfaces";
   styleUrls: ["./wines-list.component.scss"],
 })
 export class WinesListComponent implements OnInit {
-  @Input() wine: Wine;
-  @Output() onWineSelect = new EventEmitter<Wine>();
+  @Input() wineIndex: number;
+  @Output() onWineSelect = new EventEmitter<number>();
+  wine: Wine;
 
-  constructor() {}
+  constructor(private readonly dataService: DataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.wine = this.dataService.inProgressWines[this.wineIndex];
+  }
 
   elementClick() {
-    this.onWineSelect.emit(this.wine);
+    this.onWineSelect.emit(this.wineIndex);
   }
 }

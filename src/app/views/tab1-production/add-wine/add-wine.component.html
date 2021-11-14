@@ -1,80 +1,88 @@
 <div class="standard-frame">
   <div class="header-text pb-1">Nazwa</div>
-  <ion-input placeholder="Nazwa..."></ion-input>
+  <ion-input
+    placeholder="Nazwa..."
+    [ngClass]="{ 'invalid-text': !nameValid }"
+    [(ngModel)]="wine.name"
+  ></ion-input>
   <div class="header-text py-1">Data nastawienia</div>
   <ion-datetime
-    placeholder="Data"
-    monthShortNames="sty, lut, mar, kwi, maj, cze, lip, sie, wrz, paz, lis, gru"
+    [(ngModel)]="today"
+    displayFormat="DD.MMM.YYYY"
+    monthShortNames="STY, LUT, MAR, KWI, MAJ, CZE, LIP, SIE, WRZ, PAZ, LIS, GRU"
     doneText="Zatwierdź"
     cancelText="Anuluj"
   ></ion-datetime>
   <div class="header-text pt-1">Zawartość alkoholu</div>
   <div class="flex items-center">
-    <div class="w-2/3">
+    <div class="w-3/5">
       <ion-range
         class="p-0"
         min="8"
         max="22"
         snaps="true"
-        value="12"
+        [(ngModel)]="wine.power"
         ticks="false"
         color="light"
       ></ion-range>
     </div>
-    <div class="1/3 pl-3">10%</div>
+    <div class="pl-3">{{ wine.power }}%</div>
   </div>
   <div class="header-text">Słodkość</div>
   <div class="flex items-center">
-    <div class="w-2/3">
+    <div class="w-3/5">
       <ion-range
         class="p-0"
         min="0"
         max="3"
-        value="1"
+        [(ngModel)]="wine.sweetness"
         snaps="true"
         color="light"
         ticks="false"
         snaps
       ></ion-range>
     </div>
-    <div class="1/3 pl-3">półwytrawne</div>
+    <div class="pl-3">{{ Sweetness[wine.sweetness] }}</div>
   </div>
-  <div class="flex justify-between items-center">
-    <div class="header-text">Składniki</div>
-    <div>
-      <img
-        class="w-6 h-6"
-        (click)="newIngredientClick()"
-        src="assets/icons/Add-button-dark.svg"
-      />
-    </div>
-  </div>
+  <div class="header-text">Składniki</div>
   <div class="pl-2">
-    <div class="ingredient-container pt-2">
+    <div class="ingredient-container pt-1">
       <span>Nazwa</span>
       <span>Ilość</span>
       <span></span>
     </div>
-    <div *ngFor="let ingredient of ingredients; index as i">
+    <div *ngFor="let ingredient of wine.recipe.ingredients">
+      <div class="ingredient-container py-2">
+        <span>{{ ingredient.name }}</span>
+        <span>{{ ingredient.weight }}</span>
+        <span>kg.</span>
+      </div>
+      <hr />
+    </div>
+    <!-- <div *ngFor="let ingredient of wine.ingredients; index as i">
       <div class="ingredient-container py-2">
         <ion-input
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].name }"
           placeholder="Nazwa..."
           [(ngModel)]="ingredient.name"
         ></ion-input>
         <ion-input
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].value }"
           placeholder="Waga..."
+          type="number"
           [(ngModel)]="ingredient.weight"
         ></ion-input>
         <span class="flex justify-between items-center">
           <span>kg.</span>
           <img
+            *ngIf="wine.ingredients.length > 1"
             class="w-5 h-5"
             (click)="deleteIngredientClick(i)"
             src="assets/icons/Delete-button-dark.svg"
         /></span>
       </div>
       <hr />
-    </div>
+    </div> -->
   </div>
 
   <div class="pt-4 flex justify-between">

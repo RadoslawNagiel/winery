@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
+import { DataService } from "src/app/services/data.service";
 import { Wine } from "src/app/utils/interfaces";
 
 @Component({
@@ -8,12 +9,15 @@ import { Wine } from "src/app/utils/interfaces";
   styleUrls: ["./show-wine.component.scss"],
 })
 export class ShowWineComponent implements OnInit {
-  @Input() wine: Wine;
+  @Input() wineIndex: number;
   @Output() onBackClick = new EventEmitter();
+  wine: Wine;
 
-  constructor() {}
+  constructor(private readonly dataService: DataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.wine = this.dataService.inProgressWines[this.wineIndex];
+  }
 
   backClick() {
     this.onBackClick.emit();
