@@ -28,4 +28,13 @@ export const WINES: Wine[] = [
     recipe: null,
     stagesDone: [true, true, true, true, false, false, false],
   },
+  {
+    name: `Wino z hibiskusa 2`,
+    createDate: 1636982843000,
+    capacity: 20,
+    power: 8,
+    sweetness: 2,
+    recipe: null,
+    stagesDone: [true, true, true, true, false, false, false],
+  },
 ];

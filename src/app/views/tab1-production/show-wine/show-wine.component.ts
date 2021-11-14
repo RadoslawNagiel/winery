@@ -1,6 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 
 import { DataService } from "src/app/services/data.service";
+import { IonDatetime } from "@ionic/angular";
 import { Wine } from "src/app/utils/interfaces";
 
 @Component({
@@ -9,17 +19,65 @@ import { Wine } from "src/app/utils/interfaces";
   styleUrls: ["./show-wine.component.scss"],
 })
 export class ShowWineComponent implements OnInit {
-  @Input() wineIndex: number;
+  @ViewChild(`dateInput`) dateInput!: ElementRef<IonDatetime>;
   @Output() onBackClick = new EventEmitter();
   wine: Wine;
 
-  constructor(private readonly dataService: DataService) {}
+  nearestStageIndex = 0;
+
+  constructor(
+    private readonly dataService: DataService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.wine = this.dataService.inProgressWines[this.wineIndex];
+    this.wine =
+      this.dataService.inProgressWines[
+        this.activatedRoute.snapshot.queryParams.index
+      ];
+    this.getNearestStage();
   }
 
   backClick() {
-    this.onBackClick.emit();
+    void this.router.navigate([`/tabs/tab1`]);
+  }
+
+  doStage() {
+    this.wine.stagesDone[this.nearestStageIndex] = true;
+    this.getNearestStage();
+  }
+
+  changeDate(event: any) {
+    const value = event.detail.value;
+    if (value !== ``) {
+      const selectDate = new Date(value).getTime();
+      const lastDate =
+        this.wine.recipe.productStages[this.nearestStageIndex].date +
+        this.wine.createDate;
+      const dateDifference = selectDate - lastDate;
+      for (
+        let i = this.nearestStageIndex;
+        i < this.wine.recipe.productStages.length;
+        ++i
+      ) {
+        this.wine.recipe.productStages[i].date += dateDifference;
+      }
+      event.target.value = ``;
+    }
+  }
+
+  getNearestStage() {
+    let index = 0;
+    for (let stage of this.wine.stagesDone) {
+      if (!stage) {
+        break;
+      }
+      index++;
+    }
+    if (index === this.wine.stagesDone.length) {
+      return;
+    }
+    this.nearestStageIndex = index;
   }
 }

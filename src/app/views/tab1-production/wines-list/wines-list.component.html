@@ -4,8 +4,11 @@
     <div class="demijohn-text header-text">{{ wine.capacity }}l</div>
   </div>
   <div class="w-3/4 pl-2">
-    <span class="header-text">{{ wine.name }}</span>
+    <div class="header-text">{{ wine.name }}</div>
     <hr class="my-1" />
-    <span class="date-text">{{ wine.createDate | date: "dd.MM.yyyy" }}</span>
+    <div class="font-semibold">Najbliższa czynność:</div>
+    <div>
+      {{ nearestStageDate | date: "dd.MM.yyyy" }} - {{ nearestStageName }}
+    </div>
   </div>
 </div>

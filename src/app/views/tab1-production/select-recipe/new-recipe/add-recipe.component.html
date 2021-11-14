@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Nowy przepis </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="standard-frame">
+    <div class="header-text py-1">Nazwa</div>
+    <ion-input
+      placeholder="Nazwa..."
+      [ngClass]="{ 'invalid-text': !nameValid }"
+      [(ngModel)]="recipe.name"
+    ></ion-input>
+    <div class="header-text py-1">Opis</div>
+    <ion-textarea
+      placeholder="Opis..."
+      [ngClass]="{ 'invalid-text': !descriptionValid }"
+      [(ngModel)]="recipe.description"
+    ></ion-textarea>
+    <div class="header-text pt-2">Składniki</div>
+    <div class="pb-2">Ilość potrzebna do wytworzenia 10 litrów wina</div>
+    <div class="ingredient-container pt-1">
+      <span>Nazwa</span>
+      <span>Ilość</span>
+      <span>Jesdnostka</span>
+      <img
+        class="w-6 h-6"
+        (click)="newIngredientClick()"
+        src="assets/icons/Add-button-dark.svg"
+      />
+    </div>
+    <div *ngFor="let ingredient of recipe.ingredients; index as i">
+      <div class="ingredient-container py-2">
+        <ion-input
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].name }"
+          placeholder="Nazwa..."
+          [(ngModel)]="ingredient.name"
+        ></ion-input>
+        <ion-input
+          class="text-center"
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].value }"
+          placeholder="Waga..."
+          type="number"
+          [(ngModel)]="ingredient.value"
+        ></ion-input>
+        <ion-input
+          class="text-center"
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].unit }"
+          placeholder="..."
+          [(ngModel)]="ingredient.unit"
+        ></ion-input>
+        <span class="flex justify-between items-center">
+          <img
+            *ngIf="recipe.ingredients.length > 1"
+            class="w-6 h-6"
+            (click)="deleteIngredientClick(i)"
+            src="assets/icons/Delete-button-dark.svg"
+        /></span>
+      </div>
+      <hr />
+    </div>
+
+    <div class="pt-4 flex justify-between">
+      <span class="standard-button" (click)="backClick()">Cofnij</span>
+      <span class="standard-button" (click)="addRecipe()">Dodaj</span>
+    </div>
+  </div>
+</ion-content>

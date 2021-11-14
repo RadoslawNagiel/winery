@@ -4,13 +4,14 @@ export interface Wine {
   capacity: number;
   power: number;
   sweetness: Sweetness;
-  recipe: recipe;
+  recipe: Recipe;
   stagesDone: boolean[];
 }
 
 export interface Ingredient {
   name: string;
-  weight: number;
+  value: number;
+  unit: string;
 }
 
 export enum Sweetness {
@@ -20,7 +21,7 @@ export enum Sweetness {
   Słodkie,
 }
 
-export interface recipe {
+export interface Recipe {
   name: string;
   description: string;
   ingredients: Ingredient[];

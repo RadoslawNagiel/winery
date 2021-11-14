@@ -1,12 +1,12 @@
-import { AddWineComponent } from "./add-wine.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
+import { ReceipeContainerComponent } from "./receipe-container.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
-  declarations: [AddWineComponent],
-  exports: [AddWineComponent],
+  declarations: [ReceipeContainerComponent],
+  exports: [ReceipeContainerComponent],
 })
-export class AddWineModule {}
+export class ReceipeContainerModule {}

@@ -27,24 +27,17 @@ ion-tab-button {
   --color-selected: var(--ion-color-tertiary);
 }
 
-ion-datetime {
-  border-radius: 6px;
-  background-color: var(--ion-text-color) !important;
-  color: var(--input-text-color) !important;
+.sc-ion-input-md-h,
+.sc-ion-textarea-md-h {
+  margin-top: 0px;
   --padding-top: 2px;
   --padding-end: 5px;
   --padding-bottom: 2px;
   --padding-start: 5px;
 }
 
-.sc-ion-input-md-h {
-  --padding-top: 2px;
-  --padding-end: 5px;
-  --padding-bottom: 2px;
-  --padding-start: 5px;
-}
-
-ion-input {
+ion-input,
+ion-textarea {
   border-radius: 6px;
   --background: var(--ion-text-color) !important;
   --color: var(--input-text-color) !important;
@@ -60,4 +53,13 @@ ion-range {
 ion-checkbox {
   --border-color: var(--ion-color-primary);
   --background: var(--ion-text-color);
+}
+
+.checkbox-disabled {
+  opacity: 0.9 !important;
+}
+
+ion-ripple-effect {
+  background-color: transparent !important;
+  padding: 0 !important;
 }

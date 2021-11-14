@@ -1,9 +1,9 @@
+import { AddRecipeComponent } from "./add-recipe.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ShowWineComponent } from "./show-wine.component";
 
 @NgModule({
   imports: [
@@ -13,11 +13,11 @@ import { ShowWineComponent } from "./show-wine.component";
     RouterModule.forChild([
       {
         path: ``,
-        component: ShowWineComponent,
+        component: AddRecipeComponent,
       },
     ]),
   ],
-  declarations: [ShowWineComponent],
-  exports: [ShowWineComponent],
+  declarations: [AddRecipeComponent],
+  exports: [AddRecipeComponent],
 })
-export class ShowWineModule {}
+export class AddRecipeModule {}

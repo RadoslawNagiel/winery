@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from "@angular/router";
 import {
   Component,
   ElementRef,
@@ -13,13 +14,11 @@ import { DataService } from "src/app/services/data.service";
 import { ToastService } from "src/app/services/toast-service.service";
 
 @Component({
-  selector: "app-add-wine",
-  templateUrl: "./add-wine.component.html",
-  styleUrls: ["./add-wine.component.scss"],
+  selector: "app-new-wine",
+  templateUrl: "./new-wine.component.html",
+  styleUrls: ["./new-wine.component.scss"],
 })
-export class AddWineComponent implements OnInit {
-  @Output() onBackClick = new EventEmitter();
-
+export class NewWineComponent implements OnInit {
   today = ``;
 
   wine: Wine = {
@@ -28,20 +27,31 @@ export class AddWineComponent implements OnInit {
     capacity: 0,
     power: 12,
     sweetness: 1,
-    recipe: null,
+    recipe: {
+      name: ``,
+      description: ``,
+      ingredients: [],
+      productStages: [],
+    },
     stagesDone: [],
   };
 
   nameValid = true;
+  capacityValid = true;
 
   Sweetness = Sweetness;
 
   constructor(
     private readonly toastService: ToastService,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   async ngOnInit() {
+    this.wine.recipe =
+      this.dataService.recipes[this.activatedRoute.snapshot.queryParams.index];
+    this.wine.name = this.wine.recipe.name;
     this.today = this.inputDateString(new Date());
   }
 
@@ -52,7 +62,7 @@ export class AddWineComponent implements OnInit {
   }
 
   backClick() {
-    this.onBackClick.emit();
+    void this.router.navigate([`/tabs/tab1/select-recipe`]);
   }
 
   nextClick() {
@@ -61,16 +71,25 @@ export class AddWineComponent implements OnInit {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
-    this.dataService.addWine(this.wine);
+    const wineIndex = this.dataService.addWine(this.wine);
     this.toastService.presentToastSuccess(`Dodano wino`);
-    this.onBackClick.emit();
+    void this.router.navigate([`/tabs/tab1/show-wine`], {
+      queryParams: {
+        index: wineIndex,
+      },
+    });
   }
 
   checkValidate() {
     this.nameValid = true;
+    this.capacityValid = true;
     let valid = true;
     if (this.wine.name === ``) {
       this.nameValid = false;
+      valid = false;
+    }
+    if (this.wine.capacity <= 0) {
+      this.capacityValid = false;
       valid = false;
     }
     if (this.wine.createDate <= 0) {
@@ -78,36 +97,4 @@ export class AddWineComponent implements OnInit {
     }
     return valid;
   }
-
-  // if (!this.wine.ingredients.length) {
-  //   this.ingredientsValid = false;
-  //   valid = false;
-  // }
-  // let index = 0;
-  // for (let ingredient of this.wine.ingredients) {
-  //   this.ingredientsValidElements.push({ name: true, value: true });
-  //   if (ingredient.name === ``) {
-  //     this.ingredientsValidElements[index].name = false;
-  //     valid = false;
-  //     this.ingredientsValid = false;
-  //   }
-  //   if (ingredient.weight <= 0) {
-  //     this.ingredientsValidElements[index].value = false;
-  //     valid = false;
-  //     this.ingredientsValid = false;
-  //   }
-  //   ++index;
-  // }
-
-  // newIngredientClick() {
-  //   this.ingredientsValidElements.push({ name: true, value: true });
-  //   this.wine.ingredients.push({ name: ``, weight: 0 });
-  // }
-
-  // deleteIngredientClick(index: number) {
-  //   if (this.wine.ingredients.length > 1) {
-  //     this.wine.ingredients.splice(index, 1);
-  //     this.ingredientsValidElements.splice(index, 1);
-  //   }
-  // }
 }

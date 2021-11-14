@@ -1,0 +1,24 @@
+.ingredient-container {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 10px;
+  grid-template-areas: ". . .";
+  width: 100%;
+  height: 100%;
+}
+
+.invalid-text {
+  background-color: var(--ion-color-tertiary) !important;
+}
+
+ion-datetime {
+  border-radius: 6px;
+  background-color: var(--ion-text-color) !important;
+  color: var(--input-text-color) !important;
+  --padding-top: 2px;
+  --padding-end: 5px;
+  --padding-bottom: 2px;
+  --padding-start: 5px;
+}

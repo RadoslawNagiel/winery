@@ -1,35 +1,74 @@
-<div class="standard-frame">
-  <div class="flex">
-    <div class="w-1/4 relative">
-      <img src="assets/icons/Demijohn.svg" />
-      <div class="demijohn-text header-text">{{ wine.capacity }}l</div>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> {{ wine.name }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="standard-frame">
+    <div class="flex">
+      <div class="w-1/4 relative">
+        <img src="assets/icons/Demijohn.svg" />
+        <div class="demijohn-text header-text">{{ wine.capacity }}l</div>
+      </div>
+      <div class="w-3/4 pl-2">
+        <span class="header-text">{{ wine.name }}</span>
+        <hr class="my-1" />
+        <span class="date-text">{{
+          wine.createDate | date: "dd.MM.yyyy"
+        }}</span>
+      </div>
     </div>
-    <div class="w-3/4 pl-2">
-      <span class="header-text">{{ wine.name }}</span>
-      <hr class="my-1" />
-      <span class="date-text">{{ wine.createDate | date: "dd.MM.yyyy" }}</span>
+
+    <span class="header-text py-4">Składniki</span>
+    <div
+      class="pl-2 items-center"
+      *ngFor="let ingredient of wine.recipe.ingredients"
+    >
+      - {{ ingredient.name }}: {{ (ingredient.value * wine.capacity) / 10 }}
+      {{ ingredient.unit }}
+    </div>
+
+    <div class="py-4">
+      <div class="header-text">Najbliższy etap</div>
+      <div class="pl-1">
+        {{
+          wine.recipe.productStages[nearestStageIndex].date + wine.createDate
+            | date: "dd.MM.yyyy"
+        }}
+        -
+        {{ wine.recipe.productStages[nearestStageIndex].name }}
+      </div>
+      <div class="pl-1">
+        {{ wine.recipe.productStages[nearestStageIndex].description }}
+      </div>
+      <div class="pt-1 flex justify-between">
+        <ion-datetime
+          class="small-button"
+          displayFormat="DD.MMM.YYYY"
+          monthShortNames="STY, LUT, MAR, KWI, MAJ, CZE, LIP, SIE, WRZ, PAZ, LIS, GRU"
+          doneText="Zatwierdź"
+          cancelText="Anuluj"
+          placeholder="Zmień datę"
+          (ionChange)="changeDate($event)"
+        ></ion-datetime>
+        <span class="small-button" (click)="doStage()">Wykonaj</span>
+      </div>
+    </div>
+
+    <span class="header-text py-4">Etapy produkcji</span>
+    <div
+      class="pl-2 items-center flex"
+      *ngFor="let stage of wine.recipe.productStages; index as i"
+    >
+      <ion-checkbox disabled [(ngModel)]="wine.stagesDone[i]"></ion-checkbox>
+      <div class="pl-1">
+        {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }} -
+        {{ stage.name }}
+      </div>
+    </div>
+    <div class="pt-4">
+      <span class="standard-button" (click)="backClick()">Wróć</span>
     </div>
   </div>
-
-  <span class="header-text py-4">Składniki</span>
-  <div
-    class="pl-2 items-center"
-    *ngFor="let ingredient of wine.recipe.ingredients"
-  >
-    - {{ ingredient.name }}: {{ ingredient.weight }} kg.
-  </div>
-
-  <span class="header-text py-4">Etapy produkcji</span>
-  <div
-    class="pl-2 items-center"
-    *ngFor="let stage of wine.recipe.productStages; index as i"
-  >
-    <ion-checkbox [(ngModel)]="wine.stagesDone[i]"></ion-checkbox>
-    {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }} -
-    {{ stage.name }}
-  </div>
-
-  <div class="pt-4">
-    <span class="standard-button" (click)="backClick()">Cofnij</span>
-  </div>
-</div>
+</ion-content>

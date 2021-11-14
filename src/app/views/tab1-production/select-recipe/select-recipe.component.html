@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Wybierz przepis </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="flex justify-between pt-2 px-6">
+    <span class="standard-button" (click)="backClick()">Cofnij</span>
+    <span class="standard-button" (click)="newRecipe()"
+      >Dodaj nowy przepis</span
+    >
+  </div>
+  <ng-container *ngFor="let recipe of recipes; index as i">
+    <app-receipe-container
+      [recipe]="recipe"
+      [index]="i"
+    ></app-receipe-container>
+  </ng-container>
+</ion-content>

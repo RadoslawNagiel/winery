@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
+import { NewWineComponent } from "./new-wine.component";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ShowWineComponent } from "./show-wine.component";
 
 @NgModule({
   imports: [
@@ -13,11 +13,11 @@ import { ShowWineComponent } from "./show-wine.component";
     RouterModule.forChild([
       {
         path: ``,
-        component: ShowWineComponent,
+        component: NewWineComponent,
       },
     ]),
   ],
-  declarations: [ShowWineComponent],
-  exports: [ShowWineComponent],
+  declarations: [NewWineComponent],
+  exports: [NewWineComponent],
 })
-export class ShowWineModule {}
+export class NewWineModule {}
