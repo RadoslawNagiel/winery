@@ -2,11 +2,11 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
-import { ReceipeContainerComponent } from "./receipe-container.component";
+import { RecipeContainerComponent } from "./recipe-container.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
-  declarations: [ReceipeContainerComponent],
-  exports: [ReceipeContainerComponent],
+  declarations: [RecipeContainerComponent],
+  exports: [RecipeContainerComponent],
 })
-export class ReceipeContainerModule {}
+export class RecipeContainerModule {}

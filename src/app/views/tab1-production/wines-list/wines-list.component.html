@@ -1,12 +1,11 @@
 <div class="standard-frame flex" (click)="elementClick()">
-  <div class="w-1/4 relative">
+  <div class="w-16 relative">
     <img src="assets/icons/Demijohn.svg" />
-    <div class="demijohn-text header-text">{{ wine.capacity }}l</div>
+    <div class="demijohn-text header-text">{{ wine.capacity }}&nbsp;l</div>
   </div>
-  <div class="w-3/4 pl-2">
+  <div class="pl-2">
     <div class="header-text">{{ wine.name }}</div>
     <hr class="my-1" />
-    <div class="font-semibold">Najbliższa czynność:</div>
     <div>
       {{ nearestStageDate | date: "dd.MM.yyyy" }} - {{ nearestStageName }}
     </div>

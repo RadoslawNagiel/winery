@@ -1,7 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import { ProductStage, Recipe } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
-import { Recipe } from "src/app/utils/interfaces";
+import { PRODUC_STAGES } from "./const";
 import { Router } from "@angular/router";
 import { ToastService } from "src/app/services/toast-service.service";
 
@@ -15,19 +23,23 @@ export class AddRecipeComponent implements OnInit {
     name: ``,
     description: ``,
     ingredients: [{ name: ``, value: 0, unit: `` }],
-    productStages: [],
+    productStages: PRODUC_STAGES,
   };
+
+  mustDescription = ``;
+  sugar = 0;
 
   nameValid = true;
   descriptionValid = true;
+  sugarValid = true;
+  mustDescriptionValid = true;
+
+  showPreview = false;
+
   ingredientsValidElements: { name: boolean; value: boolean; unit: boolean }[] =
     [{ name: true, value: true, unit: true }];
 
-  constructor(
-    private readonly toastService: ToastService,
-    private readonly dataService: DataService,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly toastService: ToastService) {}
 
   async ngOnInit() {}
 
@@ -43,25 +55,27 @@ export class AddRecipeComponent implements OnInit {
     }
   }
 
-  backClick() {
-    void this.router.navigate([`/tabs/tab1/select-recipe`]);
-  }
-
   addRecipe() {
+    this.recipe.productStages[0].description = this.mustDescription;
+    if (this.sugar > 0) {
+      this.recipe.ingredients.unshift({
+        name: `cukier`,
+        value: this.sugar,
+        unit: `g.`,
+      });
+    }
     if (!this.checkValidate()) {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
-    this.dataService.addRecipe(this.recipe);
-    this.toastService.presentToastSuccess(`Dodano przepis`);
-    void this.router.navigate([`/tabs/tab1/select-recipe`]);
+    this.showPreview = true;
   }
-
-  nextClick() {}
 
   checkValidate() {
     this.nameValid = true;
     this.descriptionValid = true;
+    this.sugarValid = true;
+    this.mustDescriptionValid = true;
     this.ingredientsValidElements = [];
     let valid = true;
     if (this.recipe.name === ``) {
@@ -72,8 +86,15 @@ export class AddRecipeComponent implements OnInit {
       this.descriptionValid = false;
       valid = false;
     }
-
+    if (this.sugar < 0) {
+      this.sugarValid = false;
+      valid = false;
+    }
     if (!this.recipe.ingredients.length) {
+      valid = false;
+    }
+    if (this.mustDescription === ``) {
+      this.mustDescriptionValid = false;
       valid = false;
     }
     let index = 0;
@@ -95,6 +116,7 @@ export class AddRecipeComponent implements OnInit {
         this.ingredientsValidElements[index].unit = false;
         valid = false;
       }
+
       ++index;
     }
     return valid;

@@ -1,5 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons class="absolute top-1 left-0" slot="start">
+      <ion-back-button
+        (click)="backClick()"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
     <ion-title> {{ wine.name }} </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,19 +14,18 @@
 <ion-content [fullscreen]="true">
   <div class="standard-frame">
     <div class="flex">
-      <div class="w-1/4 relative">
+      <div class="w-20 relative">
         <img src="assets/icons/Demijohn.svg" />
-        <div class="demijohn-text header-text">{{ wine.capacity }}l</div>
+        <div class="demijohn-text header-text">{{ wine.capacity }}&nbsp;l</div>
       </div>
-      <div class="w-3/4 pl-2">
-        <span class="header-text">{{ wine.name }}</span>
-        <hr class="my-1" />
-        <span class="date-text">{{
-          wine.createDate | date: "dd.MM.yyyy"
-        }}</span>
+      <div class="pl-2 w-full header-text">
+        <div>Słodkość: {{ Sweetness[wine.sweetness] }}</div>
+        <div>Rocznik: {{ wine.createDate | date: "yyyy" }}</div>
+        <div>Moc: {{ wine.power }}%</div>
       </div>
     </div>
-
+    <span class="header-text py-4">Drożdże</span>
+    <div class="pl-2">{{ wine.yeast }}</div>
     <span class="header-text py-4">Składniki</span>
     <div
       class="pl-2 items-center"
@@ -58,17 +64,14 @@
 
     <span class="header-text py-4">Etapy produkcji</span>
     <div
-      class="pl-2 items-center flex"
+      class="pl-2 items-center stages-container"
       *ngFor="let stage of wine.recipe.productStages; index as i"
     >
       <ion-checkbox disabled [(ngModel)]="wine.stagesDone[i]"></ion-checkbox>
       <div class="pl-1">
-        {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }} -
-        {{ stage.name }}
+        {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }}
       </div>
-    </div>
-    <div class="pt-4">
-      <span class="standard-button" (click)="backClick()">Wróć</span>
+      <div class="pl-1">{{ stage.name }}</div>
     </div>
   </div>
 </ion-content>

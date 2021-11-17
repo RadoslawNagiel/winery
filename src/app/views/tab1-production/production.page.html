@@ -11,12 +11,17 @@
     </ion-toolbar>
   </ion-header>
   <div class="h-2"></div>
-  <div class="w-full pt-2 pl-5 pb-1">
-    <span class="standard-button" (click)="newWineClick()"
-      >Stwórz nowe wino</span
-    >
+  <div class="w-full flex justify-between pt-2 px-5 pb-1">
+    <ion-input
+      class="mr-2"
+      placeholder="Wyszukaj..."
+      (input)="searchChange($event)"
+    ></ion-input>
+    <div class="w-1/2 flex justify-end">
+      <span class="standard-button" (click)="newWineClick()">Nowe wino</span>
+    </div>
   </div>
-  <ng-container *ngFor="let wine of inProgressWines; index as i">
+  <ng-container *ngFor="let wine of showingWines; index as i">
     <app-wines-list
       [wineIndex]="i"
       (onWineSelect)="showWine($event)"

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
-import { ReceipeContainerModule } from "./receipe-container/receipe-container.module";
+import { RecipeContainerModule } from "./recipe-container/recipe-container.module";
 import { RouterModule } from "@angular/router";
 import { SelectRecipeComponent } from "./select-recipe.component";
 import { SelectRecipeRoutingModule } from "./select-recipe-routing.module";
@@ -13,7 +13,7 @@ import { SelectRecipeRoutingModule } from "./select-recipe-routing.module";
     FormsModule,
     IonicModule,
     SelectRecipeRoutingModule,
-    ReceipeContainerModule,
+    RecipeContainerModule,
   ],
   declarations: [SelectRecipeComponent],
   exports: [SelectRecipeComponent],

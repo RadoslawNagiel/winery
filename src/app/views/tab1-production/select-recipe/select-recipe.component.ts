@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 })
 export class SelectRecipeComponent implements OnInit {
   recipes: Recipe[];
+  showingRecipes: Recipe[];
 
   constructor(
     private readonly dataService: DataService,
@@ -19,6 +20,7 @@ export class SelectRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.recipes = this.dataService.recipes;
+    this.showingRecipes = this.recipes;
   }
 
   newRecipe() {
@@ -27,5 +29,26 @@ export class SelectRecipeComponent implements OnInit {
 
   backClick() {
     void this.router.navigate([`/tabs/tab1`]);
+  }
+
+  selectRecipe(recipeIndex: number) {
+    const index = this.recipes.findIndex(
+      (recipe) => recipe === this.showingRecipes[recipeIndex]
+    );
+    void this.router.navigate([`/tabs/tab1/select-recipe/new-wine`], {
+      queryParams: {
+        index,
+      },
+    });
+  }
+
+  searchChange(event: any) {
+    if (event.target.value === ``) {
+      this.showingRecipes = this.recipes;
+      return;
+    }
+    this.showingRecipes = this.recipes.filter((wine) =>
+      wine.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
   }
 }

@@ -1,0 +1,28 @@
+<div class="standard-frame">
+  <div class="header-text pt-1">{{ recipe.name }}</div>
+  <div #divToAnimate class="overflow-hidden div-anim">
+    <div>{{ recipe.description }}</div>
+    <span class="header-text py-2">Składniki:</span>
+    <div
+      class="pl-2 items-center"
+      *ngFor="let ingredient of recipe.ingredients"
+    >
+      - {{ ingredient.name }}: {{ ingredient.value }} {{ ingredient.unit }}
+    </div>
+  </div>
+  <div *ngIf="!showMore" class="text-center">...</div>
+  <div *ngIf="!showMore" class=""></div>
+  <div class="pt-2 flex justify-between">
+    <span class="standard-button w-28 text-center" (click)="showMoreButton()">
+      <span *ngIf="!showMore" class="flex justify-between items-center">
+        <ion-icon name="chevron-down-outline"></ion-icon> Rozwiń
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </span>
+      <span *ngIf="showMore" class="flex justify-between items-center">
+        <ion-icon name="chevron-up-outline"></ion-icon> Zwiń
+        <ion-icon name="chevron-up-outline"></ion-icon>
+      </span>
+    </span>
+    <span class="standard-button" (click)="select()">Wybierz</span>
+  </div>
+</div>

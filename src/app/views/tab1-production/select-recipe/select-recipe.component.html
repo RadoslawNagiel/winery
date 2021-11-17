@@ -1,20 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons class="absolute top-1 left-0" slot="start">
+      <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
     <ion-title> Wybierz przepis </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="flex justify-between pt-2 px-6">
-    <span class="standard-button" (click)="backClick()">Cofnij</span>
-    <span class="standard-button" (click)="newRecipe()"
-      >Dodaj nowy przepis</span
-    >
+  <div class="w-full flex justify-between pt-2 px-5 pb-1">
+    <ion-input
+      class="mr-2"
+      placeholder="Wyszukaj..."
+      (input)="searchChange($event)"
+    ></ion-input>
+    <div class="w-1/2 flex justify-end">
+      <span class="standard-button" (click)="newRecipe()">Nowy przepis</span>
+    </div>
   </div>
-  <ng-container *ngFor="let recipe of recipes; index as i">
-    <app-receipe-container
+  <ng-container *ngFor="let recipe of showingRecipes; index as i">
+    <app-recipe-container
       [recipe]="recipe"
       [index]="i"
-    ></app-receipe-container>
+      (onWineSelect)="selectRecipe($event)"
+    ></app-recipe-container>
   </ng-container>
 </ion-content>

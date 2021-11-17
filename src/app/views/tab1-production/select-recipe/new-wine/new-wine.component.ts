@@ -24,9 +24,11 @@ export class NewWineComponent implements OnInit {
   wine: Wine = {
     name: ``,
     createDate: 0,
-    capacity: 0,
+    capacity: 10,
     power: 12,
     sweetness: 1,
+    yeast: ``,
+    yeastTolerance: 12,
     recipe: {
       name: ``,
       description: ``,
@@ -38,6 +40,7 @@ export class NewWineComponent implements OnInit {
 
   nameValid = true;
   capacityValid = true;
+  yeastValid = true;
 
   Sweetness = Sweetness;
 
@@ -61,12 +64,12 @@ export class NewWineComponent implements OnInit {
     return `${date.getFullYear()}-${month}-${day}`;
   }
 
-  backClick() {
-    void this.router.navigate([`/tabs/tab1/select-recipe`]);
-  }
-
   nextClick() {
     this.wine.createDate = new Date(this.today).getTime();
+    this.wine.stagesDone = new Array(
+      this.wine.recipe.productStages.length
+    ).fill(false);
+
     if (!this.checkValidate()) {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
@@ -88,6 +91,10 @@ export class NewWineComponent implements OnInit {
       this.nameValid = false;
       valid = false;
     }
+    if (this.wine.yeast === ``) {
+      this.yeastValid = false;
+      valid = false;
+    }
     if (this.wine.capacity <= 0) {
       this.capacityValid = false;
       valid = false;
@@ -95,6 +102,15 @@ export class NewWineComponent implements OnInit {
     if (this.wine.createDate <= 0) {
       valid = false;
     }
+    if (this.wine.yeastTolerance < this.wine.power) {
+      valid = false;
+    }
     return valid;
+  }
+
+  yeastToleranceChange() {
+    if (this.wine.yeastTolerance < this.wine.power) {
+      this.wine.power = this.wine.yeastTolerance;
+    }
   }
 }

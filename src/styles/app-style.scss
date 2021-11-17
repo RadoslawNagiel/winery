@@ -23,8 +23,8 @@ ion-tab-bar {
 }
 
 ion-tab-button {
-  --color: var(--icon-color);
-  --color-selected: var(--ion-color-tertiary);
+  --color: var(--ion-color-tertiary);
+  --color-selected: var(--icon-color);
 }
 
 .sc-ion-input-md-h,
@@ -41,6 +41,16 @@ ion-textarea {
   border-radius: 6px;
   --background: var(--ion-text-color) !important;
   --color: var(--input-text-color) !important;
+}
+
+ion-select {
+  border-radius: 6px;
+  background-color: white !important;
+  color: var(--input-text-color) !important;
+  --padding-top: 2px;
+  --padding-end: 5px;
+  --padding-bottom: 2px;
+  --padding-start: 5px;
 }
 
 ion-range {

@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons class="absolute top-1 left-0" slot="start">
+      <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
     <ion-title> Nowe wino </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,13 +30,35 @@
       type="number"
       [(ngModel)]="wine.capacity"
     ></ion-input>
-    <div class="header-text pt-1">Zawartość alkoholu</div>
+    <div class="header-text py-1">Drożdże</div>
+    <ion-input
+      [ngClass]="{ 'invalid-text': !yeastValid }"
+      placeholder="Nazwa..."
+      [(ngModel)]="wine.yeast"
+    ></ion-input>
+    <div class="header-text pt-1">Tolerancja drożdży na alkohol</div>
     <div class="flex items-center">
       <div class="w-3/5">
         <ion-range
           class="p-0"
           min="8"
           max="22"
+          snaps="true"
+          (ionChange)="yeastToleranceChange()"
+          [(ngModel)]="wine.yeastTolerance"
+          ticks="false"
+          color="light"
+        ></ion-range>
+      </div>
+      <div class="pl-3">{{ wine.yeastTolerance }}%</div>
+    </div>
+    <div class="header-text pt-1">Zawartość alkoholu</div>
+    <div class="flex items-center">
+      <div class="w-3/5">
+        <ion-range
+          class="p-0"
+          min="7"
+          [max]="wine.yeastTolerance"
           snaps="true"
           [(ngModel)]="wine.power"
           ticks="false"
@@ -58,25 +83,7 @@
       </div>
       <div class="pl-3">{{ Sweetness[wine.sweetness] }}</div>
     </div>
-    <!-- <div class="header-text">Składniki</div>
-    <div class="pl-2">
-      <div class="ingredient-container pt-1">
-        <span>Nazwa</span>
-        <span>Ilość</span>
-        <span></span>
-      </div>
-      <div *ngFor="let ingredient of wine.recipe.ingredients">
-        <div class="ingredient-container py-2">
-          <span>{{ ingredient.name }}</span>
-          <span>{{ ingredient.value }}</span>
-          <span>kg.</span>
-        </div>
-        <hr />
-      </div>
-    </div> -->
-
-    <div class="pt-4 flex justify-between">
-      <span class="standard-button" (click)="backClick()">Cofnij</span>
+    <div class="pt-4 flex justify-end">
       <span class="standard-button" (click)="nextClick()">Dalej</span>
     </div>
   </div>

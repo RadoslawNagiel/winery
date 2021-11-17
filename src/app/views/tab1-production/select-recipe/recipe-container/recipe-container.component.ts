@@ -14,14 +14,16 @@ import { Router } from "@angular/router";
 import { ToastService } from "src/app/services/toast-service.service";
 
 @Component({
-  selector: "app-receipe-container",
-  templateUrl: "./receipe-container.component.html",
-  styleUrls: ["./receipe-container.component.scss"],
+  selector: "app-recipe-container",
+  templateUrl: "./recipe-container.component.html",
+  styleUrls: ["./recipe-container.component.scss"],
 })
-export class ReceipeContainerComponent implements OnInit {
+export class RecipeContainerComponent implements OnInit {
   @ViewChild(`divToAnimate`) divToAnimate!: ElementRef<HTMLDivElement>;
   @Input() recipe!: Recipe;
   @Input() index!: number;
+
+  @Output() onWineSelect = new EventEmitter<number>();
 
   showMore = false;
 
@@ -40,10 +42,6 @@ export class ReceipeContainerComponent implements OnInit {
   }
 
   select() {
-    void this.router.navigate([`/tabs/tab1/select-recipe/new-wine`], {
-      queryParams: {
-        index: this.index,
-      },
-    });
+    this.onWineSelect.emit(this.index);
   }
 }

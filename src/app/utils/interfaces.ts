@@ -3,6 +3,8 @@ export interface Wine {
   createDate: number;
   capacity: number;
   power: number;
+  yeast: string;
+  yeastTolerance: number;
   sweetness: Sweetness;
   recipe: Recipe;
   stagesDone: boolean[];

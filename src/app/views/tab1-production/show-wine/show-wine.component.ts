@@ -8,10 +8,10 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
+import { Sweetness, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
 import { IonDatetime } from "@ionic/angular";
-import { Wine } from "src/app/utils/interfaces";
 
 @Component({
   selector: "app-show-wine",
@@ -25,6 +25,8 @@ export class ShowWineComponent implements OnInit {
 
   nearestStageIndex = 0;
 
+  Sweetness = Sweetness;
+
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router,
@@ -37,10 +39,6 @@ export class ShowWineComponent implements OnInit {
         this.activatedRoute.snapshot.queryParams.index
       ];
     this.getNearestStage();
-  }
-
-  backClick() {
-    void this.router.navigate([`/tabs/tab1`]);
   }
 
   doStage() {
@@ -79,5 +77,9 @@ export class ShowWineComponent implements OnInit {
       return;
     }
     this.nearestStageIndex = index;
+  }
+
+  backClick() {
+    void this.router.navigate([`/tabs/tab1`]);
   }
 }
