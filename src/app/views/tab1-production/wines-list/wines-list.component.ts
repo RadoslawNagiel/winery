@@ -9,21 +9,20 @@ import { Wine } from "src/app/utils/interfaces";
   styleUrls: ["./wines-list.component.scss"],
 })
 export class WinesListComponent implements OnInit {
-  @Input() wineIndex: number;
-  @Output() onWineSelect = new EventEmitter<number>();
-  wine: Wine;
+  @Input() wineId: string;
+  @Input() wine: Wine;
+  @Output() onWineSelect = new EventEmitter<string>();
   nearestStageName = ``;
   nearestStageDate = 0;
 
-  constructor(private readonly dataService: DataService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.wine = this.dataService.inProgressWines[this.wineIndex];
     this.getNearestStage();
   }
 
   elementClick() {
-    this.onWineSelect.emit(this.wineIndex);
+    this.onWineSelect.emit(this.wineId);
     this.getNearestStage();
   }
 

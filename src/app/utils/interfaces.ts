@@ -1,4 +1,5 @@
 export interface Wine {
+  id: string;
   name: string;
   createDate: number;
   capacity: number;
@@ -24,6 +25,7 @@ export enum Sweetness {
 }
 
 export interface Recipe {
+  id: string;
   name: string;
   description: string;
   ingredients: Ingredient[];
@@ -34,4 +36,10 @@ export interface ProductStage {
   name: string;
   description: string;
   date: number;
+}
+
+export interface Guide {
+  slug: string;
+  title: string;
+  description: string;
 }

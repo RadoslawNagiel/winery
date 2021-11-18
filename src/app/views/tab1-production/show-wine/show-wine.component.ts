@@ -34,16 +34,16 @@ export class ShowWineComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.wine =
-      this.dataService.inProgressWines[
-        this.activatedRoute.snapshot.queryParams.index
-      ];
+    this.wine = this.dataService.inProgressWines.find(
+      (wine) => wine.id === this.activatedRoute.snapshot.queryParams.index
+    );
     this.getNearestStage();
   }
 
   doStage() {
     this.wine.stagesDone[this.nearestStageIndex] = true;
     this.getNearestStage();
+    this.dataService.winesListChange.next();
   }
 
   changeDate(event: any) {
@@ -79,7 +79,7 @@ export class ShowWineComponent implements OnInit {
     this.nearestStageIndex = index;
   }
 
-  backClick() {
-    void this.router.navigate([`/tabs/tab1`]);
+  async backClick() {
+    await this.router.navigate([`/tabs/tab1`]);
   }
 }

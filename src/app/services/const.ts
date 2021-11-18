@@ -2,6 +2,7 @@ import { Wine } from "src/app/utils/interfaces";
 
 export const WINES: Wine[] = [
   {
+    id: `1`,
     name: `Wino porzeczkowe`,
     createDate: 1636806443000,
     capacity: 10,
@@ -13,6 +14,7 @@ export const WINES: Wine[] = [
     stagesDone: [true, true, true, true, true, true, false],
   },
   {
+    id: `2`,
     name: `Wino winogronowe`,
     createDate: 1636892843000,
     capacity: 15.5,
@@ -24,6 +26,7 @@ export const WINES: Wine[] = [
     stagesDone: [true, false, false, false, false, false, false],
   },
   {
+    id: `3`,
     name: `Wino z hibiskusa`,
     createDate: 1636982843000,
     capacity: 40,
@@ -35,6 +38,7 @@ export const WINES: Wine[] = [
     stagesDone: [true, true, true, true, false, false, false],
   },
   {
+    id: `4`,
     name: `Wino z hibiskusa 2`,
     createDate: 1636982843000,
     capacity: 20,

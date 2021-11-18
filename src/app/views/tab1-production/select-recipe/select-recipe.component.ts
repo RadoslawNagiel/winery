@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
 import { Recipe } from "src/app/utils/interfaces";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-select-recipe",
@@ -13,6 +14,8 @@ export class SelectRecipeComponent implements OnInit {
   recipes: Recipe[];
   showingRecipes: Recipe[];
 
+  subscriptions: Subscription[] = [];
+
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router
@@ -20,35 +23,50 @@ export class SelectRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.recipes = this.dataService.recipes;
-    this.showingRecipes = this.recipes;
-  }
-
-  newRecipe() {
-    void this.router.navigate([`/tabs/tab1/select-recipe/new-recipe`]);
-  }
-
-  backClick() {
-    void this.router.navigate([`/tabs/tab1`]);
-  }
-
-  selectRecipe(recipeIndex: number) {
-    const index = this.recipes.findIndex(
-      (recipe) => recipe === this.showingRecipes[recipeIndex]
+    this.searchChange(``);
+    this.subscriptions.push(
+      this.dataService.recipesListChange.subscribe(() => {
+        this.searchChange(``);
+      })
     );
-    void this.router.navigate([`/tabs/tab1/select-recipe/new-wine`], {
+  }
+
+  async showRecipe(recipeId: string) {
+    await this.router.navigate([`/tabs/tab1/select-recipe/show-recipe`], {
       queryParams: {
-        index,
+        index: recipeId,
       },
     });
   }
 
-  searchChange(event: any) {
-    if (event.target.value === ``) {
+  async newRecipe() {
+    await this.router.navigate([`/tabs/tab1/select-recipe/new-recipe`]);
+  }
+
+  async backClick() {
+    await this.router.navigate([`/tabs/tab1`]);
+  }
+
+  searchChangeEvent(event: any) {
+    this.searchChange(event.target.value);
+  }
+
+  searchChange(text: string) {
+    if (text === ``) {
       this.showingRecipes = this.recipes;
-      return;
+    } else {
+      this.showingRecipes = this.recipes.filter((wine) =>
+        wine.name.toLowerCase().includes(text.toLowerCase())
+      );
     }
-    this.showingRecipes = this.recipes.filter((wine) =>
-      wine.name.toLowerCase().includes(event.target.value.toLowerCase())
+    this.showingRecipes = this.showingRecipes.sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
     );
+  }
+
+  ngOnDestoy() {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 }

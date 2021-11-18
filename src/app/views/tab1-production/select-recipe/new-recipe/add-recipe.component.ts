@@ -1,17 +1,9 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
-import { ProductStage, Recipe } from "src/app/utils/interfaces";
+import { Component, OnInit } from "@angular/core";
 
-import { DataService } from "src/app/services/data.service";
 import { PRODUC_STAGES } from "./const";
-import { Router } from "@angular/router";
+import { Recipe } from "src/app/utils/interfaces";
 import { ToastService } from "src/app/services/toast-service.service";
+import { cloneDeep } from "lodash";
 
 @Component({
   selector: "app-add-recipe",
@@ -20,10 +12,11 @@ import { ToastService } from "src/app/services/toast-service.service";
 })
 export class AddRecipeComponent implements OnInit {
   recipe: Recipe = {
+    id: ``,
     name: ``,
     description: ``,
     ingredients: [{ name: ``, value: 0, unit: `` }],
-    productStages: PRODUC_STAGES,
+    productStages: cloneDeep(PRODUC_STAGES),
   };
 
   mustDescription = ``;
@@ -64,10 +57,10 @@ export class AddRecipeComponent implements OnInit {
         unit: `g.`,
       });
     }
-    if (!this.checkValidate()) {
-      this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
-      return;
-    }
+    // if (!this.checkValidate()) {
+    //   this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
+    //   return;
+    // }
     this.showPreview = true;
   }
 

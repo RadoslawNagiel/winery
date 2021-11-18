@@ -22,6 +22,7 @@ export class NewWineComponent implements OnInit {
   today = ``;
 
   wine: Wine = {
+    id: ``,
     name: ``,
     createDate: 0,
     capacity: 10,
@@ -30,6 +31,7 @@ export class NewWineComponent implements OnInit {
     yeast: ``,
     yeastTolerance: 12,
     recipe: {
+      id: ``,
       name: ``,
       description: ``,
       ingredients: [],
@@ -52,8 +54,9 @@ export class NewWineComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.wine.recipe =
-      this.dataService.recipes[this.activatedRoute.snapshot.queryParams.index];
+    this.wine.recipe = this.dataService.recipes.find(
+      (recipe) => recipe.id === this.activatedRoute.snapshot.queryParams.index
+    );
     this.wine.name = this.wine.recipe.name;
     this.today = this.inputDateString(new Date());
   }
@@ -64,7 +67,7 @@ export class NewWineComponent implements OnInit {
     return `${date.getFullYear()}-${month}-${day}`;
   }
 
-  nextClick() {
+  async nextClick() {
     this.wine.createDate = new Date(this.today).getTime();
     this.wine.stagesDone = new Array(
       this.wine.recipe.productStages.length
@@ -76,7 +79,7 @@ export class NewWineComponent implements OnInit {
     }
     const wineIndex = this.dataService.addWine(this.wine);
     this.toastService.presentToastSuccess(`Dodano wino`);
-    void this.router.navigate([`/tabs/tab1/show-wine`], {
+    await this.router.navigate([`/tabs/tab1/show-wine`], {
       queryParams: {
         index: wineIndex,
       },

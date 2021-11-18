@@ -2,6 +2,7 @@ import { Recipe } from "../utils/interfaces";
 
 export const RECIPES: Recipe[] = [
   {
+    id: `1`,
     name: `Wino hibiskusowe`,
     description: `Bardzo dobre winko, dosyć słabe, nadaje się dla dzieci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at libero cursus, placerat enim vitae, venenatis lacus. Fusce id semper mi, id faucibus mauris. Ut neque quam, interdum ac tempor in, pharetra vitae ligula. Vivamus eleifend rutrum interdum. Curabitur tempus urna id lobortis convallis. Suspendisse placerat rutrum justo, et dictum leo consequat ut. Curabitur non nibh turpis. Nulla feugiat placerat nisi a ultrices. Nunc vitae nunc ac diam posuere fringilla. Ut eget venenatis diam, porta cursus sapien. `,
     ingredients: [
@@ -65,6 +66,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
+    id: `2`,
     name: `Wino Porzeczkowe`,
     description: `Bardzo dobre winko, dosyć słabe, nadaje się dla dzieci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at libero cursus, placerat enim vitae, venenatis lacus. Fusce id semper mi, id faucibus mauris. Ut neque quam, interdum ac tempor in, pharetra vitae ligula. Vivamus eleifend rutrum interdum. Curabitur tempus urna id lobortis convallis. Suspendisse placerat rutrum justo, et dictum leo consequat ut. Curabitur non nibh turpis. Nulla feugiat placerat nisi a ultrices. Nunc vitae nunc ac diam posuere fringilla. Ut eget venenatis diam, porta cursus sapien. `,
     ingredients: [
@@ -118,6 +120,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
+    id: `3`,
     name: `Wino Porzeczkowe2`,
     description: `Bardzo dobre winko, dosyć słabe, nadaje się dla dzieci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at libero cursus, placerat enim vitae, venenatis lacus. Fusce id semper mi, id faucibus mauris. Ut neque quam, interdum ac tempor in, pharetra vitae ligula. Vivamus eleifend rutrum interdum. Curabitur tempus urna id lobortis convallis. Suspendisse placerat rutrum justo, et dictum leo consequat ut. Curabitur non nibh turpis. Nulla feugiat placerat nisi a ultrices. Nunc vitae nunc ac diam posuere fringilla. Ut eget venenatis diam, porta cursus sapien. `,
     ingredients: [

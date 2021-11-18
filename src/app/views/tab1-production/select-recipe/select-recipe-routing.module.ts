@@ -13,11 +13,17 @@ const routes: Routes = [
     loadChildren: () =>
       import(`./new-recipe/add-recipe.module`).then((m) => m.AddRecipeModule),
   },
-
   {
     path: `new-wine`,
     loadChildren: () =>
       import(`./new-wine/new-wine.module`).then((m) => m.NewWineModule),
+  },
+  {
+    path: `show-recipe`,
+    loadChildren: () =>
+      import(`./show-recipe/show-recipe.module`).then(
+        (m) => m.ShowRecipeModule
+      ),
   },
 ];
 

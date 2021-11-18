@@ -8,10 +8,8 @@ import {
   ViewChild,
 } from "@angular/core";
 
-import { DataService } from "src/app/services/data.service";
 import { Recipe } from "src/app/utils/interfaces";
 import { Router } from "@angular/router";
-import { ToastService } from "src/app/services/toast-service.service";
 
 @Component({
   selector: "app-recipe-container",
@@ -19,29 +17,15 @@ import { ToastService } from "src/app/services/toast-service.service";
   styleUrls: ["./recipe-container.component.scss"],
 })
 export class RecipeContainerComponent implements OnInit {
-  @ViewChild(`divToAnimate`) divToAnimate!: ElementRef<HTMLDivElement>;
-  @Input() recipe!: Recipe;
-  @Input() index!: number;
+  @Input() name!: string;
+  @Input() description!: string;
+  @Input() recipeId!: string;
 
-  @Output() onWineSelect = new EventEmitter<number>();
-
-  showMore = false;
-
-  constructor(private readonly router: Router) {}
+  @Output() onWineSelect = new EventEmitter<string>();
 
   async ngOnInit() {}
 
-  showMoreButton() {
-    this.showMore = !this.showMore;
-    if (this.showMore) {
-      this.divToAnimate.nativeElement.style.height = `${this.divToAnimate.nativeElement.scrollHeight}px`;
-      return;
-    }
-
-    this.divToAnimate.nativeElement.style.height = `75px`;
-  }
-
   select() {
-    this.onWineSelect.emit(this.index);
+    this.onWineSelect.emit(this.recipeId);
   }
 }

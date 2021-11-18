@@ -12,17 +12,18 @@
     <ion-input
       class="mr-2"
       placeholder="Wyszukaj..."
-      (input)="searchChange($event)"
+      (input)="searchChangeEvent($event)"
     ></ion-input>
     <div class="w-1/2 flex justify-end">
       <span class="standard-button" (click)="newRecipe()">Nowy przepis</span>
     </div>
   </div>
-  <ng-container *ngFor="let recipe of showingRecipes; index as i">
+  <ng-container *ngFor="let recipe of showingRecipes">
     <app-recipe-container
-      [recipe]="recipe"
-      [index]="i"
-      (onWineSelect)="selectRecipe($event)"
+      [name]="recipe.name"
+      [description]="recipe.description.substring(0, 150)"
+      [recipeId]="recipe.id"
+      (onWineSelect)="showRecipe($event)"
     ></app-recipe-container>
   </ng-container>
 </ion-content>

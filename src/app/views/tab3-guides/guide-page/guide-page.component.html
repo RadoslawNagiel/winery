@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons
+      (click)="onBackClick()"
+      class="absolute top-1 left-0"
+      slot="start"
+    >
+      <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Poradnik </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="standard-frame" (click)="selectGuide(guide.slug)">
+    <div class="header-text">{{ guide.title }}</div>
+    <div class="">{{ guide.description }}</div>
+  </div>
+</ion-content>

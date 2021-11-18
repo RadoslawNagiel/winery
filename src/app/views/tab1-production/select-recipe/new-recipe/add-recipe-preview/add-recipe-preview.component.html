@@ -1,16 +1,6 @@
 <div class="standard-frame">
-  <div class="flex">
-    <div class="w-20 relative">
-      <img src="assets/icons/Demijohn.svg" />
-      <div class="demijohn-text header-text">{{ wine.capacity }}&nbsp;l</div>
-    </div>
-    <div class="pl-2 w-full">
-      <span class="header-text">{{ wine.name }}</span>
-      <hr class="my-1" />
-      <span class="date-text">{{ wine.createDate | date: "dd.MM.yyyy" }}</span>
-    </div>
-  </div>
-  <span class="header-text py-4">Składniki</span>
+  <div class="header-text text-2xl">{{ wine.name }}</div>
+  <div class="header-text py-1">Składniki</div>
   <div
     class="pl-2 items-center"
     *ngFor="let ingredient of wine.recipe.ingredients"
@@ -18,19 +8,21 @@
     - {{ ingredient.name }}: {{ (ingredient.value * wine.capacity) / 10 }}
     {{ ingredient.unit }}
   </div>
-  <span class="header-text py-4">Etapy produkcji</span>
-  <div
-    class="pl-2 items-center flex"
-    *ngFor="let stage of wine.recipe.productStages; index as i"
-  >
-    <div>
-      <div class="font-semibold">
-        {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }} -
-        {{ stage.name }}
-      </div>
-      <div class="pb-1 pl-2">
-        {{ stage.description }}
-      </div>
+  <div class="header-text py-1">Etapy produkcji</div>
+  <div *ngFor="let stage of wine.recipe.productStages; index as i">
+    <div class="font-semibold days-container items-center">
+      <span>Dzień:</span>
+      <ion-input
+        class="text-center"
+        [disabled]="i === 0"
+        min="0"
+        type="number"
+        [(ngModel)]="statesDays[i]"
+      ></ion-input>
+      <span>&nbsp;-&nbsp;{{ stage.name }}</span>
+    </div>
+    <div class="pb-1 pl-2">
+      {{ stage.description }}
     </div>
   </div>
   <div class="pt-4 flex justify-between">
