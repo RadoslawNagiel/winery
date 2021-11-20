@@ -8,7 +8,7 @@
   <div class="h-2"></div>
   <div class="w-full flex justify-between pt-2 px-5 pb-1">
     <ion-input
-      class="mr-2"
+      class="mr-2 search-input"
       placeholder="Wyszukaj..."
       (input)="searchChangeEvent($event)"
     ></ion-input>
@@ -17,10 +17,10 @@
     </div>
   </div>
   <ng-container *ngFor="let wine of showingWines">
-    <app-wines-list
+    <app-production-list-element
       [wine]="wine"
       [wineId]="wine.id"
       (onWineSelect)="showWine($event)"
-    ></app-wines-list>
+    ></app-production-list-element>
   </ng-container>
 </ion-content>

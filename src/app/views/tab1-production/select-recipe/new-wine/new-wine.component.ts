@@ -37,6 +37,8 @@ export class NewWineComponent implements OnInit {
       ingredients: [],
       productStages: [],
     },
+    numberOfBottles: 0,
+    done: false,
     stagesDone: [],
   };
 

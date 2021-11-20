@@ -4,11 +4,11 @@ import { DataService } from "src/app/services/data.service";
 import { Wine } from "src/app/utils/interfaces";
 
 @Component({
-  selector: "app-wines-list",
-  templateUrl: "./wines-list.component.html",
-  styleUrls: ["./wines-list.component.scss"],
+  selector: "app-production-list-element",
+  templateUrl: "./production-list-element.component.html",
+  styleUrls: ["./production-list-element.component.scss"],
 })
-export class WinesListComponent implements OnInit {
+export class ProductionstElementComponent implements OnInit {
   @Input() wineId: string;
   @Input() wine: Wine;
   @Output() onWineSelect = new EventEmitter<string>();

@@ -37,49 +37,15 @@ export class ShowWineComponent implements OnInit {
     this.wine = this.dataService.inProgressWines.find(
       (wine) => wine.id === this.activatedRoute.snapshot.queryParams.index
     );
-    this.getNearestStage();
   }
 
-  doStage() {
-    this.wine.stagesDone[this.nearestStageIndex] = true;
-    this.getNearestStage();
-    this.dataService.winesListChange.next();
-  }
-
-  changeDate(event: any) {
-    const value = event.detail.value;
-    if (value !== ``) {
-      const selectDate = new Date(value).getTime();
-      const lastDate =
-        this.wine.recipe.productStages[this.nearestStageIndex].date +
-        this.wine.createDate;
-      const dateDifference = selectDate - lastDate;
-      for (
-        let i = this.nearestStageIndex;
-        i < this.wine.recipe.productStages.length;
-        ++i
-      ) {
-        this.wine.recipe.productStages[i].date += dateDifference;
-      }
-      event.target.value = ``;
+  minusClick() {
+    if (this.wine.numberOfBottles > 0) {
+      --this.wine.numberOfBottles;
     }
-  }
-
-  getNearestStage() {
-    let index = 0;
-    for (let stage of this.wine.stagesDone) {
-      if (!stage) {
-        break;
-      }
-      index++;
-    }
-    if (index === this.wine.stagesDone.length) {
-      return;
-    }
-    this.nearestStageIndex = index;
   }
 
   async backClick() {
-    await this.router.navigate([`/tabs/tab1`]);
+    await this.router.navigate([`/tabs/tab2`]);
   }
 }

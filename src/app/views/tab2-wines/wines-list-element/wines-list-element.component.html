@@ -1,0 +1,15 @@
+<div class="standard-frame flex" (click)="elementClick()">
+  <div class="flex pr-3">
+    <img class="w-4" src="assets/icons/wine.svg" />
+    <img class="w-5" src="assets/icons/wine.svg" />
+    <img class="w-4" src="assets/icons/wine.svg" />
+  </div>
+  <div class="pl-2 w-full">
+    <div class="header-text flex justify-between">
+      <span>{{ wine.name }}</span>
+      <span>{{ wine.createDate | date: "yyyy" }}</span>
+    </div>
+    <hr class="my-1" />
+    <div>{{ wine.numberOfBottles }} butelek</div>
+  </div>
+</div>

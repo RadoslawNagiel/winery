@@ -11,6 +11,8 @@ export const WINES: Wine[] = [
     yeastTolerance: 17,
     sweetness: 0,
     recipe: null,
+    done: false,
+    numberOfBottles: 10,
     stagesDone: [true, true, true, true, true, true, false],
   },
   {
@@ -23,6 +25,8 @@ export const WINES: Wine[] = [
     yeastTolerance: 12,
     sweetness: 3,
     recipe: null,
+    done: false,
+    numberOfBottles: 10,
     stagesDone: [true, false, false, false, false, false, false],
   },
   {
@@ -35,6 +39,8 @@ export const WINES: Wine[] = [
     yeastTolerance: 12,
     sweetness: 2,
     recipe: null,
+    done: false,
+    numberOfBottles: 10,
     stagesDone: [true, true, true, true, false, false, false],
   },
   {
@@ -47,6 +53,8 @@ export const WINES: Wine[] = [
     yeastTolerance: 18,
     sweetness: 2,
     recipe: null,
+    done: false,
+    numberOfBottles: 10,
     stagesDone: [true, true, true, true, false, false, false],
   },
 ];

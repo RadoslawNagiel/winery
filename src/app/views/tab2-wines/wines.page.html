@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Poradniki </ion-title>
+    <ion-title> Gotowe wina </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,10 +14,11 @@
     ></ion-input>
     <div class="w-1/2"></div>
   </div>
-  <ng-container *ngFor="let guide of showingGuides">
-    <div class="standard-frame" (click)="selectGuide(guide.slug)">
-      <div class="header-text">{{guide.title}}</div>
-      <div class="">{{guide.description.substring(0,100)}}...</div>
-    </div>
+  <ng-container *ngFor="let wine of showingWines">
+    <app-wines-list-element
+      [wine]="wine"
+      [wineId]="wine.id"
+      (onWineSelect)="showWine($event)"
+    ></app-wines-list-element>
   </ng-container>
 </ion-content>

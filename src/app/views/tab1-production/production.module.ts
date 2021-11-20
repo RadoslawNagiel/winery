@@ -4,9 +4,9 @@ import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
 import { ProductionPage } from "./production.page";
 import { ProductionPageRoutingModule } from "./production-routing.module";
+import { ProductionstElementModule } from "./production-list-element/production-list-element.module";
 import { SelectRecipeModule } from "./select-recipe/select-recipe.module";
-import { ShowWineModule } from "./show-wine/show-wine.module";
-import { WinesListModule } from "./wines-list/wines-list.module";
+import { ShowWineInProgresModule } from "./show-wine-in-progres/show-wine-in-progres.module";
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { WinesListModule } from "./wines-list/wines-list.module";
     CommonModule,
     FormsModule,
     ProductionPageRoutingModule,
-    WinesListModule,
-    ShowWineModule,
+    ProductionstElementModule,
+    ShowWineInProgresModule,
     SelectRecipeModule,
   ],
   declarations: [ProductionPage],

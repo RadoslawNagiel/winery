@@ -57,10 +57,10 @@ export class AddRecipeComponent implements OnInit {
         unit: `g.`,
       });
     }
-    // if (!this.checkValidate()) {
-    //   this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
-    //   return;
-    // }
+    if (!this.checkValidate()) {
+      this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
+      return;
+    }
     this.showPreview = true;
   }
 

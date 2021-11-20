@@ -14,6 +14,7 @@ export class DataService {
   nextRecipeIndex = this.recipes.length;
 
   inProgressWines: Wine[] = WINES;
+  finishedWines: Wine[] = WINES;
   nextWineIndex = this.inProgressWines.length;
 
   guides = GUIDES;

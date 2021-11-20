@@ -37,6 +37,8 @@ export class AddRecipePreviewComponent implements OnInit {
     yeastTolerance: 12,
     sweetness: Sweetness.Półwytrawne,
     recipe: null,
+    done: false,
+    numberOfBottles: 0,
     stagesDone: [],
   };
 

@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons class="absolute top-1 left-0" slot="start">
+      <ion-back-button
+        (click)="backClick()"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ wine.name }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="standard-frame">
+    <div class="flex">
+      <div class="flex pr-3">
+        <img class="w-4" src="assets/icons/wine.svg" />
+        <img class="w-5" src="assets/icons/wine.svg" />
+        <img class="w-4" src="assets/icons/wine.svg" />
+      </div>
+      <div class="pl-2 w-full header-text">
+        <div>Słodkość: {{ Sweetness[wine.sweetness] }}</div>
+        <div>Rocznik: {{ wine.createDate | date: "yyyy" }}</div>
+        <div>Moc: {{ wine.power }}%</div>
+      </div>
+    </div>
+
+    <div class="header-text py-1">Liczba butelek</div>
+    <div class="flex items-center">
+      <ion-input
+        class="text-center"
+        placeholder=""
+        type="number"
+        [(ngModel)]="wine.numberOfBottles"
+      ></ion-input>
+      <div class="w-1/2 ml-2">
+        <div class="circle-button" (click)="minusClick()">-</div>
+      </div>
+    </div>
+
+    <div class="header-text py-1">Drożdże</div>
+    <div class="pl-2">{{ wine.yeast }}</div>
+    <div class="header-text py-1">Składniki</div>
+    <div
+      class="pl-2 items-center"
+      *ngFor="let ingredient of wine.recipe.ingredients"
+    >
+      - {{ ingredient.name }}: {{ (ingredient.value * wine.capacity) / 10 }}
+      {{ ingredient.unit }}
+    </div>
+
+    <div class="header-text py-1">Etapy produkcji</div>
+    <div
+      class="pl-2 items-center stages-container"
+      *ngFor="let stage of wine.recipe.productStages; index as i"
+    >
+      <div class="pl-1">
+        {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }}
+      </div>
+      <div class="pl-1">{{ stage.name }}</div>
+    </div>
+  </div>
+</ion-content>

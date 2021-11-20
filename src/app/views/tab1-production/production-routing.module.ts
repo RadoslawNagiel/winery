@@ -11,7 +11,9 @@ const routes: Routes = [
   {
     path: `show-wine`,
     loadChildren: () =>
-      import(`./show-wine/show-wine.module`).then((m) => m.ShowWineModule),
+      import(`./show-wine-in-progres/show-wine-in-progres.module`).then(
+        (m) => m.ShowWineInProgresModule
+      ),
   },
   {
     path: `select-recipe`,
