@@ -34,7 +34,7 @@ export class ShowWineComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.wine = this.dataService.inProgressWines.find(
+    this.wine = this.dataService.finishedWines.find(
       (wine) => wine.id === this.activatedRoute.snapshot.queryParams.index
     );
   }
@@ -43,6 +43,10 @@ export class ShowWineComponent implements OnInit {
     if (this.wine.numberOfBottles > 0) {
       --this.wine.numberOfBottles;
     }
+  }
+
+  plusClick() {
+    ++this.wine.numberOfBottles;
   }
 
   async backClick() {

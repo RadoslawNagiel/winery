@@ -33,7 +33,7 @@ export class NewWineComponent implements OnInit {
     recipe: {
       id: ``,
       name: ``,
-      description: ``,
+      author: ``,
       ingredients: [],
       productStages: [],
     },

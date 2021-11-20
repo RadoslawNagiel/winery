@@ -1,5 +1,5 @@
 <div class="standard-frame">
-  <div class="header-text text-2xl">{{ wine.name }}</div>
+  <div class="big-header-text text-2xl">{{ wine.name }}</div>
   <div class="header-text py-1">Składniki</div>
   <div
     class="pl-2 items-center"
@@ -10,20 +10,34 @@
   </div>
   <div class="header-text py-1">Etapy produkcji</div>
   <div *ngFor="let stage of wine.recipe.productStages; index as i">
-    <div class="font-semibold days-container items-center">
+    <div class="font-semibold days-container items-center pb-1">
       <span>Dzień:</span>
       <ion-input
+        *ngIf="i !== 4 && i !== 2"
         class="text-center"
         [disabled]="i === 0"
         min="0"
         type="number"
         [(ngModel)]="statesDays[i]"
       ></ion-input>
+      <ion-input
+        *ngIf="i === 4 || i === 2"
+        class="text-center"
+        disabled
+        value="X"
+      ></ion-input>
       <span>&nbsp;-&nbsp;{{ stage.name }}</span>
     </div>
-    <div class="pb-1 pl-2">
-      {{ stage.description }}
+    <div *ngIf="i === 2" class="pl-2">
+      Etap ten będzie powtarzany co 4 tygodnie, aż do momentu przerwania
+      fermentacji.
     </div>
+    <div *ngIf="i === 4" class="pl-2">
+      Etap ten będzie powtarzany co 8 tygodni, aż do momentu butelkowania.
+    </div>
+    <!-- <div class="pb-1 pl-2">
+      {{ stage.description }}
+    </div> -->
   </div>
   <div class="pt-4 flex justify-between">
     <span class="standard-button" (click)="backClick()">Cofnij</span>

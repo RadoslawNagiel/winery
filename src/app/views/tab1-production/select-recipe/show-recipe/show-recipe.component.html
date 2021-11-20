@@ -3,16 +3,16 @@
     <ion-buttons class="absolute top-1 left-0" slot="start">
       <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{ recipe.name }} </ion-title>
+    <ion-title> Przepis </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="standard-frame">
-    <div class="header-text pt-1">{{ recipe.name }}</div>
+    <div class="big-header-text pt-1">{{ recipe.name }}</div>
     <div>
-      <div>{{ recipe.description }}</div>
-      <span class="header-text py-2">Składniki:</span>
+      <div>autor: {{ recipe.author }}</div>
+      <div class="header-text py-1">Składniki:</div>
       <div
         class="pl-2 items-center"
         *ngFor="let ingredient of recipe.ingredients"
@@ -20,18 +20,21 @@
         - {{ ingredient.name }}: {{ ingredient.value }} {{ ingredient.unit }}
       </div>
 
-      <span class="header-text py-2">Kroki:</span>
+      <div class="header-text py-1">Etapy produkcji:</div>
       <div class="pl-2 items-center" *ngFor="let stage of recipe.productStages">
         <div class="font-semibold">
-          Dzień {{ stage.date / 86400000 + 1 }}: {{ stage.name }}
+          Dzień {{ stage.date / 86400000 }}: {{ stage.name }}
         </div>
         <div class="pl-1">
           {{ stage.description }}
         </div>
+        <hr class="mb-2" />
       </div>
     </div>
     <div class="pt-2 flex justify-end">
-      <span class="standard-button" (click)="selectRecipe()">Wybierz</span>
+      <span class="standard-button" (click)="selectRecipe()"
+        >Użyj tego przepisu</span
+      >
     </div>
   </div>
 </ion-content>

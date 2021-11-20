@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Recipe, Units } from "src/app/utils/interfaces";
 
 import { PRODUC_STAGES } from "./const";
-import { Recipe } from "src/app/utils/interfaces";
 import { ToastService } from "src/app/services/toast-service.service";
 import { cloneDeep } from "lodash";
 
@@ -14,8 +14,8 @@ export class AddRecipeComponent implements OnInit {
   recipe: Recipe = {
     id: ``,
     name: ``,
-    description: ``,
-    ingredients: [{ name: ``, value: 0, unit: `` }],
+    author: ``,
+    ingredients: [{ name: ``, value: 0, unit: null }],
     productStages: cloneDeep(PRODUC_STAGES),
   };
 
@@ -23,7 +23,7 @@ export class AddRecipeComponent implements OnInit {
   sugar = 0;
 
   nameValid = true;
-  descriptionValid = true;
+  authorValid = true;
   sugarValid = true;
   mustDescriptionValid = true;
 
@@ -38,7 +38,7 @@ export class AddRecipeComponent implements OnInit {
 
   newIngredientClick() {
     this.ingredientsValidElements.push({ name: true, value: true, unit: true });
-    this.recipe.ingredients.push({ name: ``, value: 0, unit: `` });
+    this.recipe.ingredients.push({ name: ``, value: 0, unit: null });
   }
 
   deleteIngredientClick(index: number) {
@@ -49,12 +49,13 @@ export class AddRecipeComponent implements OnInit {
   }
 
   addRecipe() {
-    this.recipe.productStages[0].description = this.mustDescription;
+    this.recipe.productStages[0].description =
+      this.mustDescription + ` ` + cloneDeep(PRODUC_STAGES[0].description);
     if (this.sugar > 0) {
       this.recipe.ingredients.unshift({
         name: `cukier`,
         value: this.sugar,
-        unit: `g.`,
+        unit: Units.gramy,
       });
     }
     if (!this.checkValidate()) {
@@ -66,7 +67,7 @@ export class AddRecipeComponent implements OnInit {
 
   checkValidate() {
     this.nameValid = true;
-    this.descriptionValid = true;
+    this.authorValid = true;
     this.sugarValid = true;
     this.mustDescriptionValid = true;
     this.ingredientsValidElements = [];
@@ -75,8 +76,8 @@ export class AddRecipeComponent implements OnInit {
       this.nameValid = false;
       valid = false;
     }
-    if (this.recipe.description === ``) {
-      this.descriptionValid = false;
+    if (this.recipe.author === ``) {
+      this.authorValid = false;
       valid = false;
     }
     if (this.sugar < 0) {
@@ -105,7 +106,7 @@ export class AddRecipeComponent implements OnInit {
         this.ingredientsValidElements[index].value = false;
         valid = false;
       }
-      if (ingredient.unit === ``) {
+      if (ingredient.unit === null) {
         this.ingredientsValidElements[index].unit = false;
         valid = false;
       }

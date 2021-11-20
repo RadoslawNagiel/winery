@@ -29,7 +29,7 @@ export const GUIDES: Guide[] = [
     description: `Jest to proces rozkładania cukrów przez enzymy (wytwarzane przez drożdże), w którym powstaje alkohol oraz dwutlenek węgla. 
     Najważniejszą fazą fermentacji jest fermentacja burzliwa, która rozpoczyna się po dodaniu wszystkich składników. 
     Najlepszą temperaturą dla fermentacji jest 18-24°C. Zbyt wysoka temperatura zabija drożdże. Zbyt niska sprawia, że przestają one pracować. Podczas procesu fermentacji wytwarza się dwutlenek węgla, który wydostaje się z pojemnika za pomocą rurki fermentacyjnej. Rurka ta powinna być wypełniona do połowy wodą, tak aby dwutlenek węgla mógł się wydostać na zwenątrz, ale żeby tlen nie dostawał się do środka. Należy kontrolować poziom wody w rurce, gdyż może ona po jakimś czasie wyparować.
-    Jeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że fermentacja ustała. `,
+    Jeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że fermentacja ustała.`,
   },
   {
     slug: `przygotowywanie-syropu-cukrowego`,
@@ -50,6 +50,6 @@ export const GUIDES: Guide[] = [
   {
     slug: `zatrzymanie-fermentacji`,
     title: `Zatrzymanie fermentacji`,
-    description: `podgrzanie wina lub siarkowanie.`,
+    description: `Jeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że fermentacja ustała.`,
   },
 ];

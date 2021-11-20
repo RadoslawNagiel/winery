@@ -57,6 +57,8 @@ export class AddRecipePreviewComponent implements OnInit {
   }
 
   async addRecipe() {
+    this.statesDays[4] = this.statesDays[3] + 0.5;
+    this.statesDays[2] = this.statesDays[1] + 0.5;
     if (!this.checkValid()) {
       this.toastService.presentToastError(`Wypełnij poprawnie dni`);
       return;
@@ -68,21 +70,39 @@ export class AddRecipePreviewComponent implements OnInit {
       ++index;
     }
 
-    let lastIndex = this.recipe.productStages.length - 1;
-    while (
-      this.recipe.productStages[lastIndex].date -
-        this.recipe.productStages[lastIndex - 1].date >=
-      this.dayTimestamp * 84
-    ) {
-      const newState = cloneDeep(this.recipe.productStages[lastIndex - 1]);
-      newState.date += this.dayTimestamp * 56;
-      this.recipe.productStages.splice(lastIndex, 0, newState);
-      ++lastIndex;
-    }
+    this.checkIndex(2, this.dayTimestamp * 28);
+    this.checkIndex(
+      this.recipe.productStages.length - 2,
+      this.dayTimestamp * 56
+    );
 
     this.dataService.addRecipe(this.recipe);
     this.toastService.presentToastSuccess(`Dodano przepis`);
     await this.router.navigate([`/tabs/tab1/select-recipe`]);
+  }
+
+  checkIndex(index: number, howManyDays: number) {
+    this.recipe.productStages[index].date =
+      this.recipe.productStages[index - 1].date + howManyDays;
+    if (
+      this.recipe.productStages[index + 1].date -
+        this.recipe.productStages[index].date <
+      howManyDays / 2
+    ) {
+      this.recipe.productStages.splice(index, 1);
+      return;
+    }
+
+    while (
+      this.recipe.productStages[index + 1].date -
+        this.recipe.productStages[index].date >=
+      howManyDays * 1.5
+    ) {
+      const newState = cloneDeep(this.recipe.productStages[index]);
+      newState.date += howManyDays;
+      this.recipe.productStages.splice(index + 1, 0, newState);
+      ++index;
+    }
   }
 
   checkValid() {

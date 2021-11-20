@@ -17,15 +17,13 @@ import { Router } from "@angular/router";
   styleUrls: ["./recipe-container.component.scss"],
 })
 export class RecipeContainerComponent implements OnInit {
-  @Input() name!: string;
-  @Input() description!: string;
-  @Input() recipeId!: string;
+  @Input() recipe!: Recipe;
 
   @Output() onWineSelect = new EventEmitter<string>();
 
   async ngOnInit() {}
 
   select() {
-    this.onWineSelect.emit(this.recipeId);
+    this.onWineSelect.emit(this.recipe.id);
   }
 }

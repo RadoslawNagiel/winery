@@ -16,7 +16,35 @@ export interface Wine {
 export interface Ingredient {
   name: string;
   value: number;
-  unit: string;
+  unit: Units;
+}
+
+export interface Recipe {
+  id: string;
+  name: string;
+  author: string;
+  ingredients: Ingredient[];
+  productStages: ProductStage[];
+}
+
+export interface ProductStage {
+  name: ProductionStage;
+  description: string;
+  date: number;
+}
+
+export interface Guide {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export enum ProductionStage {
+  Preparation = `Przygotowanie moszczu`,
+  Straining = `Odcedzanie owoców`,
+  Drainage = `Zlewanie znad osadu`,
+  StopFermentation = `Przerwanie fermentacji`,
+  Bottling = `Butelkowanie`,
 }
 
 export enum Sweetness {
@@ -26,22 +54,8 @@ export enum Sweetness {
   Słodkie,
 }
 
-export interface Recipe {
-  id: string;
-  name: string;
-  description: string;
-  ingredients: Ingredient[];
-  productStages: ProductStage[];
-}
-
-export interface ProductStage {
-  name: string;
-  description: string;
-  date: number;
-}
-
-export interface Guide {
-  slug: string;
-  title: string;
-  description: string;
+export enum Units {
+  gramy = `g.`,
+  litry = `l.`,
+  sztuki = `szt.`,
 }

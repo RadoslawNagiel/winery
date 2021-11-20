@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { Sweetness, Wine } from "src/app/utils/interfaces";
+import { ProductionStage, Sweetness, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
 import { IonDatetime } from "@ionic/angular";
@@ -44,6 +44,10 @@ export class ShowWineInProgresComponent implements OnInit {
     this.wine.stagesDone[this.nearestStageIndex] = true;
     this.getNearestStage();
     this.dataService.winesListChange.next();
+
+    if (this.nearestStageIndex === this.wine.stagesDone.length) {
+      this.wine.done = true;
+    }
   }
 
   changeDate(event: any) {
@@ -61,7 +65,6 @@ export class ShowWineInProgresComponent implements OnInit {
       ) {
         this.wine.recipe.productStages[i].date += dateDifference;
       }
-      event.target.value = ``;
     }
   }
 
@@ -77,6 +80,46 @@ export class ShowWineInProgresComponent implements OnInit {
       return;
     }
     this.nearestStageIndex = index;
+  }
+
+  getNearestDate() {
+    const date = new Date(
+      this.wine.recipe.productStages[this.nearestStageIndex].date +
+        this.wine.createDate
+    );
+    const day = `0${date.getDate()}`.slice(-2);
+    const month = `0${date.getMonth() + 1}`.slice(-2);
+    return `${date.getFullYear()}-${month}-${day}`;
+  }
+
+  getHints(stage: ProductionStage) {
+    switch (stage) {
+      case ProductionStage.Preparation:
+        return [
+          { name: `Fermentacja`, slug: `fermentacja` },
+          { name: `Sterylizacja`, slug: `sterylizacja` },
+          { name: `Syrop cukrowy`, slug: `przygotowywanie-syropu-cukrowego` },
+        ];
+      case ProductionStage.Straining:
+        return [
+          { name: `Syrop cukrowy`, slug: `przygotowywanie-syropu-cukrowego` },
+        ];
+      case ProductionStage.Drainage:
+        return [{ name: `Zlewanie znad osadu`, slug: `zlewanie-znad-osadu` }];
+      case ProductionStage.StopFermentation:
+        return [
+          { name: `Zatrzymanie fermentacji`, slug: `zatrzymanie-fermentacji` },
+        ];
+      case ProductionStage.Bottling:
+        return [
+          { name: `Butelkowanie`, slug: `butelkowanie-wina` },
+          { name: `Sterylizacja`, slug: `sterylizacja` },
+        ];
+    }
+  }
+
+  async openGuides(slug: string) {
+    await this.router.navigate([`/tabs/tab3/${slug}`]);
   }
 
   async backClick() {

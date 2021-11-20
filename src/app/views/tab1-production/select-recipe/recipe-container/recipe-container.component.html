@@ -1,6 +1,9 @@
 <div class="standard-frame" (click)="select()">
-  <div class="header-text pt-1">{{ name }}</div>
-  <div class="overflow-hidden div-anim">
-    <div>{{ description }}</div>
+  <div class="big-header-text pt-1">{{ recipe.name }}</div>
+  <div>autor: {{ recipe.author }}</div>
+  <div class="header-text py-1">Składniki na 10 litrów</div>
+  <div *ngFor="let ingredient of recipe.ingredients">
+    - {{ ingredient.name }}: {{ ingredient.value }}
+    {{ ingredient.unit }}
   </div>
 </div>

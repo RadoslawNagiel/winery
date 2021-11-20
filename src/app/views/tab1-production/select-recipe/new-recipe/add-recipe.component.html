@@ -16,12 +16,12 @@
         [ngClass]="{ 'invalid-text': !nameValid }"
         [(ngModel)]="recipe.name"
       ></ion-input>
-      <div class="header-text py-1">Opis</div>
-      <ion-textarea
-        placeholder="Opis..."
-        [ngClass]="{ 'invalid-text': !descriptionValid }"
-        [(ngModel)]="recipe.description"
-      ></ion-textarea>
+      <div class="header-text py-1">Autor</div>
+      <ion-input
+        placeholder="Autor..."
+        [ngClass]="{ 'invalid-text': !authorValid }"
+        [(ngModel)]="recipe.author"
+      ></ion-input>
       <app-text-info
         [title]="'Cukier'"
         [hintText]="
@@ -57,7 +57,7 @@
         <span></span>
       </div>
       <div *ngFor="let ingredient of recipe.ingredients; index as i">
-        <div class="ingredient-container py-2">
+        <div class="ingredient-container py-2 items-center">
           <ion-input
             [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].name }"
             placeholder="Nazwa..."

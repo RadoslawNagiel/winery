@@ -20,9 +20,7 @@
   </div>
   <ng-container *ngFor="let recipe of showingRecipes">
     <app-recipe-container
-      [name]="recipe.name"
-      [description]="recipe.description.substring(0, 150)"
-      [recipeId]="recipe.id"
+      [recipe]="recipe"
       (onWineSelect)="showRecipe($event)"
     ></app-recipe-container>
   </ng-container>

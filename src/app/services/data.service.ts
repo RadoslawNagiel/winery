@@ -13,8 +13,8 @@ export class DataService {
   recipes = RECIPES;
   nextRecipeIndex = this.recipes.length;
 
-  inProgressWines: Wine[] = WINES;
-  finishedWines: Wine[] = WINES;
+  inProgressWines: Wine[] = [];
+  finishedWines: Wine[] = [];
   nextWineIndex = this.inProgressWines.length;
 
   guides = GUIDES;
@@ -25,7 +25,12 @@ export class DataService {
   constructor() {}
 
   loadWines() {
+    this.inProgressWines = WINES.filter((wine) => !wine.done);
+    this.finishedWines = WINES.filter((wine) => wine.done);
     for (let wine of this.inProgressWines) {
+      wine.recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
+    }
+    for (let wine of this.finishedWines) {
       wine.recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
     }
   }
