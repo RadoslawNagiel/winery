@@ -21,6 +21,8 @@ import { ToastService } from "src/app/services/toast-service.service";
 export class NewWineComponent implements OnInit {
   today = ``;
 
+  nextYear = new Date().getFullYear() + 1;
+
   wine: Wine = {
     id: ``,
     name: ``,

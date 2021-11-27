@@ -42,11 +42,20 @@ export class ShowWineComponent implements OnInit {
   minusClick() {
     if (this.wine.numberOfBottles > 0) {
       --this.wine.numberOfBottles;
+      this.dataService.winesListChange.next();
     }
   }
 
   plusClick() {
     ++this.wine.numberOfBottles;
+    this.dataService.winesListChange.next();
+  }
+
+  changeAmount() {
+    if (this.wine.numberOfBottles < 0 || this.wine.numberOfBottles === null) {
+      this.wine.numberOfBottles = 0;
+    }
+    this.dataService.winesListChange.next();
   }
 
   async backClick() {

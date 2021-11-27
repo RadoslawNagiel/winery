@@ -26,7 +26,7 @@
           Dzień {{ stage.date / 86400000 }}: {{ stage.name }}
         </div>
         <div class="pl-1">
-          {{ stage.description }}
+          {{ getStageDescription(stage.name) }}
         </div>
         <hr class="mb-2" />
       </div>

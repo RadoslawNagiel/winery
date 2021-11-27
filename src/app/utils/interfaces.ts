@@ -29,14 +29,28 @@ export interface Recipe {
 
 export interface ProductStage {
   name: ProductionStage;
-  description: string;
+  description?: string;
   date: number;
+}
+
+export interface ProductStageDescription {
+  name: ProductionStage;
+  description: string;
+  descriptions?: string[];
+  guides: {
+    name: string;
+    slug: string;
+  }[];
 }
 
 export interface Guide {
   slug: string;
   title: string;
   description: string;
+  guides: {
+    name: string;
+    slug: string;
+  }[];
 }
 
 export enum ProductionStage {
@@ -55,7 +69,7 @@ export enum Sweetness {
 }
 
 export enum Units {
-  gramy = `g.`,
-  litry = `l.`,
-  sztuki = `szt.`,
+  gramy = `g`,
+  litry = `l`,
+  sztuki = `szt`,
 }

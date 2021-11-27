@@ -8,10 +8,17 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { ProductionStage, Sweetness, Wine } from "src/app/utils/interfaces";
+import { IonDatetime, NavController } from "@ionic/angular";
+import {
+  ProductStageDescription,
+  ProductionStage,
+  Sweetness,
+  Wine,
+} from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
-import { IonDatetime } from "@ionic/angular";
+import { PRODUC_STAGES_DESCRIPTIONS } from "src/app/utils/product-stages";
+import { ToastService } from "src/app/services/toast-service.service";
 
 @Component({
   selector: "app-show-wine-in-progres",
@@ -23,30 +30,44 @@ export class ShowWineInProgresComponent implements OnInit {
   @Output() onBackClick = new EventEmitter();
   wine: Wine;
 
+  nextYear = new Date().getFullYear() + 1;
+
   nearestStageIndex = 0;
+  nearestStage: ProductStageDescription;
 
   Sweetness = Sweetness;
 
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly toastService: ToastService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.wine = this.dataService.inProgressWines.find(
       (wine) => wine.id === this.activatedRoute.snapshot.queryParams.index
     );
     this.getNearestStage();
   }
 
-  doStage() {
+  async doStage() {
     this.wine.stagesDone[this.nearestStageIndex] = true;
     this.getNearestStage();
-    this.dataService.winesListChange.next();
+    this.dataService.inProgresWinesListChange.next();
 
-    if (this.nearestStageIndex === this.wine.stagesDone.length) {
-      this.wine.done = true;
+    if (this.nearestStageIndex === this.wine.stagesDone.length - 1) {
+      this.dataService.wineIsReady(this.wine.id);
+      this.toastService.presentToastSuccess(`Wino gotowe!`);
+      await this.router.navigate([`/tabs/tab1`], {
+        skipLocationChange: true,
+      });
+
+      await this.router.navigate([`/tabs/tab2/show-wine`], {
+        queryParams: {
+          index: this.wine.id,
+        },
+      });
     }
   }
 
@@ -80,6 +101,9 @@ export class ShowWineInProgresComponent implements OnInit {
       return;
     }
     this.nearestStageIndex = index;
+    this.nearestStage = PRODUC_STAGES_DESCRIPTIONS.find(
+      (stage) => stage.name === this.wine.recipe.productStages[index].name
+    );
   }
 
   getNearestDate() {
@@ -92,34 +116,35 @@ export class ShowWineInProgresComponent implements OnInit {
     return `${date.getFullYear()}-${month}-${day}`;
   }
 
-  getHints(stage: ProductionStage) {
-    switch (stage) {
-      case ProductionStage.Preparation:
-        return [
-          { name: `Fermentacja`, slug: `fermentacja` },
-          { name: `Sterylizacja`, slug: `sterylizacja` },
-          { name: `Syrop cukrowy`, slug: `przygotowywanie-syropu-cukrowego` },
-        ];
-      case ProductionStage.Straining:
-        return [
-          { name: `Syrop cukrowy`, slug: `przygotowywanie-syropu-cukrowego` },
-        ];
-      case ProductionStage.Drainage:
-        return [{ name: `Zlewanie znad osadu`, slug: `zlewanie-znad-osadu` }];
-      case ProductionStage.StopFermentation:
-        return [
-          { name: `Zatrzymanie fermentacji`, slug: `zatrzymanie-fermentacji` },
-        ];
-      case ProductionStage.Bottling:
-        return [
-          { name: `Butelkowanie`, slug: `butelkowanie-wina` },
-          { name: `Sterylizacja`, slug: `sterylizacja` },
-        ];
+  getStopFermentationDescription() {
+    if (this.wine.sweetness === Sweetness.Wytrawne) {
+      return this.nearestStage.descriptions[0];
     }
+    if (this.wine.yeastTolerance === this.wine.power) {
+      return this.nearestStage.descriptions[1];
+    }
+    return this.nearestStage.descriptions[2];
+  }
+
+  getStageDescription(stageName: ProductionStage) {
+    let description = PRODUC_STAGES_DESCRIPTIONS.find(
+      (description) => description.name === stageName
+    ).description;
+    if (stageName === ProductionStage.Preparation) {
+      description = this.nearestStage.description + ` ` + description;
+    }
+    if (stageName === ProductionStage.StopFermentation) {
+      return this.getStopFermentationDescription();
+    }
+    return description;
   }
 
   async openGuides(slug: string) {
-    await this.router.navigate([`/tabs/tab3/${slug}`]);
+    await this.router.navigate([`/tabs/tab3/${slug}`], {
+      queryParams: {
+        backWine: this.wine.id,
+      },
+    });
   }
 
   async backClick() {

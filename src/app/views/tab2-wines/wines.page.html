@@ -21,4 +21,11 @@
       (onWineSelect)="showWine($event)"
     ></app-wines-list-element>
   </ng-container>
+  <ng-container *ngFor="let wine of showingWinesNotAvailable">
+    <app-wines-list-element
+      [wine]="wine"
+      [wineId]="wine.id"
+      (onWineSelect)="showWine($event)"
+    ></app-wines-list-element>
+  </ng-container>
 </ion-content>

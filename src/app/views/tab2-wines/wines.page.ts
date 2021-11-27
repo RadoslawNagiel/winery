@@ -12,6 +12,7 @@ import { Wine } from "src/app/utils/interfaces";
 export class WinesPageComponent {
   wines: Wine[] = [];
   showingWines: Wine[] = [];
+  showingWinesNotAvailable: Wine[] = [];
 
   subscriptions: Subscription[] = [];
 
@@ -44,16 +45,23 @@ export class WinesPageComponent {
   }
 
   searchChange(text: string) {
+    let wines = [];
     if (text === ``) {
-      this.showingWines = this.wines;
+      wines = this.wines;
     } else {
-      this.showingWines = this.wines.filter((wine) =>
+      wines = this.wines.filter((wine) =>
         wine.name.toLowerCase().includes(text.toLowerCase())
       );
     }
-    this.showingWines = this.showingWines.sort((a, b) =>
-      a.createDate > b.createDate ? 1 : -1
-    );
+
+    wines = wines.sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
+
+    this.showingWines = wines.filter((wine) => {
+      return wine.numberOfBottles > 0;
+    });
+    this.showingWinesNotAvailable = wines.filter((wine) => {
+      return wine.numberOfBottles === 0;
+    });
   }
 
   ngOnDestoy() {

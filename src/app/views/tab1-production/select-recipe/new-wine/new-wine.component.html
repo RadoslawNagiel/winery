@@ -19,6 +19,7 @@
     <ion-datetime
       [(ngModel)]="today"
       displayFormat="DD.MMM.YYYY"
+      [max]="nextYear"
       monthShortNames="STY, LUT, MAR, KWI, MAJ, CZE, LIP, SIE, WRZ, PAZ, LIS, GRU"
       doneText="Zatwierdź"
       cancelText="Anuluj"
@@ -52,7 +53,12 @@
       </div>
       <div class="pl-3">{{ wine.yeastTolerance }}%</div>
     </div>
-    <div class="header-text pt-1">Zawartość alkoholu</div>
+    <app-text-info
+      [title]="'Zawartość alkoholu'"
+      [hintText]="
+        'Najprościej jest wytworzyć wino o mocy równej tolerancji drożdży na alkohol.'
+      "
+    ></app-text-info>
     <div class="flex items-center">
       <div class="w-3/5">
         <ion-range

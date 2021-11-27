@@ -1,4 +1,8 @@
-<div class="standard-frame flex" (click)="elementClick()">
+<div
+  class="standard-frame flex"
+  [ngClass]="{ 'not-avaliable': wine.numberOfBottles === 0 }"
+  (click)="elementClick()"
+>
   <div class="flex pr-3">
     <img class="w-4" src="assets/icons/wine.svg" />
     <img class="w-5" src="assets/icons/wine.svg" />
@@ -10,6 +14,9 @@
       <span>{{ wine.createDate | date: "yyyy" }}</span>
     </div>
     <hr class="my-1" />
-    <div>{{ wine.numberOfBottles }} butelek</div>
+    <div *ngIf="wine.numberOfBottles; else notAvaliable">
+      {{ wine.numberOfBottles }} butelek
+    </div>
+    <ng-template #notAvaliable>Niedostępne</ng-template>
   </div>
 </div>

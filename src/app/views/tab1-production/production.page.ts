@@ -21,11 +21,10 @@ export class ProductionPage {
   ) {}
 
   ngOnInit() {
-    this.dataService.loadWines();
     this.inProgressWines = this.dataService.inProgressWines;
     this.searchChange(``);
     this.subscriptions.push(
-      this.dataService.winesListChange.subscribe(() => {
+      this.dataService.inProgresWinesListChange.subscribe(() => {
         this.inProgressWines = this.dataService.inProgressWines;
         this.searchChange(``);
       })

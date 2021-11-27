@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import {
+  PRODUC_STAGES,
+  PRODUC_STAGES_DESCRIPTIONS,
+} from "src/app/utils/product-stages";
 import { Recipe, Units } from "src/app/utils/interfaces";
 
-import { PRODUC_STAGES } from "./const";
 import { ToastService } from "src/app/services/toast-service.service";
 import { cloneDeep } from "lodash";
 
@@ -49,8 +52,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   addRecipe() {
-    this.recipe.productStages[0].description =
-      this.mustDescription + ` ` + cloneDeep(PRODUC_STAGES[0].description);
+    this.recipe.productStages[0].description = this.mustDescription;
     if (this.sugar > 0) {
       this.recipe.ingredients.unshift({
         name: `cukier`,

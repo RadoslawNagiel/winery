@@ -26,7 +26,10 @@
       </div>
     </div>
     <div class="header-text py-1">Drożdże</div>
-    <div class="pl-2">{{ wine.yeast }}</div>
+    <div class="pl-2">
+      {{ wine.yeast }}<br />
+      Tolerancja: {{ wine.yeastTolerance }}%
+    </div>
     <div class="header-text py-1">Składniki</div>
     <div
       class="pl-2 items-center"
@@ -43,6 +46,7 @@
         <ion-datetime
           class="datetime-input"
           displayFormat="DD.MMM.YYYY"
+          [max]="nextYear"
           monthShortNames="STY, LUT, MAR, KWI, MAJ, CZE, LIP, SIE, WRZ, PAZ, LIS, GRU"
           doneText="Zatwierdź"
           [value]="getNearestDate()"
@@ -50,25 +54,18 @@
           (ionChange)="changeDate($event)"
         ></ion-datetime>
         &nbsp;-
-        {{ wine.recipe.productStages[nearestStageIndex].name }}
+        {{ nearestStage.name }}
       </div>
       <div class="pl-1">
-        {{ wine.recipe.productStages[nearestStageIndex].description }}
+        {{ getStageDescription(nearestStage.name) }}
       </div>
-      <div class="font-semibold pt-1 pl-1">Dowiedz się więcej:</div>
-      <div class="pl-2 pb-1 flex flex-wrap">
-        <ng-container
-          *ngFor="
-            let hint of getHints(
-              wine.recipe.productStages[nearestStageIndex].name
-            )
-          "
-        >
+      <div class="pl-2 pb-1 pt-1 flex flex-wrap">
+        <ng-container *ngFor="let guide of nearestStage.guides">
           <div
             class="mr-2 mb-1 flex items-center reference"
-            (click)="openGuides(hint.slug)"
+            (click)="openGuides(guide.slug)"
           >
-            <ion-icon name="book-outline"></ion-icon>&nbsp;{{ hint.name }}
+            <ion-icon name="book-outline"></ion-icon>&nbsp;{{ guide.name }}
           </div>
         </ng-container>
       </div>

@@ -1,10 +1,10 @@
 import { Recipe, Wine } from "../utils/interfaces";
 
-import { GUIDES } from "./guides";
+import { GUIDES } from "../utils/guides";
 import { Injectable } from "@angular/core";
-import { RECIPES } from "./recipes";
+import { RECIPES } from "../utils/recipes";
 import { Subject } from "rxjs";
-import { WINES } from "./const";
+import { WINES } from "../utils/wines";
 
 @Injectable({
   providedIn: `root`,
@@ -15,18 +15,21 @@ export class DataService {
 
   inProgressWines: Wine[] = [];
   finishedWines: Wine[] = [];
-  nextWineIndex = this.inProgressWines.length;
+  nextWineIndex = 0;
 
   guides = GUIDES;
 
-  winesListChange = new Subject();
+  inProgresWinesListChange = new Subject();
   recipesListChange = new Subject();
+  winesListChange = new Subject();
 
   constructor() {}
 
   loadWines() {
     this.inProgressWines = WINES.filter((wine) => !wine.done);
     this.finishedWines = WINES.filter((wine) => wine.done);
+    this.nextWineIndex = WINES.length;
+
     for (let wine of this.inProgressWines) {
       wine.recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
     }
@@ -39,7 +42,7 @@ export class DataService {
     this.nextWineIndex++;
     newWine.id = String(this.nextWineIndex);
     this.inProgressWines.push(newWine);
-    this.winesListChange.next();
+    this.inProgresWinesListChange.next();
     return newWine.id;
   }
 
@@ -48,5 +51,16 @@ export class DataService {
     recipe.id = String(this.nextRecipeIndex);
     this.recipes.push(recipe);
     this.recipesListChange.next();
+  }
+
+  wineIsReady(wineId: string) {
+    const wine = this.inProgressWines.find((wine) => wine.id === wineId);
+    const index = this.inProgressWines.findIndex((wine) => wine.id === wineId);
+    this.inProgressWines.splice(index, 1);
+    wine.done = true;
+    wine.numberOfBottles = Math.floor(wine.capacity / 0.75);
+    this.finishedWines.push(wine);
+    this.inProgresWinesListChange.next();
+    this.winesListChange.next();
   }
 }

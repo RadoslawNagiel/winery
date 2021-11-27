@@ -35,6 +35,7 @@
           class="text-center"
           type="number"
           [(ngModel)]="wine.numberOfBottles"
+          (change)="changeAmount()"
         ></ion-input>
         <div
           class="absolute top-2 left-1 circle-button-small z-50"
