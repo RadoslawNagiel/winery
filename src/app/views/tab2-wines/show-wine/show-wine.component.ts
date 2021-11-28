@@ -58,6 +58,17 @@ export class ShowWineComponent implements OnInit {
     this.dataService.winesListChange.next();
   }
 
+  getSugarValue() {
+    let value = this.wine.recipe.ingredients.find(
+      (ing) => ing.name === `cukier`
+    ).value;
+    return (
+      Math.round(
+        (value / 10 + 17 * (this.wine.power - 10)) * this.wine.capacity * 1000
+      ) / 1000
+    );
+  }
+
   async backClick() {
     await this.router.navigate([`/tabs/tab2`]);
   }

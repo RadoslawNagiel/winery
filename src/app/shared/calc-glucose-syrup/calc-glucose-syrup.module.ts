@@ -1,12 +1,12 @@
+import { CalcGlucoseSyrupComponent } from "./calc-glucose-syrup.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
-import { TextInfoComponent } from "./text-info.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
-  declarations: [TextInfoComponent],
-  exports: [TextInfoComponent],
+  declarations: [CalcGlucoseSyrupComponent],
+  exports: [CalcGlucoseSyrupComponent],
 })
-export class TextInfoModule {}
+export class CalcGlucoseSyrupModule {}

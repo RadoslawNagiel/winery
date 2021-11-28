@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { IonDatetime, NavController } from "@ionic/angular";
 import {
+  ProductStage,
   ProductStageDescription,
   ProductionStage,
   Sweetness,
@@ -30,12 +31,18 @@ export class ShowWineInProgresComponent implements OnInit {
   @Output() onBackClick = new EventEmitter();
   wine: Wine;
 
+  endFermentation = false;
+  clearWine = false;
+
+  dayTimestamp = 86400000;
   nextYear = new Date().getFullYear() + 1;
 
   nearestStageIndex = 0;
   nearestStage: ProductStageDescription;
+  nearestDateInput = ``;
 
   Sweetness = Sweetness;
+  ProductionStage = ProductionStage;
 
   constructor(
     private readonly dataService: DataService,
@@ -51,12 +58,23 @@ export class ShowWineInProgresComponent implements OnInit {
     this.getNearestStage();
   }
 
+  undoStage() {
+    this.endFermentation = false;
+    this.clearWine = false;
+
+    this.wine.stagesDone[this.nearestStageIndex - 1] = false;
+    this.getNearestStage();
+    this.dataService.inProgresWinesListChange.next();
+  }
+
   async doStage() {
+    this.endFermentation = false;
+    this.clearWine = false;
+
     this.wine.stagesDone[this.nearestStageIndex] = true;
     this.getNearestStage();
     this.dataService.inProgresWinesListChange.next();
-
-    if (this.nearestStageIndex === this.wine.stagesDone.length - 1) {
+    if (this.nearestStageIndex === this.wine.stagesDone.length) {
       this.dataService.wineIsReady(this.wine.id);
       this.toastService.presentToastSuccess(`Wino gotowe!`);
       await this.router.navigate([`/tabs/tab1`], {
@@ -71,13 +89,60 @@ export class ShowWineInProgresComponent implements OnInit {
     }
   }
 
+  getHalfSugar() {
+    return Math.round(this.getSugarValue() / 2) / 1000;
+  }
+
+  getSugarValue() {
+    let value = this.wine.recipe.ingredients.find(
+      (ing) => ing.name === `cukier`
+    ).value;
+    return (
+      Math.round(
+        (value / 10 + 17 * (this.wine.power - 10)) * this.wine.capacity * 1000
+      ) / 1000
+    );
+  }
+
+  changeStageToDrainage() {
+    const date = this.wine.recipe.productStages[this.nearestStageIndex].date;
+    const stage: ProductStage = {
+      name: ProductionStage.Drainage,
+      date: date,
+    };
+    this.wine.recipe.productStages.splice(this.nearestStageIndex, 0, stage);
+    this.wine.stagesDone.splice(this.nearestStageIndex, 0, false);
+
+    const dateDifference = 28 * this.dayTimestamp;
+    const length = this.wine.recipe.productStages.length;
+    for (let i = this.nearestStageIndex + 1; i < length; ++i) {
+      this.wine.recipe.productStages[i].date += dateDifference;
+    }
+
+    this.dataService.inProgresWinesListChange.next();
+    this.getNearestStage();
+    this.toastService.presentToastSuccess(`Dodano nowy etap`);
+  }
+
   changeDate(event: any) {
     const value = event.detail.value;
-    if (value !== ``) {
+    if (value !== `` && value != this.nearestDateInput) {
       const selectDate = new Date(value).getTime();
       const lastDate =
         this.wine.recipe.productStages[this.nearestStageIndex].date +
         this.wine.createDate;
+      if (this.nearestStageIndex) {
+        const earielStageDate =
+          this.wine.recipe.productStages[this.nearestStageIndex - 1].date +
+          this.wine.createDate;
+        if (earielStageDate > selectDate) {
+          this.toastService.presentToastError(
+            `Data nie może być wcześniejsza niż poprzedni etap`
+          );
+          event.target.value = this.getNearestDate();
+          return;
+        }
+      }
       const dateDifference = selectDate - lastDate;
       for (
         let i = this.nearestStageIndex;
@@ -86,6 +151,7 @@ export class ShowWineInProgresComponent implements OnInit {
       ) {
         this.wine.recipe.productStages[i].date += dateDifference;
       }
+      this.toastService.presentToastSuccess(`Zmieniono datę`);
     }
   }
 
@@ -97,13 +163,14 @@ export class ShowWineInProgresComponent implements OnInit {
       }
       index++;
     }
+    this.nearestStageIndex = index;
     if (index === this.wine.stagesDone.length) {
       return;
     }
-    this.nearestStageIndex = index;
     this.nearestStage = PRODUC_STAGES_DESCRIPTIONS.find(
       (stage) => stage.name === this.wine.recipe.productStages[index].name
     );
+    this.nearestDateInput = this.getNearestDate();
   }
 
   getNearestDate() {
@@ -140,11 +207,12 @@ export class ShowWineInProgresComponent implements OnInit {
   }
 
   async openGuides(slug: string) {
-    await this.router.navigate([`/tabs/tab3/${slug}`], {
-      queryParams: {
-        backWine: this.wine.id,
-      },
-    });
+    await this.router.navigate([`/tabs/tab3/${slug}`]);
+    // await this.router.navigate([`/tabs/tab3/${slug}`], {
+    //   queryParams: {
+    //     backWine: this.wine.id,
+    //   },
+    // });
   }
 
   async backClick() {

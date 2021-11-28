@@ -1,4 +1,4 @@
-import { Guide } from "../utils/interfaces";
+import { Calculators, Guide } from "../utils/interfaces";
 
 export const GUIDES: Guide[] = [
   {
@@ -45,7 +45,12 @@ export const GUIDES: Guide[] = [
         name: `Moc wina`,
         slug: `moc-wina`,
       },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
+      },
     ],
+    calculator: Calculators.SYRUP,
   },
   {
     slug: `zlewanie-znad-osadu`,
@@ -67,6 +72,10 @@ export const GUIDES: Guide[] = [
         name: `Sterylizacja`,
         slug: `sterylizacja`,
       },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
+      },
     ],
   },
   {
@@ -84,14 +93,39 @@ export const GUIDES: Guide[] = [
         name: `Fermentacja`,
         slug: `fermentacja`,
       },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
+      },
     ],
   },
   {
     slug: `moc-wina`,
     title: `Moc wina`,
-    description: `Możemy zaplanować jaką moc będzie miało nasze wino. Każde 17 g cukru na litr roztworu da nam 1% alkoholu. Należy jednak pamiętać, że drożdże mają swoją maksymalną tolerancję na alkohol. Kiedy mamy już stworzony moszcz (bez dodatkowego cukru), możemy jego część przelać przez sito do probówki. Następnie w probówce umieszczamy cukromierz i zakręcamy nim, aby pozbyć się pęcherzyków powietrza, które mogły na nim osiąść. Aby pomiar był jak najbardziej dokładny, płyn powinien mieć temperaturę 20°C. Następnie odczytujemy z cukromierza liczbę w skali Ballinga. 1 stopień BLG to 10 g cukru na 1 kg roztworu. Zależnie od składników moszczu, ten pomiar będzie oznaczał co innego.<br>
+    description: `Możemy zaplanować jaką moc będzie miało nasze wino. Każde 17 g cukru na litr roztworu da nam 1% alkoholu. Należy jednak pamiętać, że drożdże mają swoją maksymalną tolerancję na alkohol. Kiedy mamy już stworzony moszcz (bez dodatkowego cukru), możemy jego część przelać przez sito do probówki. Następnie w probówce umieszczamy cukromierz i zakręcamy nim, aby pozbyć się pęcherzyków powietrza, które mogły na nim osiąść. Aby pomiar był jak najbardziej dokładny, płyn powinien mieć temperaturę 20°C. Następnie odczytujemy z cukromierza liczbę w skali Ballinga. 1 stopień Blg to 10 g cukru na 1 kg roztworu. Zależnie od składników moszczu, ten pomiar będzie oznaczał co innego.<br>
     <b>Przykład</b><br>
-    Chcemy wyprodukować 5 litrów wina o mocy 10%. Po zbadaniu moszczu cukromierzem otrzymujemy wynik 5 BLG. oznacza to że w 1kg roztworu znajduje się 50g cukru. Dla uproszczenia przyjmijmy, że 1 litr roztworu waży 1kg. Tak więc w litrze roztworu mamy 50g cukru. Aby dowiedzieć jaką moc otrzymamy, musimy podzielić ten cukier przez 17. Wychodzi nam około 3% (50 : 17 ≈ 2.94). Tak więc brakuje nam jeszcze 7% do oczekiwanej mocy. Po pomnożeniu 7 × 17 wiemy, że potrzebujemy dodać 119 g na litr. Produkujemy 5 litrów, więc w sumie potrzebujemy dodać 595 gramów cukru.`,
+    Chcemy wyprodukować 5 litrów wina o mocy 10%. Po zbadaniu moszczu cukromierzem otrzymujemy wynik 5 Blg. oznacza to że w 1kg roztworu znajduje się 50g cukru. Dla uproszczenia przyjmijmy, że 1 litr roztworu waży 1kg. Tak więc w litrze roztworu mamy 50g cukru. Aby dowiedzieć jaką moc otrzymamy, musimy podzielić ten cukier przez 17. Wychodzi nam około 3% (50 : 17 ≈ 2.94). Tak więc brakuje nam jeszcze 7% do oczekiwanej mocy. Po pomnożeniu 7 × 17 wiemy, że potrzebujemy dodać 119 g na litr. Produkujemy 5 litrów, więc w sumie potrzebujemy dodać 595 gramów cukru.`,
+    guides: [
+      {
+        name: `Przygotowywanie syropu cukrowego`,
+        slug: `przygotowywanie-syropu-cukrowego`,
+      },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
+      },
+    ],
+    calculator: Calculators.BLG,
+  },
+  {
+    slug: `slodkosc-wina`,
+    title: `Słodkość wina`,
+    description: `Wino na podstawie zawartości cukru, możemy przydzielić do poniższych kategorii.<br>
+    • wytrawne - do 4-9 gramów (zależnie od kwaskowatości)<br>
+    • półwytrawne - do 12-18 gramów (zależnie od kwaskowatości)<br>
+    • półsłodkie - do 45 gramów<br>
+    • słodkie - ponad 45 gramów
+    `,
     guides: [
       {
         name: `Przygotowywanie syropu cukrowego`,

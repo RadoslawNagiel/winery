@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from "@angular/router";
+import { Calculators, Guide } from "src/app/utils/interfaces";
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 
 import { DataService } from "src/app/services/data.service";
-import { Guide } from "src/app/utils/interfaces";
 
 @Component({
   selector: "app-guide-page",
@@ -11,7 +11,9 @@ import { Guide } from "src/app/utils/interfaces";
 })
 export class GuidePageComponent implements OnInit {
   guide: Guide;
-  backWineId = ``;
+  // backWineId = ``;
+
+  Calculators = Calculators;
 
   constructor(
     private readonly dataService: DataService,
@@ -27,7 +29,7 @@ export class GuidePageComponent implements OnInit {
       .substring(10);
 
     this.guide = this.dataService.guides.find((g) => g.slug === slug);
-    this.backWineId = this.activatedRoute.snapshot.queryParams.backWine;
+    // this.backWineId = this.activatedRoute.snapshot.queryParams.backWine;
   }
 
   async openGuides(slug: string) {
@@ -35,14 +37,14 @@ export class GuidePageComponent implements OnInit {
   }
 
   async onBackClick() {
-    if (this.backWineId) {
-      await this.router.navigate([`/tabs/tab1/show-wine`], {
-        queryParams: {
-          index: this.backWineId,
-        },
-      });
-      return;
-    }
+    // if (this.backWineId) {
+    //   await this.router.navigate([`/tabs/tab1/show-wine`], {
+    //     queryParams: {
+    //       index: this.backWineId,
+    //     },
+    //   });
+    //   return;
+    // }
     await this.router.navigate([`/tabs/tab3`]);
   }
 }

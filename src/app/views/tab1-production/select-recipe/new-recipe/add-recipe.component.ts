@@ -53,17 +53,15 @@ export class AddRecipeComponent implements OnInit {
 
   addRecipe() {
     this.recipe.productStages[0].description = this.mustDescription;
-    if (this.sugar > 0) {
-      this.recipe.ingredients.unshift({
-        name: `cukier`,
-        value: this.sugar,
-        unit: Units.gramy,
-      });
-    }
     if (!this.checkValidate()) {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
+    this.recipe.ingredients.unshift({
+      name: `cukier`,
+      value: this.sugar,
+      unit: Units.gramy,
+    });
     this.showPreview = true;
   }
 
@@ -82,7 +80,7 @@ export class AddRecipeComponent implements OnInit {
       this.authorValid = false;
       valid = false;
     }
-    if (this.sugar < 0) {
+    if (this.sugar <= 0) {
       this.sugarValid = false;
       valid = false;
     }

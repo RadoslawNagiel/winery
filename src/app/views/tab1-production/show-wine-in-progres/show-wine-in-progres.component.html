@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-buttons class="absolute top-1 left-0" slot="start">
       <ion-back-button
+        defaultHref="/tabs/tab1"
         (click)="backClick()"
         text=""
         icon="arrow-back-outline"
@@ -35,7 +36,13 @@
       class="pl-2 items-center"
       *ngFor="let ingredient of wine.recipe.ingredients"
     >
-      - {{ ingredient.name }}: {{ (ingredient.value * wine.capacity) / 10 }}
+      - {{ ingredient.name }}:
+      <ng-container *ngIf="ingredient.name === 'cukier'; else noSugar">
+        {{ getSugarValue() }}
+      </ng-container>
+      <ng-template #noSugar>
+        {{ (ingredient.value * wine.capacity) / 10 }}
+      </ng-template>
       {{ ingredient.unit }}
     </div>
 
@@ -49,29 +56,84 @@
           [max]="nextYear"
           monthShortNames="STY, LUT, MAR, KWI, MAJ, CZE, LIP, SIE, WRZ, PAZ, LIS, GRU"
           doneText="Zatwierdź"
-          [value]="getNearestDate()"
+          [value]="nearestDateInput"
           cancelText="Anuluj"
           (ionChange)="changeDate($event)"
         ></ion-datetime>
         &nbsp;-
         {{ nearestStage.name }}
       </div>
-      <div class="pl-1">
-        {{ getStageDescription(nearestStage.name) }}
-      </div>
-      <div class="pl-2 pb-1 pt-1 flex flex-wrap">
-        <ng-container *ngFor="let guide of nearestStage.guides">
-          <div
-            class="mr-2 mb-1 flex items-center reference"
-            (click)="openGuides(guide.slug)"
-          >
-            <ion-icon name="book-outline"></ion-icon>&nbsp;{{ guide.name }}
+      <ng-container
+        *ngIf="
+          (nearestStage.name === StopFermentation && !endFermentation) ||
+            (nearestStage.name === Bottling && !clearWine);
+          else normalStage
+        "
+      >
+        <div *ngIf="nearestStage.name === ProductionStage.StopFermentation">
+          Sprawdź czy drożdże zakończyły swoją pracę. Oznacza to, że przez rurkę
+          nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale
+          równy. Cały cukier powinien być już strawiony przez drożdże, a wino
+          powinno już posiadać oczekiwaną moc.
+          <div class="font-semibold">
+            Czy drożdże zakończyły już swoją pracę?
           </div>
-        </ng-container>
-      </div>
-      <div class="flex justify-end">
-        <span class="standard-button" (click)="doStage()">Etap wykonany!</span>
-      </div>
+          <div class="flex justify-start pt-1">
+            <span class="standard-button" (click)="changeStageToDrainage()"
+              >Nie</span
+            >
+            <span class="standard-button ml-2" (click)="endFermentation = true"
+              >Tak</span
+            >
+          </div>
+        </div>
+        <div *ngIf="nearestStage.name === ProductionStage.Bottling">
+          <div class="font-semibold">
+            Czy wino jest klarowne i na dnie gąsiora nie zbiera się już osad?
+          </div>
+          <div class="flex justify-start pt-1">
+            <span class="standard-button" (click)="changeStageToDrainage()"
+              >Nie</span
+            >
+            <span class="standard-button ml-2" (click)="clearWine = true"
+              >Tak</span
+            >
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #normalStage>
+        <div class="pl-1">
+          {{ getStageDescription(nearestStage.name) }}
+        </div>
+        <div *ngIf="nearestStage.name === ProductionStage.Preparation">
+          <app-calc-glucose-syrup
+            [disableSugarEdit]="true"
+            [sugar]="getHalfSugar()"
+            [capacity]="getHalfSugar()"
+          ></app-calc-glucose-syrup>
+        </div>
+        <div class="pl-2 pb-1 pt-1 flex flex-wrap">
+          <ng-container *ngFor="let guide of nearestStage.guides">
+            <div
+              class="mr-2 mb-1 flex items-center reference"
+              (click)="openGuides(guide.slug)"
+            >
+              <ion-icon name="book-outline"></ion-icon>&nbsp;{{ guide.name }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="flex justify-between flex-row-reverse">
+          <span class="standard-button" (click)="doStage()"
+            >Etap wykonany!</span
+          >
+          <span
+            *ngIf="nearestStageIndex"
+            class="standard-button"
+            (click)="undoStage()"
+            >Cofnij etap</span
+          >
+        </div>
+      </ng-template>
     </div>
 
     <span class="header-text py-4">Etapy produkcji</span>

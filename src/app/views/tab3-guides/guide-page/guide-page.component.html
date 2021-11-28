@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons
-      (click)="onBackClick()"
-      class="absolute top-1 left-0"
-      slot="start"
-    >
-      <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
+    <ion-buttons class="absolute top-1 left-0" slot="start">
+      <ion-back-button
+        defaultHref="/tabs/tab3"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title> Poradnik </ion-title>
   </ion-toolbar>
@@ -13,17 +13,28 @@
 
 <ion-content [fullscreen]="true">
   <div class="standard-frame">
-    <div class="header-text">{{ guide.title }}</div>
+    <div class="big-header-text">{{ guide.title }}</div>
     <div [innerHTML]="guide.description"></div>
-    <div class="pl-2 pb-1 pt-1 flex flex-wrap">
-      <ng-container *ngFor="let guideLink of guide.guides">
-        <!-- <div
-          class="mr-2 mb-1 flex items-center reference"
-          (click)="openGuides(guideLink.slug)"
-        >
-          <ion-icon name="book-outline"></ion-icon>&nbsp;{{ guideLink.name }}
-        </div> -->
+    <div class="py-2" *ngIf="guide.calculator !== undefined">
+      <ng-container *ngIf="guide.calculator === Calculators.BLG">
+        <app-calc-blg></app-calc-blg>
       </ng-container>
+      <ng-container *ngIf="guide.calculator === Calculators.SYRUP">
+        <app-calc-glucose-syrup></app-calc-glucose-syrup>
+      </ng-container>
+    </div>
+    <div *ngIf="guide.guides.length">
+      <div class="header-text">Zobacz również:</div>
+      <div class="pl-2 pb-1 pt-1 flex flex-wrap">
+        <ng-container *ngFor="let guideLink of guide.guides">
+          <div
+            class="mr-2 mb-1 flex items-center reference"
+            (click)="openGuides(guideLink.slug)"
+          >
+            <ion-icon name="book-outline"></ion-icon>&nbsp;{{ guideLink.name }}
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
 </ion-content>

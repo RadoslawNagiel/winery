@@ -35,7 +35,7 @@ export const PRODUC_STAGES: ProductStage[] = [
 export const PRODUC_STAGES_DESCRIPTIONS: ProductStageDescription[] = [
   {
     name: ProductionStage.Preparation,
-    description: `Przygotowujemy zaczyn drożdżowy, według zaleceń producenta i dodajemy go do moszczu. Połowę zalecanego cukru, rozpuszczamy w wodzie według poniższego kalkulatora. Czekamy aż syrop cukrowy ostygnie do temperatury mniejszej niż 30°C, po czym dolewamy go do wiadra. Moszcz powinien mieć objętość około 90% ostatecznego litrażu. Wiadro zamykamy pokrywką z rurką fermentacyjną, w połowie wypełnioną wodą. Moszcz należy mieszać przynajmniej raz dziennie. Temperatura moszczu powinna wynosić około 21°C.`,
+    description: `Przygotowujemy zaczyn drożdżowy, według zaleceń producenta i dodajemy go do moszczu. Połowę zalecanego cukru, rozpuszczamy w wodzie lub winie według poniższego kalkulatora w taki sposób, aby wypełnić wiadro do oczekiwanej objętości. Czekamy aż syrop cukrowy ostygnie do temperatury mniejszej niż 30°C, po czym dolewamy go do wiadra. Wiadro zamykamy pokrywką z rurką fermentacyjną, w połowie wypełnioną wodą. Moszcz należy mieszać przynajmniej raz dziennie. Temperatura moszczu powinna wynosić około 21°C.`,
     guides: [
       {
         name: `Podstawowy sprzęt`,
@@ -104,15 +104,23 @@ export const PRODUC_STAGES_DESCRIPTIONS: ProductStageDescription[] = [
         name: `Przygotowywanie syropu cukrowego`,
         slug: `przygotowywanie-syropu-cukrowego`,
       },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
+      },
     ],
   },
   {
     name: ProductionStage.Bottling,
-    description: `Jeśli wino jest klarowne i na dnie gąsiora nie zbiera się już osad, możemy przejść do butelkowania. Wino przelewamy do sterylnych butelek, które następnie zatykamy przy pomocy korkownicy. Zabutelkowane wino, powinno dojrzewać w pozycji leżącej, w temperaturze około 15°C, oraz powinno być osłonięte przed światłem.`,
+    description: `Wino przelewamy do sterylnych butelek, które następnie zatykamy przy pomocy korkownicy. Zabutelkowane wino, powinno dojrzewać w pozycji leżącej, w temperaturze około 15°C, oraz powinno być osłonięte przed światłem.`,
     guides: [
       {
         name: `Butelkowanie wina`,
         slug: `butelkowanie-wina`,
+      },
+      {
+        name: `Słodkość wina`,
+        slug: `slodkosc-wina`,
       },
     ],
   },

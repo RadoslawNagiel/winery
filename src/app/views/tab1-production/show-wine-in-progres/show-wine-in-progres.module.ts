@@ -1,3 +1,4 @@
+import { CalcGlucoseSyrupModule } from "src/app/shared/calc-glucose-syrup/calc-glucose-syrup.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
@@ -10,6 +11,7 @@ import { ShowWineInProgresComponent } from "./show-wine-in-progres.component";
     CommonModule,
     FormsModule,
     IonicModule,
+    CalcGlucoseSyrupModule,
     RouterModule.forChild([
       {
         path: ``,

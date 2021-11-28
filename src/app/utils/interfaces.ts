@@ -51,6 +51,7 @@ export interface Guide {
     name: string;
     slug: string;
   }[];
+  calculator?: Calculators;
 }
 
 export enum ProductionStage {
@@ -71,5 +72,10 @@ export enum Sweetness {
 export enum Units {
   gramy = `g`,
   litry = `l`,
-  sztuki = `szt`,
+  sztuki = `szt.`,
+}
+
+export enum Calculators {
+  SYRUP,
+  BLG,
 }

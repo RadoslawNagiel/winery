@@ -31,10 +31,14 @@ export class DataService {
     this.nextWineIndex = WINES.length;
 
     for (let wine of this.inProgressWines) {
-      wine.recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
+      const recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
+      wine.recipe = recipe;
+      wine.name = recipe.name;
     }
     for (let wine of this.finishedWines) {
-      wine.recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
+      const recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
+      wine.recipe = recipe;
+      wine.name = recipe.name;
     }
   }
 

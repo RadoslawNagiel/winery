@@ -16,7 +16,13 @@
   </div>
   <ng-container *ngFor="let guide of showingGuides">
     <div class="standard-frame" (click)="selectGuide(guide.slug)">
-      <div class="header-text">{{guide.title}}</div>
+      <div class="flex justify-between items-center">
+        <div class="header-text">{{guide.title}}</div>
+        <ion-icon
+          *ngIf="guide.calculator !== undefined"
+          name="calculator-outline"
+        ></ion-icon>
+      </div>
       <div>
         <span [innerHTML]="guide.description.substring(0,150)"></span>...
       </div>
