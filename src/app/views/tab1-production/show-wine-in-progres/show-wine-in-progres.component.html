@@ -65,8 +65,9 @@
       </div>
       <ng-container
         *ngIf="
-          (nearestStage.name === StopFermentation && !endFermentation) ||
-            (nearestStage.name === Bottling && !clearWine);
+          (nearestStage.name === ProductionStage.StopFermentation &&
+            !endFermentation) ||
+            (nearestStage.name === ProductionStage.Bottling && !clearWine);
           else normalStage
         "
       >
@@ -146,6 +147,9 @@
         {{ stage.date + wine.createDate | date: "dd.MM.yyyy" }}
       </div>
       <div class="pl-1">{{ stage.name }}</div>
+    </div>
+    <div class="pt-2 flex justify-end">
+      <ion-icon (click)="deleteWine()" name="trash-outline"></ion-icon>
     </div>
   </div>
 </ion-content>

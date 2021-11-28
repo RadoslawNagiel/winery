@@ -2,7 +2,7 @@ import { ProductionStage, Recipe, Units } from "../utils/interfaces";
 
 export const RECIPES: Recipe[] = [
   {
-    id: `1`,
+    id: `s-1`,
     name: `Wino agrestowe`,
     author: `Kenneth Hawkins`,
     ingredients: [
@@ -76,7 +76,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `2`,
+    id: `s-2`,
     name: `Wino agrestowe`,
     author: `Browin`,
     ingredients: [
@@ -124,7 +124,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `3`,
+    id: `s-3`,
     name: `Wino z jabłek`,
     author: `Browin`,
     ingredients: [
@@ -177,7 +177,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `4`,
+    id: `s-4`,
     name: `Wino malinowe`,
     author: `Browin`,
     ingredients: [
@@ -225,7 +225,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `5`,
+    id: `s-5`,
     name: `Wino wiśniowe`,
     author: `Browin`,
     ingredients: [
@@ -273,7 +273,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `6`,
+    id: `s-6`,
     name: `Wino z czerwonych porzeczek`,
     author: `Browin`,
     ingredients: [
@@ -321,7 +321,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    id: `7`,
+    id: `s-7`,
     name: `Wino z winogron`,
     author: `Browin`,
     ingredients: [

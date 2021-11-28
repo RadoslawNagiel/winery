@@ -16,6 +16,10 @@
       <span class="standard-button" (click)="newWineClick()">Nowe wino</span>
     </div>
   </div>
+
+  <div class="flex justify-end">
+    <span class="standard-button" (click)="test()">Powiadomienia test</span>
+  </div>
   <ng-container *ngFor="let wine of showingWines">
     <app-production-list-element
       [wine]="wine"

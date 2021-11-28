@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
+import { NotificationsService } from "src/app/services/notifications.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Wine } from "src/app/utils/interfaces";
@@ -17,7 +18,8 @@ export class ProductionPage {
 
   constructor(
     private readonly dataService: DataService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly notificationsService: NotificationsService
   ) {}
 
   ngOnInit() {
@@ -41,6 +43,22 @@ export class ProductionPage {
 
   async newWineClick() {
     await this.router.navigate([`/tabs/tab1/select-recipe`]);
+  }
+
+  test() {
+    this.notificationsService.showNotification(
+      `Testowe powiadomienie po 30 sekundach`,
+      new Date(Date.now() + 30000)
+    );
+    this.notificationsService.showNotification(
+      `Testowe powiadomienie po 30 sekundach`,
+      new Date(Date.now() + 3600000)
+    );
+    this.notificationsService.showNotification(
+      `Testowe powiadomienie po 30 sekundach`,
+      new Date(Date.now() + 7200000)
+    );
+    this.notificationsService.showNotificationTest();
   }
 
   searchChangeEvent(event: any) {

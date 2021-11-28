@@ -215,6 +215,21 @@ export class ShowWineInProgresComponent implements OnInit {
     // });
   }
 
+  async deleteWine() {
+    const result = await this.toastService.presentToastWithOptions(
+      `Czy na pewno chcesz usunąć to wino?`,
+      `Usuń`
+    );
+    if (result) {
+      this.confirmDelete();
+    }
+  }
+
+  confirmDelete() {
+    this.dataService.deleteWine(this.wine.id);
+    this.backClick();
+  }
+
   async backClick() {
     await this.router.navigate([`/tabs/tab1`]);
   }

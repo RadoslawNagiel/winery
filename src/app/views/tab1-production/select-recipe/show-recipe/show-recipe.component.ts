@@ -22,7 +22,7 @@ export class ShowRecipeComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.recipe = this.dataService.recipes.find(
+    this.recipe = this.dataService.allRecipes.find(
       (recipe) => recipe.id === this.activatedRoute.snapshot.queryParams.index
     );
   }

@@ -29,7 +29,7 @@ export class ToastService {
     toast.present();
   }
 
-  async presentToastWithOptions(text: string) {
+  async presentToastWithOptions(text: string, confirmText: string) {
     const toast = await this.toastController.create({
       message: text,
       position: `top`,
@@ -39,7 +39,7 @@ export class ToastService {
           role: `Cancel`,
         },
         {
-          text: `Dalej`,
+          text: confirmText,
           role: `Continue`,
         },
       ],

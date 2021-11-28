@@ -58,7 +58,7 @@ export class NewWineComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.wine.recipe = this.dataService.recipes.find(
+    this.wine.recipe = this.dataService.allRecipes.find(
       (recipe) => recipe.id === this.activatedRoute.snapshot.queryParams.index
     );
     this.wine.name = this.wine.recipe.name;

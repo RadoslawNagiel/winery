@@ -12,6 +12,7 @@ import { Sweetness, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
 import { IonDatetime } from "@ionic/angular";
+import { ToastService } from "src/app/services/toast-service.service";
 
 @Component({
   selector: "app-show-wine",
@@ -30,7 +31,8 @@ export class ShowWineComponent implements OnInit {
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,21 @@ export class ShowWineComponent implements OnInit {
         (value / 10 + 17 * (this.wine.power - 10)) * this.wine.capacity * 1000
       ) / 1000
     );
+  }
+
+  async deleteWine() {
+    const result = await this.toastService.presentToastWithOptions(
+      `Czy na pewno chcesz usunąć to wino?`,
+      `Usuń`
+    );
+    if (result) {
+      this.confirmDelete();
+    }
+  }
+
+  async confirmDelete() {
+    this.dataService.deleteWine(this.wine.id);
+    this.backClick();
   }
 
   async backClick() {

@@ -22,7 +22,7 @@ export class SelectRecipeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.recipes = this.dataService.recipes;
+    this.recipes = this.dataService.allRecipes;
     this.searchChange(``);
     this.subscriptions.push(
       this.dataService.recipesListChange.subscribe(() => {

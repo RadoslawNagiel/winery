@@ -1,17 +1,20 @@
 import { Recipe, Wine } from "../utils/interfaces";
+import { Subject, Subscription } from "rxjs";
 
 import { GUIDES } from "../utils/guides";
 import { Injectable } from "@angular/core";
 import { RECIPES } from "../utils/recipes";
-import { Subject } from "rxjs";
-import { WINES } from "../utils/wines";
+import { Storage } from "@ionic/storage-angular";
 
 @Injectable({
   providedIn: `root`,
 })
 export class DataService {
-  recipes = RECIPES;
-  nextRecipeIndex = this.recipes.length;
+  private _storage: Storage | null = null;
+
+  recipes = [];
+  allRecipes = [];
+  nextRecipeIndex = 0;
 
   inProgressWines: Wine[] = [];
   finishedWines: Wine[] = [];
@@ -20,40 +23,92 @@ export class DataService {
   guides = GUIDES;
 
   inProgresWinesListChange = new Subject();
-  recipesListChange = new Subject();
   winesListChange = new Subject();
+  recipesListChange = new Subject();
 
-  constructor() {}
+  subscriptions: Subscription[] = [];
 
-  loadWines() {
-    this.inProgressWines = WINES.filter((wine) => !wine.done);
-    this.finishedWines = WINES.filter((wine) => wine.done);
-    this.nextWineIndex = WINES.length;
+  constructor(private readonly storage: Storage) {}
 
-    for (let wine of this.inProgressWines) {
-      const recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
-      wine.recipe = recipe;
-      wine.name = recipe.name;
+  fireSubscriptions() {
+    this.subscriptions.push(
+      this.inProgresWinesListChange.subscribe(() => {
+        this.updateWineStorage();
+      })
+    );
+    this.subscriptions.push(
+      this.winesListChange.subscribe(() => {
+        this.updateWineStorage();
+      })
+    );
+    this.subscriptions.push(
+      this.recipesListChange.subscribe(() => {
+        this.updateRecipeStorage();
+      })
+    );
+  }
+
+  async loadWines() {
+    this.fireSubscriptions();
+    this._storage = await this.storage.create();
+
+    const wines = await this._storage.get(`wines`);
+    if (wines) {
+      this.inProgressWines = wines.filter((wine) => !wine.done);
+      this.finishedWines = wines.filter((wine) => wine.done);
+      this.nextWineIndex = wines.length;
     }
-    for (let wine of this.finishedWines) {
-      const recipe = RECIPES[Math.floor(Math.random() * RECIPES.length)];
-      wine.recipe = recipe;
-      wine.name = recipe.name;
+    this.allRecipes = RECIPES;
+    const recipes = await this._storage.get(`recipes`);
+    if (recipes) {
+      this.allRecipes.push(...recipes);
+      this.recipes = recipes;
+      this.nextRecipeIndex = recipes.length;
     }
+  }
+
+  updateWineStorage() {
+    const wines = [];
+    wines.push(...this.inProgressWines);
+    wines.push(...this.finishedWines);
+    this._storage.set(`wines`, wines);
+  }
+
+  updateRecipeStorage() {
+    this._storage.set(`recipes`, this.recipes);
   }
 
   addWine(newWine: Wine) {
-    this.nextWineIndex++;
     newWine.id = String(this.nextWineIndex);
     this.inProgressWines.push(newWine);
     this.inProgresWinesListChange.next();
+    this.nextWineIndex++;
     return newWine.id;
   }
 
+  deleteWine(wineId: string) {
+    let index = this.inProgressWines.findIndex((wine) => wine.id === wineId);
+    if (index === -1) {
+      index = this.finishedWines.findIndex((wine) => wine.id === wineId);
+      this.finishedWines.splice(index, 1);
+      this.winesListChange.next();
+      return;
+    }
+    this.inProgressWines.splice(index, 1);
+    this.inProgresWinesListChange.next();
+  }
+
   addRecipe(recipe: Recipe) {
-    this.nextRecipeIndex++;
     recipe.id = String(this.nextRecipeIndex);
     this.recipes.push(recipe);
+    this.allRecipes.push(recipe);
+    this.recipesListChange.next();
+    this.nextRecipeIndex++;
+  }
+
+  deleteRecipe(recipeId: string) {
+    let index = this.recipes.findIndex((wine) => wine.id === recipeId);
+    this.recipes.splice(index, 1);
     this.recipesListChange.next();
   }
 
