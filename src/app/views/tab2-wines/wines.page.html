@@ -28,4 +28,10 @@
       (onWineSelect)="showWine($event)"
     ></app-wines-list-element>
   </ng-container>
+  <div
+    *ngIf="showingWinesNotAvailable.length + showingWines.length === 0"
+    class="text-center py-5 uppercase"
+  >
+    Brak win
+  </div>
 </ion-content>

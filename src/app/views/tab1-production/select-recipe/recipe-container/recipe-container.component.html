@@ -1,5 +1,12 @@
 <div class="standard-frame" (click)="select()">
-  <div class="big-header-text pt-1">{{ recipe.name }}</div>
+  <div class="flex justify-between">
+    <div class="big-header-text pt-1">{{ recipe.name }}</div>
+    <ion-icon
+      *ngIf="!recipe.id.includes('s-')"
+      (click)="deleteRecipe($event)"
+      name="trash-outline"
+    ></ion-icon>
+  </div>
   <div>autor: {{ recipe.author }}</div>
   <div class="header-text py-1">Składniki na 10 litrów</div>
   <div *ngFor="let ingredient of recipe.ingredients">

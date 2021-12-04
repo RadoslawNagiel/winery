@@ -16,6 +16,8 @@ export class ProductionPage {
 
   subscriptions: Subscription[] = [];
 
+  testclick = false;
+
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router,
@@ -45,20 +47,14 @@ export class ProductionPage {
     await this.router.navigate([`/tabs/tab1/select-recipe`]);
   }
 
-  test() {
-    this.notificationsService.showNotification(
-      `Testowe powiadomienie po 30 sekundach`,
-      new Date(Date.now() + 30000)
+  async test() {
+    await this.notificationsService.scheduleNotifications();
+    this.testclick = true;
+    await this.notificationsService.showNotification(
+      `Powiadomienie od razu`,
+      `Tytuł`,
+      new Date(Date.now() + 2000)
     );
-    this.notificationsService.showNotification(
-      `Testowe powiadomienie po 30 sekundach`,
-      new Date(Date.now() + 3600000)
-    );
-    this.notificationsService.showNotification(
-      `Testowe powiadomienie po 30 sekundach`,
-      new Date(Date.now() + 7200000)
-    );
-    this.notificationsService.showNotificationTest();
   }
 
   searchChangeEvent(event: any) {

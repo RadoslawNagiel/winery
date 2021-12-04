@@ -77,7 +77,6 @@ export class AddRecipePreviewComponent implements OnInit {
     );
 
     this.dataService.addRecipe(this.recipe);
-    this.toastService.presentToastSuccess(`Dodano przepis`);
     await this.router.navigate([`/tabs/tab1/select-recipe`]);
   }
 

@@ -82,7 +82,6 @@ export class NewWineComponent implements OnInit {
       return;
     }
     const wineIndex = this.dataService.addWine(this.wine);
-    this.toastService.presentToastSuccess(`Dodano wino`);
     await this.router.navigate([`/tabs/tab1/show-wine`], {
       queryParams: {
         index: wineIndex,

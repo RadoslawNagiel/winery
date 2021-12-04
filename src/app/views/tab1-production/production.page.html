@@ -16,10 +16,6 @@
       <span class="standard-button" (click)="newWineClick()">Nowe wino</span>
     </div>
   </div>
-
-  <div class="flex justify-end">
-    <span class="standard-button" (click)="test()">Powiadomienia test</span>
-  </div>
   <ng-container *ngFor="let wine of showingWines">
     <app-production-list-element
       [wine]="wine"
@@ -27,4 +23,11 @@
       (onWineSelect)="showWine($event)"
     ></app-production-list-element>
   </ng-container>
+  <div *ngIf="!showingWines.length" class="text-center py-5 uppercase">
+    Brak win
+  </div>
+
+  <!-- <div class="flex justify-end" *ngIf="!testclick">
+    <span class="standard-button" (click)="test()">Powiadomienia test</span>
+  </div> -->
 </ion-content>

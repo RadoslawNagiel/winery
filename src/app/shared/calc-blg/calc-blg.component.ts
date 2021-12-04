@@ -29,13 +29,23 @@ export class CalcBlgComponent implements OnInit {
     if (this.blg < 0) {
       this.blg = 0;
     }
+    if (this.blg > 100) {
+      this.blg = 100;
+    }
     if (this.additionalSugar < 0) {
       this.additionalSugar = 0;
     }
     if (this.weight < 0) {
       this.weight = 0;
     }
-    this.sugar = this.blg * 10 * (this.weight / 1000) + this.additionalSugar;
+    if (this.additionalSugar > 0) {
+      this.changePower();
+      return;
+    }
+    this.sugar =
+      Math.round(
+        (this.blg * 10 * (this.weight / 1000) + this.additionalSugar) * 100
+      ) / 100;
     this.power = Math.round((this.sugar / 17) * 100) / 100;
   }
 

@@ -65,6 +65,10 @@ ion-checkbox {
   --background: var(--ion-text-color);
 }
 
+.native-input[disabled].sc-ion-input-md {
+  opacity: 0.6;
+}
+
 .checkbox-disabled {
   opacity: 0.9 !important;
 }

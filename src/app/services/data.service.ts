@@ -3,8 +3,10 @@ import { Subject, Subscription } from "rxjs";
 
 import { GUIDES } from "../utils/guides";
 import { Injectable } from "@angular/core";
+import { NotificationsService } from "./notifications.service";
 import { RECIPES } from "../utils/recipes";
 import { Storage } from "@ionic/storage-angular";
+import { ToastService } from "./toast-service.service";
 
 @Injectable({
   providedIn: `root`,
@@ -28,7 +30,10 @@ export class DataService {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private readonly storage: Storage) {}
+  constructor(
+    private readonly storage: Storage,
+    private readonly toastService: ToastService
+  ) {}
 
   fireSubscriptions() {
     this.subscriptions.push(
@@ -83,6 +88,7 @@ export class DataService {
     this.inProgressWines.push(newWine);
     this.inProgresWinesListChange.next();
     this.nextWineIndex++;
+    this.toastService.presentToastSuccess(`Dodano wino`);
     return newWine.id;
   }
 
@@ -90,12 +96,17 @@ export class DataService {
     let index = this.inProgressWines.findIndex((wine) => wine.id === wineId);
     if (index === -1) {
       index = this.finishedWines.findIndex((wine) => wine.id === wineId);
+      if (index === -1) {
+        return;
+      }
       this.finishedWines.splice(index, 1);
       this.winesListChange.next();
+      this.toastService.presentToastSuccess(`Wino zostało usunięte`);
       return;
     }
     this.inProgressWines.splice(index, 1);
     this.inProgresWinesListChange.next();
+    this.toastService.presentToastSuccess(`Wino zostało usunięte`);
   }
 
   addRecipe(recipe: Recipe) {
@@ -104,12 +115,19 @@ export class DataService {
     this.allRecipes.push(recipe);
     this.recipesListChange.next();
     this.nextRecipeIndex++;
+    this.toastService.presentToastSuccess(`Dodano przepis`);
   }
 
   deleteRecipe(recipeId: string) {
     let index = this.recipes.findIndex((wine) => wine.id === recipeId);
-    this.recipes.splice(index, 1);
-    this.recipesListChange.next();
+    console.log(index);
+
+    if (index !== -1) {
+      this.recipes.splice(index, 1);
+      this.allRecipes.splice(index, 1);
+      this.recipesListChange.next();
+      this.toastService.presentToastSuccess(`Przepis został usunięty`);
+    }
   }
 
   wineIsReady(wineId: string) {
@@ -121,5 +139,12 @@ export class DataService {
     this.finishedWines.push(wine);
     this.inProgresWinesListChange.next();
     this.winesListChange.next();
+    this.toastService.presentToastSuccess(`Wino gotowe!`);
+  }
+
+  ngOnDestoy() {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 }

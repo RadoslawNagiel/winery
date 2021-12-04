@@ -95,7 +95,7 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: ``,
+        description: `Owoce dokładnie myjemy, rozdrabniamy w niewielkiej ilości wody i wlewamy do wiadra.`,
       },
       {
         name: ProductionStage.Straining,
@@ -148,7 +148,7 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: ``,
+        description: `Jabłka myjemy i drobno kroimy lub miażdżymy. Najlepiej wycisnąć je w sokowirówce. Miazgę lub sok umieszczamy w wiadrze.`,
       },
       {
         name: ProductionStage.Straining,
@@ -178,17 +178,17 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: `s-4`,
-    name: `Wino malinowe`,
+    name: `Wino wiśniowe`,
     author: `Browin`,
     ingredients: [
       {
         name: `cukier`,
-        value: 3160,
+        value: 2500,
         unit: Units.gramy,
       },
       {
-        name: `maliny`,
-        value: 7300,
+        name: `wiśnie`,
+        value: 10000,
         unit: Units.gramy,
       },
     ],
@@ -196,7 +196,7 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: ``,
+        description: `WIśnie drylujemy i wraz z sokiem przelewamy do wiadra.`,
       },
       {
         name: ProductionStage.Straining,
@@ -226,17 +226,17 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: `s-5`,
-    name: `Wino wiśniowe`,
+    name: `Wino z czerwonych porzeczek`,
     author: `Browin`,
     ingredients: [
       {
         name: `cukier`,
-        value: 2500,
+        value: 3160,
         unit: Units.gramy,
       },
       {
-        name: `wiśnie`,
-        value: 10000,
+        name: `porzeczki`,
+        value: 5000,
         unit: Units.gramy,
       },
     ],
@@ -244,7 +244,7 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: ``,
+        description: `Porzeczki obrywamy z łodyżek. Owoce płuczemy, miażdżymy i umieszczamy w wiadrze.`,
       },
       {
         name: ProductionStage.Straining,
@@ -274,54 +274,6 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: `s-6`,
-    name: `Wino z czerwonych porzeczek`,
-    author: `Browin`,
-    ingredients: [
-      {
-        name: `cukier`,
-        value: 3160,
-        unit: Units.gramy,
-      },
-      {
-        name: `porzeczki`,
-        value: 5000,
-        unit: Units.gramy,
-      },
-    ],
-    productStages: [
-      {
-        name: ProductionStage.Preparation,
-        date: 0,
-        description: ``,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
-      },
-    ],
-  },
-  {
-    id: `s-7`,
     name: `Wino z winogron`,
     author: `Browin`,
     ingredients: [
@@ -340,7 +292,7 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: ``,
+        description: `Przygotowujemy sok z winogron.`,
       },
       {
         name: ProductionStage.Straining,

@@ -32,7 +32,7 @@ export class ToastService {
   async presentToastWithOptions(text: string, confirmText: string) {
     const toast = await this.toastController.create({
       message: text,
-      position: `top`,
+      color: `danger`,
       buttons: [
         {
           text: `Anuluj`,

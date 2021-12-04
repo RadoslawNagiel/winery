@@ -76,7 +76,6 @@ export class ShowWineInProgresComponent implements OnInit {
     this.dataService.inProgresWinesListChange.next();
     if (this.nearestStageIndex === this.wine.stagesDone.length) {
       this.dataService.wineIsReady(this.wine.id);
-      this.toastService.presentToastSuccess(`Wino gotowe!`);
       await this.router.navigate([`/tabs/tab1`], {
         skipLocationChange: true,
       });
