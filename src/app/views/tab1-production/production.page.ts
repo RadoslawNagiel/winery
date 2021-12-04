@@ -48,7 +48,6 @@ export class ProductionPage {
   }
 
   async test() {
-    await this.notificationsService.scheduleNotifications();
     this.testclick = true;
     await this.notificationsService.showNotification(
       `Powiadomienie od razu`,

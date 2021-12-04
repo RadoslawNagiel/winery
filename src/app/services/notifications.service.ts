@@ -2,7 +2,6 @@ import { Channel, LocalNotifications } from "@capacitor/local-notifications";
 
 import { DataService } from "./data.service";
 import { Injectable } from "@angular/core";
-import { Platform } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Wine } from "../utils/interfaces";
 import { cloneDeep } from "lodash";
@@ -16,10 +15,15 @@ export class NotificationsService {
 
   subscription: Subscription | undefined;
 
-  constructor(
-    private readonly platform: Platform,
-    private readonly dataService: DataService
-  ) {}
+  constructor(private readonly dataService: DataService) {
+    LocalNotifications.createChannel({
+      id: `chanel-1`,
+      name: `chanel-1`,
+      vibration: true,
+      importance: 5,
+      visibility: 1,
+    });
+  }
 
   async showNotification(text: string, title: string, date: Date) {
     const id = cloneDeep(this.notId);
@@ -29,18 +33,26 @@ export class NotificationsService {
         {
           id,
           title,
+          iconColor: `#7a1616`,
           body: text,
           smallIcon: `demijohn_foreground.xml`,
+          channelId: `chanel-1`,
           schedule: {
             at: date,
           },
-          channelId: `chanel-1`,
         },
       ],
     });
   }
 
   async scheduleNotifications() {
+    await LocalNotifications.createChannel({
+      id: `chanel-1`,
+      name: `chanel-1`,
+      vibration: true,
+      importance: 5,
+      visibility: 1,
+    });
     this.subscription = this.dataService.inProgresWinesListChange.subscribe(
       () => {
         this.scheduleNotifications();
@@ -48,17 +60,6 @@ export class NotificationsService {
     );
 
     this.notId = 0;
-
-    if (this.platform.is(`android`)) {
-      await LocalNotifications.createChannel({
-        id: `chanel-1`,
-        name: `chanel1`,
-        sound: `slap.wav`,
-        importance: 5,
-        visibility: 1,
-        vibration: true,
-      });
-    }
 
     const allNotifications = await LocalNotifications.getPending();
     const promises = allNotifications.notifications.map((not) => {
@@ -71,14 +72,14 @@ export class NotificationsService {
     for (let wine of wines) {
       const nearest = this.getNearestStageDate(wine);
       if (nearest) {
-        let date = nearest.date.setHours(12, 0, 0, 0);
+        let date = nearest.date.setHours(16, 0, 0, 0);
         await this.showNotification(
           `${nearest.wineName} - ${nearest.stageName}`,
           `To już dzisiaj!`,
           new Date(date)
         );
 
-        date = nearest.date.setHours(17, 0, 0, 0);
+        date = nearest.date.setHours(18, 0, 0, 0);
         await this.showNotification(
           `${nearest.wineName} - ${nearest.stageName}`,
           `Nie zapomnij!`,
