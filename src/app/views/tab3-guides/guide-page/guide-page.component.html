@@ -13,7 +13,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="standard-frame">
-    <div class="big-header-text">{{ guide.title }}</div>
+    <div class="big-header-text">{{ guide.name }}</div>
     <div [innerHTML]="guide.description"></div>
     <div class="py-2" *ngIf="guide.calculator !== undefined">
       <ng-container *ngIf="guide.calculator === Calculators.BLG">

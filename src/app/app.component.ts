@@ -17,4 +17,8 @@ export class AppComponent {
     await this.dataService.loadWines();
     await this.notificationsService.scheduleNotifications();
   }
+
+  async ngOnDestroy() {
+    await this.notificationsService.scheduleNotifications();
+  }
 }

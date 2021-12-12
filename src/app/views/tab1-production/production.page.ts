@@ -4,6 +4,7 @@ import { NotificationsService } from "src/app/services/notifications.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Wine } from "src/app/utils/interfaces";
+import { searchArrayByName } from "src/app/utils/search";
 
 @Component({
   selector: "app-production",
@@ -61,14 +62,8 @@ export class ProductionPage {
   }
 
   searchChange(text: string) {
-    if (text === ``) {
-      this.showingWines = this.inProgressWines;
-    } else {
-      this.showingWines = this.inProgressWines.filter((wine) =>
-        wine.name.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    this.showingWines = this.showingWines.sort((a, b) =>
+    const arr = searchArrayByName(text, this.inProgressWines);
+    this.showingWines = arr.sort((a, b) =>
       this.getNearestStageDate(a) > this.getNearestStageDate(b) ? 1 : -1
     );
   }

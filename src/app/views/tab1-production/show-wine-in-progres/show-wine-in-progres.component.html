@@ -106,7 +106,12 @@
         <div class="pl-1">
           {{ getStageDescription(nearestStage.name) }}
         </div>
-        <div *ngIf="nearestStage.name === ProductionStage.Preparation">
+        <div
+          *ngIf="
+            nearestStage.name === ProductionStage.Preparation ||
+            nearestStage.name === ProductionStage.Straining
+          "
+        >
           <app-calc-glucose-syrup
             [disableSugarEdit]="true"
             [sugar]="getHalfSugar()"

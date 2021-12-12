@@ -45,7 +45,7 @@ export interface ProductStageDescription {
 
 export interface Guide {
   slug: string;
-  title: string;
+  name: string;
   description: string;
   guides: {
     name: string;

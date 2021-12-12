@@ -3,6 +3,7 @@ import { DataService } from "src/app/services/data.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Wine } from "src/app/utils/interfaces";
+import { searchArrayByName } from "src/app/utils/search";
 
 @Component({
   selector: "app-wines",
@@ -45,21 +46,14 @@ export class WinesPageComponent {
   }
 
   searchChange(text: string) {
-    let wines = [];
-    if (text === ``) {
-      wines = this.wines;
-    } else {
-      wines = this.wines.filter((wine) =>
-        wine.name.toLowerCase().includes(text.toLowerCase())
-      );
-    }
+    let arr = searchArrayByName(text, this.wines);
 
-    wines = wines.sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
+    arr = arr.sort((a, b) => (a.createDate < b.createDate ? 1 : -1));
 
-    this.showingWines = wines.filter((wine) => {
+    this.showingWines = arr.filter((wine) => {
       return wine.numberOfBottles > 0;
     });
-    this.showingWinesNotAvailable = wines.filter((wine) => {
+    this.showingWinesNotAvailable = arr.filter((wine) => {
       return wine.numberOfBottles === 0;
     });
   }

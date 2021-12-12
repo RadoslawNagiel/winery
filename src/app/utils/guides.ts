@@ -3,7 +3,7 @@ import { Calculators, Guide } from "../utils/interfaces";
 export const GUIDES: Guide[] = [
   {
     slug: `podstawowy-sprzet-do-produkcji-wina`,
-    title: `Podstawowy sprzęt do produkcji wina`,
+    name: `Podstawowy sprzęt do produkcji wina`,
     description: `• wiadro fermentacyjne, z plastiku odpowiedniego do przechowywania żywności <br>
     • przykrywka do wiadra z rurką fermentacyjną <br>
     • duży lejek <br>
@@ -20,13 +20,13 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `sterylizacja`,
-    title: `Sterylizacja`,
+    name: `Sterylizacja`,
     description: `Bardzo ważnym elementem produkcji wina, jest jak największe zachowanie czystości aparatury (wszystkiego co będzie miało kontakt z winem). Sprzętu nie wystarczy tylko umyć, ale zawsze należy go wysterylizować odpowiednimi środkami, takimi jak pirosiarczyn sodu, czy przeróżnymi innymi preparatami do sterylizacji i dezynfekcji. Środki te należy stosować zgodnie z zaleceniami producenta.`,
     guides: [],
   },
   {
     slug: `fermentacja`,
-    title: `Fermentacja`,
+    name: `Fermentacja`,
     description: `Jest to proces rozkładania cukrów przez enzymy (wytwarzane przez drożdże), w którym powstaje alkohol oraz dwutlenek węgla. Najważniejszą fazą fermentacji jest fermentacja burzliwa, która trwa około 2-4 dni i rozpoczyna się po dodaniu wszystkich składników.    Najlepszą temperaturą dla fermentacji jest 18-24°C. Zbyt wysoka temperatura (zależnie od rodzaju, około 50°C) zabija drożdże, zbyt niska natomiast sprawia, że przestają one pracować. Podczas procesu fermentacji wytwarza się dwutlenek węgla, który powinien wydostać się z pojemnika za pomocą rurki fermentacyjnej. Rurkę tę należy wypełnić do połowy wodą tak aby dwutlenek węgla mógł się wydostać na zewnątrz, ale żeby tlen nie dostawał się do środka. Należy kontrolować poziom wody w rurce, gdyż może ona po jakimś czasie wyparować. Końcówkę rurki można też zatkać kawałkiem wacika, aby muszki nie mogły dostać się do środka.`,
     guides: [
       {
@@ -37,7 +37,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `przygotowywanie-syropu-cukrowego`,
-    title: `Przygotowywanie syropu cukrowego`,
+    name: `Przygotowywanie syropu cukrowego`,
     description: `Cukier oraz wodę (lub część wina) umieszczamy w garnku. Całość podgrzewamy, często mieszając, do momentu całkowitego rozpuszczenia cukru. Syrop przed dodaniem do wina, należy ostudzić do temperatury mniejszej niż 30°C.<br>
     Objętość syropu zawierającego 1 kilogram cukru rozpuszczonego w litrze wody, wynosi około 1.6 litra.`,
     guides: [
@@ -54,7 +54,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `zlewanie-znad-osadu`,
-    title: `Zlewanie znad osadu`,
+    name: `Zlewanie znad osadu`,
     description: `Aby zlać wino znad osadu, należy koniec wężyka zanurzyć do połowy zawartości gąsiora. Drugi koniec wężyka mocno zasysamy i umieszczamy w drugim gąsiorze, umieszczonym poniżej pierwszego. W trakcie zlewania należy stale kontrolować zanurzenie wężyka w winie. Jego końcówka musi ciągle znajdować się poniżej płynu, ale powyżej osadu. W ten sposób zlewamy całe wino, pozostawiając osad na dnie pierwszego gąsiora.`,
     guides: [
       {
@@ -65,8 +65,8 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `butelkowanie-wina`,
-    title: `Butelkowanie wina`,
-    description: `Jeżeli wino nie posiada już osadu i jest całkowicie klarowne, możemy je zabutelkować. Wino nalewamy do wysterylizowanych butelek. Następnie butelki zatykamy korkami przy użyciu korkownicy. Między korkiem a powierzchnią wina, powinno być około 13 mm przerwy. Na butelki warto nakleić etykiety zawierające datę produkcji, moc i rodzaj wina. Po zabutelkowaniu, wino powinno przebywać w takiej pozycji, aby korek miał stały kontakt z płynem, co zapobiega wyschnięciu korka. Wino najlepiej dojrzewa w temperaturze około 15°C. W zależności od mocy, wino może dojrzewać przez 9-24 miesiące. Im mocniejsze wino, tym dłużej powinno ono dojrzewać.`,
+    name: `Butelkowanie wina`,
+    description: `Jeżeli wino nie posiada już osadu i jest całkowicie klarowne, możemy je zabutelkować. Do butelkowania potrzebne nam będą wysterylizowane butelki, wyparzone korki oraz korkownica. Wino nalewamy do butelek a następnie butelki zatykamy korkami przy użyciu korkownicy. Między korkiem a powierzchnią wina, powinno być około 13 mm przerwy. Na butelki warto nakleić etykiety zawierające datę produkcji, moc i rodzaj wina. Po zabutelkowaniu, wino powinno przebywać w takiej pozycji, aby korek miał stały kontakt z płynem, co zapobiega wyschnięciu korka. Wino najlepiej dojrzewa w temperaturze około 15°C. W zależności od mocy, wino może dojrzewać przez 9-24 miesiące. Im mocniejsze wino, tym dłużej powinno ono dojrzewać.`,
     guides: [
       {
         name: `Sterylizacja`,
@@ -80,7 +80,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `zatrzymanie-fermentacji`,
-    title: `Zatrzymanie fermentacji`,
+    name: `Zatrzymanie fermentacji`,
     description: `Jeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że drożdże przestały pracować. Jeżeli nie planujemy już dosładzać wina (aby zmienić jego słodkość), nie musimy pozbywać się pozostałych drożdży. W przeciwnym wypadku musimy użyć jednej z poniższych metod.<br>
     <b>1) Zabicie drożdży alkoholem</b><br>
     Zależnie od rodzaju drożdży, mają one różny poziom tolerancji na alkohol. Możemy pozbyć się drożdży, jeżeli moc wytworzonego alkoholu osiągnie ten poziom. Nie należy dolewać do wina wysokoprocentowego alkoholu w celu pozbycia się drożdży.<br>
@@ -101,7 +101,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `moc-wina`,
-    title: `Moc wina`,
+    name: `Moc wina`,
     description: `Możemy zaplanować jaką moc będzie miało nasze wino. Każde 17 g cukru na litr roztworu da nam 1% alkoholu. Należy jednak pamiętać, że drożdże mają swoją maksymalną tolerancję na alkohol. Kiedy mamy już stworzony moszcz (bez dodatkowego cukru), możemy jego część przelać przez sito do probówki. Następnie w probówce umieszczamy cukromierz i zakręcamy nim, aby pozbyć się pęcherzyków powietrza, które mogły na nim osiąść. Aby pomiar był jak najbardziej dokładny, płyn powinien mieć temperaturę 20°C. Następnie odczytujemy z cukromierza liczbę w skali Ballinga. 1 stopień Blg to 10 g cukru na 1 kg roztworu. Zależnie od składników moszczu, ten pomiar będzie oznaczał co innego.<br>
     <b>Przykład</b><br>
     Chcemy wyprodukować 5 litrów wina o mocy 10%. Po zbadaniu moszczu cukromierzem, otrzymujemy wynik 5 Blg. Oznacza to, że w 1kg roztworu znajduje się 50g cukru. Dla uproszczenia przyjmijmy, że 1 litr roztworu waży 1kg. Tak więc w litrze roztworu mamy 50g cukru. Chcemy otrzymać trunek o mocy 10%. Wykonujemy więc mnożenie 10 × 17g i wiemy, że łącznie potrzebujemy 170g na litr. Moszcz zawiera już 50g cukru, więc potrzebujemy dodać jeszcze 120g cukru na litr. Produkujemy 5 litrów, więc w sumie potrzebujemy dodać 600g cukru.`,
@@ -119,7 +119,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: `slodkosc-wina`,
-    title: `Słodkość wina`,
+    name: `Słodkość wina`,
     description: `Wino na podstawie zawartości cukru, możemy przydzielić do poniższych kategorii.<br>
     • wytrawne - do 4-9 gramów (zależnie od kwaskowatości)<br>
     • półwytrawne - do 12-18 gramów (zależnie od kwaskowatości)<br>

@@ -98,7 +98,7 @@ export class ShowWineInProgresComponent implements OnInit {
     ).value;
     return (
       Math.round(
-        (value / 10 + 17 * (this.wine.power - 10)) * this.wine.capacity * 1000
+        (value / 10 + (this.wine.power - 10) * 17) * this.wine.capacity * 1000
       ) / 1000
     );
   }

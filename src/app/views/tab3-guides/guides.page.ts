@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
 import { Guide } from "src/app/utils/interfaces";
 import { Router } from "@angular/router";
+import { searchArrayByName } from "src/app/utils/search";
 
 @Component({
   selector: "app-guides",
@@ -27,15 +28,9 @@ export class GuidesComponent {
   }
 
   searchChange(text: string) {
-    if (text === ``) {
-      this.showingGuides = this.guides;
-    } else {
-      this.showingGuides = this.guides.filter((guide) =>
-        guide.title.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    this.showingGuides = this.showingGuides.sort((a, b) =>
-      a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
+    const arr = searchArrayByName(text, this.guides);
+    this.showingGuides = arr.sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
     );
   }
 

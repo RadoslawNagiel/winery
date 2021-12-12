@@ -4,6 +4,7 @@ import { DataService } from "src/app/services/data.service";
 import { Recipe } from "src/app/utils/interfaces";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { searchArrayByName } from "src/app/utils/search";
 
 @Component({
   selector: "app-select-recipe",
@@ -52,14 +53,8 @@ export class SelectRecipeComponent implements OnInit {
   }
 
   searchChange(text: string) {
-    if (text === ``) {
-      this.showingRecipes = this.recipes;
-    } else {
-      this.showingRecipes = this.recipes.filter((wine) =>
-        wine.name.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-    this.showingRecipes = this.showingRecipes.sort((a, b) =>
+    const arr = searchArrayByName(text, this.recipes);
+    this.showingRecipes = arr.sort((a, b) =>
       a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
     );
   }

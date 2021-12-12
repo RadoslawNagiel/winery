@@ -17,7 +17,7 @@
   <ng-container *ngFor="let guide of showingGuides">
     <div class="standard-frame" (click)="selectGuide(guide.slug)">
       <div class="flex justify-between items-center">
-        <div class="header-text">{{guide.title}}</div>
+        <div class="header-text">{{guide.name}}</div>
         <ion-icon
           *ngIf="guide.calculator !== undefined"
           name="calculator-outline"

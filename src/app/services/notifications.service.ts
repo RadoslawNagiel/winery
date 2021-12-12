@@ -13,8 +13,6 @@ export class NotificationsService {
   notId = 0;
   dayTimestamp = 86400000;
 
-  subscription: Subscription | undefined;
-
   constructor(private readonly dataService: DataService) {
     LocalNotifications.createChannel({
       id: `chanel-1`,
@@ -53,20 +51,17 @@ export class NotificationsService {
       importance: 5,
       visibility: 1,
     });
-    this.subscription = this.dataService.inProgresWinesListChange.subscribe(
-      () => {
-        this.scheduleNotifications();
-      }
-    );
 
     this.notId = 0;
 
     const allNotifications = await LocalNotifications.getPending();
-    const promises = allNotifications.notifications.map((not) => {
-      LocalNotifications.cancel({ notifications: [{ id: not.id }] });
-    });
-    await Promise.all(promises);
-
+    if (allNotifications) {
+      await Promise.all(
+        allNotifications.notifications.map((not) => {
+          LocalNotifications.cancel({ notifications: [{ id: not.id }] });
+        })
+      );
+    }
     const wines = this.dataService.inProgressWines;
 
     for (let wine of wines) {
@@ -114,9 +109,5 @@ export class NotificationsService {
       stageName: wine.recipe.productStages[index].name,
       date: new Date(wine.recipe.productStages[index].date + wine.createDate),
     };
-  }
-
-  ngOnDestoy() {
-    this.subscription.unsubscribe();
   }
 }
