@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 import { ToastService } from "src/app/services/toast-service.service";
 
@@ -13,6 +13,9 @@ export class CalcBlgComponent implements OnInit {
   @Input() sugar = 10;
   @Input() weight = 1000;
   @Input() power = 1;
+  @Input() onlyBlg = false;
+
+  @Output() onsugarChanged = new EventEmitter<number>();
 
   ngOnInit() {
     this.changeBlg();
@@ -47,6 +50,7 @@ export class CalcBlgComponent implements OnInit {
         (this.blg * 10 * (this.weight / 1000) + this.additionalSugar) * 100
       ) / 100;
     this.power = Math.round((this.sugar / 17) * 100) / 100;
+    this.onsugarChanged.emit(this.sugar);
   }
 
   changePower() {
@@ -58,6 +62,8 @@ export class CalcBlgComponent implements OnInit {
     if (this.additionalSugar < 0) {
       this.additionalSugar = 0;
       this.changeBlg();
+      return;
     }
+    this.onsugarChanged.emit(this.sugar);
   }
 }

@@ -7,6 +7,7 @@ export interface Wine {
   yeast: string;
   yeastTolerance: number;
   sweetness: Sweetness;
+  addedSugar: number;
   recipe: Recipe;
   done: boolean;
   numberOfBottles: number;
@@ -22,7 +23,6 @@ export interface Ingredient {
 export interface Recipe {
   id: string;
   name: string;
-  author: string;
   ingredients: Ingredient[];
   productStages: ProductStage[];
 }

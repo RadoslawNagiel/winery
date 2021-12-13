@@ -60,17 +60,6 @@ export class ShowWineComponent implements OnInit {
     this.dataService.winesListChange.next();
   }
 
-  getSugarValue() {
-    let value = this.wine.recipe.ingredients.find(
-      (ing) => ing.name === `cukier`
-    ).value;
-    return (
-      Math.round(
-        (value / 10 + (this.wine.power - 10) * 17) * this.wine.capacity * 1000
-      ) / 1000
-    );
-  }
-
   async deleteWine() {
     const result = await this.toastService.presentToastWithOptions(
       `Czy na pewno chcesz usunąć to wino?`,

@@ -1,6 +1,6 @@
 <div class="frame w-full my-1">
   <div class="border-b">Kalkulator Blg</div>
-  <div class="container">
+  <div [ngClass]="onlyBlg ? 'container-2' : 'container'">
     <div>
       <ion-input
         class="text-center"
@@ -19,18 +19,20 @@
       (change)="changeBlg()"
     ></ion-input>
     <div>g - waga litra roztworu</div>
-    <div>
+    <ng-container *ngIf="!onlyBlg">
       <div>
-        <ion-input
-          class="text-center"
-          min="0"
-          type="number"
-          [(ngModel)]="power"
-          (change)="changePower()"
-        ></ion-input>
+        <div>
+          <ion-input
+            class="text-center"
+            min="0"
+            type="number"
+            [(ngModel)]="power"
+            (change)="changePower()"
+          ></ion-input>
+        </div>
       </div>
-    </div>
-    <div>% - moc</div>
+      <div>% - moc</div>
+    </ng-container>
     <div>
       <ion-input
         class="text-center"
@@ -41,13 +43,15 @@
       ></ion-input>
     </div>
     <div>g - cukier w litrze</div>
-    <ion-input
-      class="text-center"
-      min="0"
-      type="number"
-      [(ngModel)]="additionalSugar"
-      disabled
-    ></ion-input>
-    <div>g - cukier do dodania na litr</div>
+    <ng-container *ngIf="!onlyBlg">
+      <ion-input
+        class="text-center"
+        min="0"
+        type="number"
+        [(ngModel)]="additionalSugar"
+        disabled
+      ></ion-input>
+      <div>g - cukier do dodania na litr</div>
+    </ng-container>
   </div>
 </div>

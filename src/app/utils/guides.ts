@@ -15,7 +15,8 @@ export const GUIDES: Guide[] = [
     • butelki do wina <br>
     • korkownica wraz z korkami <br>
     • sprzęt do czyszczenia i sterylizacji <br>
-    • termometr <br>`,
+    • termometr <br>
+    • cukromierz z probówka <br>`,
     guides: [],
   },
   {

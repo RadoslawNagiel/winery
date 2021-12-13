@@ -60,12 +60,7 @@
       *ngFor="let ingredient of wine.recipe.ingredients"
     >
       - {{ ingredient.name }}:
-      <ng-container *ngIf="ingredient.name === 'cukier'; else noSugar">
-        {{ getSugarValue() }}
-      </ng-container>
-      <ng-template #noSugar>
-        {{ (ingredient.value * wine.capacity) / 10 }}
-      </ng-template>
+      {{ (ingredient.value * wine.capacity) / 10 }}
       {{ ingredient.unit }}
     </div>
 

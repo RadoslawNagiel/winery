@@ -7,9 +7,10 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { Recipe, Sweetness, Wine } from "src/app/utils/interfaces";
+import { Recipe, Sweetness, Units, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
+import { PRODUC_STAGES_DESCRIPTIONS } from "src/app/utils/product-stages";
 import { Router } from "@angular/router";
 import { ToastService } from "src/app/services/toast-service.service";
 import { cloneDeep } from "lodash";
@@ -33,6 +34,7 @@ export class AddRecipePreviewComponent implements OnInit {
     createDate: 0,
     capacity: 10,
     power: 10,
+    addedSugar: 0,
     yeast: `Drożdże winiarskie`,
     yeastTolerance: 12,
     sweetness: Sweetness.Półwytrawne,
@@ -116,6 +118,9 @@ export class AddRecipePreviewComponent implements OnInit {
       lastDay = day;
     }
     return true;
+  }
+  getPreparationDescription() {
+    return PRODUC_STAGES_DESCRIPTIONS[0].descriptions[0];
   }
 
   backClick() {

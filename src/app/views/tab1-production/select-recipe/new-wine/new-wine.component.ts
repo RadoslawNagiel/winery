@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { Sweetness, Wine } from "src/app/utils/interfaces";
+import { Sweetness, Units, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
 import { ToastService } from "src/app/services/toast-service.service";
@@ -32,10 +32,10 @@ export class NewWineComponent implements OnInit {
     sweetness: 1,
     yeast: ``,
     yeastTolerance: 12,
+    addedSugar: 0,
     recipe: {
       id: ``,
       name: ``,
-      author: ``,
       ingredients: [],
       productStages: [],
     },
@@ -81,6 +81,12 @@ export class NewWineComponent implements OnInit {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
+    const sugar = (this.wine.power - 6) * 17;
+    this.wine.recipe.ingredients.unshift({
+      name: `cukier`,
+      value: this.wine.capacity * sugar,
+      unit: Units.gramy,
+    });
     const wineIndex = this.dataService.addWine(this.wine);
     await this.router.navigate([`/tabs/tab1/show-wine`], {
       queryParams: {

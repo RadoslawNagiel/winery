@@ -2,15 +2,9 @@ import { ProductionStage, Recipe, Units } from "../utils/interfaces";
 
 export const RECIPES: Recipe[] = [
   {
-    id: `s-1`,
+    id: ``,
     name: `Wino agrestowe`,
-    author: `Kenneth Hawkins`,
     ingredients: [
-      {
-        name: `cukier`,
-        value: 1000,
-        unit: Units.gramy,
-      },
       {
         name: `agrest`,
         value: 2000,
@@ -22,8 +16,8 @@ export const RECIPES: Recipe[] = [
         unit: Units.gramy,
       },
       {
-        name: `sok jabłkowy (bez konserwantów)`,
-        value: 2.2,
+        name: `sok jabłkowy bez konserwantów`,
+        value: 2.211,
         unit: Units.litry,
       },
       {
@@ -31,116 +25,45 @@ export const RECIPES: Recipe[] = [
         value: 250,
         unit: Units.gramy,
       },
-      {
-        name: `kwas winny 3mg witaminy B₂`,
-        value: 5,
-        unit: Units.gramy,
-      },
-      {
-        name: `enzym pektolityczny`,
-        value: 5,
-        unit: Units.gramy,
-      },
-      {
-        name: `kwiat czarnego bzu`,
-        value: 5,
-        unit: Units.gramy,
-      },
     ],
     productStages: [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: `Owoce dokładnie myjemy, rozdrabniamy w niewielkiej ilości wody i wlewamy do wiadra. Dodajemy sok jabłkowy oraz kwiat czarnego bzu.. Rozpuszczamy miód w wodzie (litr wody na 250 g. miodu), podgrzewając na wolnym ogniu. Dodajemy witaminę B₁ i dokładnie mieszamy.`,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 4,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 133,
+        description: `Owoce dokładnie myjemy i rozdrabniamy w niewielkiej ilości wody a następnie całość wlewamy do wiadra. Dodajemy sok jabłkowy. Rozpuszczamy miód w wodzie w proporcjach 1:2, podgrzewając na wolnym ogniu. Całość dodajemy do wiadra. `,
       },
     ],
   },
   {
-    id: `s-2`,
-    name: `Wino agrestowe`,
-    author: `Browin`,
+    id: ``,
+    name: `Wino ananasowo-winogronowe`,
     ingredients: [
       {
-        name: `cukier`,
-        value: 3000,
+        name: `ananasy z puszki`,
+        value: 967,
         unit: Units.gramy,
       },
       {
-        name: `agrest`,
-        value: 5800,
-        unit: Units.gramy,
+        name: `sok z jasnych winogron`,
+        value: 2.2,
+        unit: Units.litry,
       },
     ],
     productStages: [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: `Owoce dokładnie myjemy, rozdrabniamy w niewielkiej ilości wody i wlewamy do wiadra.`,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
+        description: `Ananasy drobno kroimy i wlewamy wraz z syropem do wiadra. Dodajemy sok z winogron. `,
       },
     ],
   },
   {
-    id: `s-3`,
-    name: `Wino z jabłek`,
-    author: `Browin`,
+    id: ``,
+    name: `Wino z brzoskwiń`,
     ingredients: [
       {
-        name: `cukier`,
-        value: 2500,
-        unit: Units.gramy,
-      },
-      {
-        name: `jabłka`,
-        value: 10800,
-        unit: Units.gramy,
-      },
-      {
-        name: `regulator kwaskowości`,
-        value: 5,
+        name: `brzoskwinie z puszki`,
+        value: 955,
         unit: Units.gramy,
       },
     ],
@@ -148,47 +71,17 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: `Jabłka myjemy i drobno kroimy lub miażdżymy. Najlepiej wycisnąć je w sokowirówce. Miazgę lub sok umieszczamy w wiadrze.`,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
+        description: `W wiadrze umieszczamy jak najdrobniej pokrojone brzoskwinie. `,
       },
     ],
   },
   {
-    id: `s-4`,
-    name: `Wino wiśniowe`,
-    author: `Browin`,
+    id: ``,
+    name: `Wino z czarnych porzeczek`,
     ingredients: [
       {
-        name: `cukier`,
-        value: 2500,
-        unit: Units.gramy,
-      },
-      {
-        name: `wiśnie`,
-        value: 10000,
+        name: `czarne porzeczki`,
+        value: 2000,
         unit: Units.gramy,
       },
     ],
@@ -196,95 +89,22 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: `WIśnie drylujemy i wraz z sokiem przelewamy do wiadra.`,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
+        description: `Porzeczki dokładnie myjemi a następnie wyciskamy z nich sok. Przecier umieszczamy w wiadrze. `,
       },
     ],
   },
   {
-    id: `s-5`,
+    id: ``,
     name: `Wino z czerwonych porzeczek`,
-    author: `Browin`,
     ingredients: [
       {
-        name: `cukier`,
-        value: 3160,
-        unit: Units.gramy,
-      },
-      {
-        name: `porzeczki`,
-        value: 5000,
-        unit: Units.gramy,
-      },
-    ],
-    productStages: [
-      {
-        name: ProductionStage.Preparation,
-        date: 0,
-        description: `Porzeczki obrywamy z łodyżek. Owoce płuczemy, miażdżymy i umieszczamy w wiadrze.`,
-      },
-      {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
-      },
-      {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
-      },
-      {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
-      },
-      {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
-      },
-    ],
-  },
-  {
-    id: `s-6`,
-    name: `Wino z winogron`,
-    author: `Browin`,
-    ingredients: [
-      {
-        name: `cukier`,
+        name: `czerwone porzeczki`,
         value: 2000,
         unit: Units.gramy,
       },
       {
-        name: `winogrona`,
-        value: 9000,
+        name: `maliny`,
+        value: 255,
         unit: Units.gramy,
       },
     ],
@@ -292,31 +112,102 @@ export const RECIPES: Recipe[] = [
       {
         name: ProductionStage.Preparation,
         date: 0,
-        description: `Przygotowujemy sok z winogron.`,
+        description: `Maliny przebieramy a porzeczki obrywamy z łodyżek. Owocze myjemy, mjażdżymy i umieszczamy w wiadrze. `,
+      },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino z soku owocowego`,
+    ingredients: [
+      {
+        name: `sok pomarańczowy`,
+        value: 1100,
+        unit: Units.litry,
       },
       {
-        name: ProductionStage.Straining,
-        date: 86400000 * 7,
+        name: `sok jabłkowy lub ananasowy`,
+        value: 1100,
+        unit: Units.litry,
       },
+    ],
+    productStages: [
       {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 35,
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Soki wlewamy do wiadra. `,
       },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino z gruszek`,
+    ingredients: [
       {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 63,
+        name: `gruszki`,
+        value: 4000,
+        unit: Units.gramy,
       },
+    ],
+    productStages: [
       {
-        name: ProductionStage.StopFermentation,
-        date: 86400000 * 98,
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Gruszki myjemy, kroimy i umieszczamy w wiadrze. `,
       },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino jabłkowe`,
+    ingredients: [
       {
-        name: ProductionStage.Drainage,
-        date: 86400000 * 154,
+        name: `jabłka`,
+        value: 8000,
+        unit: Units.gramy,
       },
+    ],
+    productStages: [
       {
-        name: ProductionStage.Bottling,
-        date: 86400000 * 210,
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Jabłka myjemy i drobno kroimy lub miażdżymy. Najlepiej wycisnąć je w sokowirówce. Miazgę lub sok umieszczamy w wiadrze. `,
+      },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino z porzeczki czerwonej`,
+    ingredients: [
+      {
+        name: `czerwone porzeczki`,
+        value: 4600,
+        unit: Units.gramy,
+      },
+    ],
+    productStages: [
+      {
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Porzeczki odrywamy z łodyżek i dokładnie myjemy. Następnie wyciskamy z nich sok. `,
+      },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino śliwkowe`,
+    ingredients: [
+      {
+        name: `śliwki`,
+        value: 4000,
+        unit: Units.gramy,
+      },
+    ],
+    productStages: [
+      {
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Śliwki myjemy, usuwamy pestki a następnie umieszczamy w wiadrze. `,
       },
     ],
   },

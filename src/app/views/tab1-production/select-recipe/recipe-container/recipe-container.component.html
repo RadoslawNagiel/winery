@@ -7,8 +7,8 @@
       name="trash-outline"
     ></ion-icon>
   </div>
-  <div>autor: {{ recipe.author }}</div>
   <div class="header-text py-1">Składniki na 10 litrów</div>
+  <div *ngIf="204 - recipe.sugar > 0">- cukier</div>
   <div *ngFor="let ingredient of recipe.ingredients">
     - {{ ingredient.name }}: {{ ingredient.value }}
     {{ ingredient.unit }}

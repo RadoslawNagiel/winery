@@ -65,12 +65,45 @@
       </div>
       <ng-container
         *ngIf="
-          (nearestStage.name === ProductionStage.StopFermentation &&
-            !endFermentation) ||
+          (nearestStage.name === ProductionStage.Preparation && !mustCreated) ||
+            (nearestStage.name === ProductionStage.StopFermentation &&
+              !endFermentation) ||
             (nearestStage.name === ProductionStage.Bottling && !clearWine);
           else normalStage
         "
       >
+        <div *ngIf="nearestStage.name === ProductionStage.Preparation">
+          {{ wine.recipe.productStages[0].description }}
+          {{ nearestStage.descriptions[0] }}
+          <app-calc-glucose-syrup
+            [disableSugarEdit]="true"
+            [sugar]="getHalfSugar()"
+            [capacity]="getHalfSugar()"
+          ></app-calc-glucose-syrup>
+          Nastepnie dokonaj pomiaru zawartości cukru w listrze roztworu. Proces
+          pomiaru został opisany w poradniku
+          <span
+            class="items-center reference whitespace-nowrap"
+            (click)="openGuides('moc-wina')"
+          >
+            <ion-icon name="book-outline"></ion-icon>&nbsp;Moc wina
+          </span>
+
+          <app-calc-blg
+            [onlyBlg]="'true'"
+            [blg]="getBlg()"
+            (onsugarChanged)="changeSugar($event)"
+          ></app-calc-blg>
+          <div class="font-semibold">
+            Wpisz pomiar do kalkulatora a następnie zatwierdź poniższym
+            przyciskiem
+          </div>
+          <div class="pt-1">
+            <span class="standard-button" (click)="changeSugarAccept()"
+              >Zatwierdź</span
+            >
+          </div>
+        </div>
         <div *ngIf="nearestStage.name === ProductionStage.StopFermentation">
           Sprawdź czy drożdże zakończyły swoją pracę. Oznacza to, że przez rurkę
           nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale
@@ -106,16 +139,11 @@
         <div class="pl-1">
           {{ getStageDescription(nearestStage.name) }}
         </div>
-        <div
-          *ngIf="
-            nearestStage.name === ProductionStage.Preparation ||
-            nearestStage.name === ProductionStage.Straining
-          "
-        >
+        <div *ngIf="nearestStage.name === ProductionStage.Straining">
           <app-calc-glucose-syrup
             [disableSugarEdit]="true"
-            [sugar]="getHalfSugar()"
-            [capacity]="getHalfSugar()"
+            [sugar]="getHalfSugarStraining()"
+            [capacity]="getHalfSugarStraining()"
           ></app-calc-glucose-syrup>
         </div>
         <div class="pl-2 pb-1 pt-1 flex flex-wrap">

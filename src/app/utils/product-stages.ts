@@ -35,7 +35,11 @@ export const PRODUC_STAGES: ProductStage[] = [
 export const PRODUC_STAGES_DESCRIPTIONS: ProductStageDescription[] = [
   {
     name: ProductionStage.Preparation,
-    description: `Połowę zalecanego cukru, rozpuszczamy w wodzie (lub w moszczu, jeśli brak miejsca na dodatkową wodę), według poniższego kalkulatora, w taki sposób, aby wypełnić wiadro do oczekiwanej objętości. Wlewamy syrop cukrowy do wiadra. Przygotowujemy zaczyn drożdżowy, według zaleceń producenta i jeśli temperatura moszczu jest mniejszej niż 30°C, dodajemy go do moszczu. Wiadro zamykamy pokrywką z rurką fermentacyjną, w połowie wypełnioną wodą. Moszcz należy mieszać przynajmniej raz dziennie. Temperatura moszczu powinna wynosić około 21°C.`,
+    description: ``,
+    descriptions: [
+      `Połowę zalecanego cukru rozpuszczamy w wodzie (lub w moszczu, jeśli brak miejsca na dodatkową wodę), według poniższego kalkulatora, w taki sposób, aby wypełnić wiadro do oczekiwanej objętości. Wlewamy syrop cukrowy do wiadra. `,
+      `Przygotowujemy zaczyn drożdżowy, według zaleceń producenta i jeśli temperatura moszczu jest mniejszej niż 30°C, dodajemy go do moszczu. Wiadro zamykamy pokrywką z rurką fermentacyjną, w połowie wypełnioną wodą. Moszcz należy mieszać przynajmniej raz dziennie. Temperatura moszczu powinna wynosić około 21°C.`,
+    ],
     guides: [
       {
         name: `Podstawowy sprzęt`,
@@ -57,7 +61,7 @@ export const PRODUC_STAGES_DESCRIPTIONS: ProductStageDescription[] = [
   },
   {
     name: ProductionStage.Straining,
-    description: `Moszcz przelewamy przez sito, a następnie otrzymany płyn wlewamy do gąsiora. Drugą połowę cukru, rozpuszczamy w wodzie według poniższego kalkulatora. Czekamy aż syrop cukrowy ostygnie do temperatury mniejszej niż 30°C, po czym dolewamy go do gąsiora. Gąsior należy zatkać korkiem z rurką fermentacyjną.`,
+    description: `Moszcz przelewamy przez sito, a następnie otrzymany płyn wlewamy do gąsiora. Pozostałą, wyliczoną część cukru, rozpuszczamy w wodzie według poniższego kalkulatora. Czekamy aż syrop cukrowy ostygnie do temperatury mniejszej niż 30°C, po czym dolewamy go do gąsiora. Gąsior należy zatkać korkiem z rurką fermentacyjną.`,
     guides: [
       {
         name: `Sterylizacja`,

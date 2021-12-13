@@ -16,31 +16,6 @@
         [ngClass]="{ 'invalid-text': !nameValid }"
         [(ngModel)]="recipe.name"
       ></ion-input>
-      <div class="header-text py-1">Autor</div>
-      <ion-input
-        placeholder="Autor..."
-        [ngClass]="{ 'invalid-text': !authorValid }"
-        [(ngModel)]="recipe.author"
-      ></ion-input>
-      <app-text-info
-        [title]="'Cukier'"
-        [hintText]="
-          'Podaj ilość cukru potrzebną do wytworzenia 10 litrów, wytrawnego wina 10%'
-        "
-      ></app-text-info>
-      <div class="flex items-center">
-        <div class="w-1/2">
-          <ion-input
-            min="0"
-            max="3740"
-            [ngClass]="{ 'invalid-text': !sugarValid }"
-            placeholder="Ilość..."
-            type="number"
-            [(ngModel)]="sugar"
-          ></ion-input>
-        </div>
-        <span>&nbsp;g</span>
-      </div>
 
       <app-text-info
         [title]="'Składniki'"

@@ -4,6 +4,7 @@ import { NotificationsService } from "src/app/services/notifications.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Wine } from "src/app/utils/interfaces";
+import { cloneDeep } from "lodash";
 import { searchArrayByName } from "src/app/utils/search";
 
 @Component({
@@ -26,12 +27,14 @@ export class ProductionPage {
   ) {}
 
   ngOnInit() {
-    this.inProgressWines = this.dataService.inProgressWines;
+    this.inProgressWines = cloneDeep(this.dataService.inProgressWines);
     this.searchChange(``);
     this.subscriptions.push(
       this.dataService.inProgresWinesListChange.subscribe(() => {
-        this.inProgressWines = this.dataService.inProgressWines;
-        this.searchChange(``);
+        setTimeout(() => {
+          this.inProgressWines = cloneDeep(this.dataService.inProgressWines);
+          this.searchChange(``);
+        });
       })
     );
   }

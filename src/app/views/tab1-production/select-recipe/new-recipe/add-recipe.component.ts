@@ -17,17 +17,13 @@ export class AddRecipeComponent implements OnInit {
   recipe: Recipe = {
     id: ``,
     name: ``,
-    author: ``,
     ingredients: [{ name: ``, value: 0, unit: null }],
     productStages: cloneDeep(PRODUC_STAGES),
   };
 
   mustDescription = ``;
-  sugar = 0;
 
   nameValid = true;
-  authorValid = true;
-  sugarValid = true;
   mustDescriptionValid = true;
 
   showPreview = false;
@@ -57,31 +53,16 @@ export class AddRecipeComponent implements OnInit {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
-    this.recipe.ingredients.unshift({
-      name: `cukier`,
-      value: this.sugar,
-      unit: Units.gramy,
-    });
     this.showPreview = true;
   }
 
   checkValidate() {
     this.nameValid = true;
-    this.authorValid = true;
-    this.sugarValid = true;
     this.mustDescriptionValid = true;
     this.ingredientsValidElements = [];
     let valid = true;
     if (this.recipe.name === ``) {
       this.nameValid = false;
-      valid = false;
-    }
-    if (this.recipe.author === ``) {
-      this.authorValid = false;
-      valid = false;
-    }
-    if (this.sugar <= 0) {
-      this.sugarValid = false;
       valid = false;
     }
     if (!this.recipe.ingredients.length) {

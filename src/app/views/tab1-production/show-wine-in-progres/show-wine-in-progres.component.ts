@@ -31,6 +31,7 @@ export class ShowWineInProgresComponent implements OnInit {
   @Output() onBackClick = new EventEmitter();
   wine: Wine;
 
+  mustCreated = false;
   endFermentation = false;
   clearWine = false;
 
@@ -59,6 +60,7 @@ export class ShowWineInProgresComponent implements OnInit {
   }
 
   undoStage() {
+    this.mustCreated = false;
     this.endFermentation = false;
     this.clearWine = false;
 
@@ -68,6 +70,7 @@ export class ShowWineInProgresComponent implements OnInit {
   }
 
   async doStage() {
+    this.mustCreated = false;
     this.endFermentation = false;
     this.clearWine = false;
 
@@ -92,15 +95,23 @@ export class ShowWineInProgresComponent implements OnInit {
     return Math.round(this.getSugarValue() / 2) / 1000;
   }
 
-  getSugarValue() {
-    let value = this.wine.recipe.ingredients.find(
-      (ing) => ing.name === `cukier`
-    ).value;
+  getHalfSugarStraining() {
     return (
       Math.round(
-        (value / 10 + (this.wine.power - 10) * 17) * this.wine.capacity * 1000
+        this.wine.capacity * this.wine.power * 17 - this.wine.addedSugar
       ) / 1000
     );
+  }
+
+  getSugarValue() {
+    return Math.round(
+      this.wine.recipe.ingredients.find((ing) => ing.name === `cukier`).value
+    );
+  }
+
+  getBlg() {
+    const sugar = this.getSugarValue() / 2;
+    return Math.round(sugar / this.wine.capacity + 6 * 17) / 10;
   }
 
   changeStageToDrainage() {
@@ -151,6 +162,7 @@ export class ShowWineInProgresComponent implements OnInit {
         this.wine.recipe.productStages[i].date += dateDifference;
       }
       this.toastService.presentToastSuccess(`Zmieniono datę`);
+      this.dataService.inProgresWinesListChange.next();
     }
   }
 
@@ -196,13 +208,26 @@ export class ShowWineInProgresComponent implements OnInit {
     let description = PRODUC_STAGES_DESCRIPTIONS.find(
       (description) => description.name === stageName
     ).description;
-    if (stageName === ProductionStage.Preparation) {
-      description = this.nearestStage.description + ` ` + description;
-    }
     if (stageName === ProductionStage.StopFermentation) {
       return this.getStopFermentationDescription();
     }
+    if (stageName === ProductionStage.Preparation) {
+      return this.nearestStage.descriptions[1];
+    }
     return description;
+  }
+
+  changeSugar(sugar: number) {
+    this.wine.addedSugar = sugar * this.wine.capacity;
+  }
+
+  changeSugarAccept() {
+    this.mustCreated = true;
+    const sugarToAdd =
+      this.wine.capacity * this.wine.power * 17 - this.wine.addedSugar;
+    const fullSugar = sugarToAdd + this.getSugarValue() / 2;
+    this.wine.recipe.ingredients.find((ing) => ing.name === `cukier`).value =
+      fullSugar;
   }
 
   async openGuides(slug: string) {
