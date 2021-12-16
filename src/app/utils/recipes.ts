@@ -177,28 +177,10 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: ``,
-    name: `Wino z porzeczki czerwonej`,
-    ingredients: [
-      {
-        name: `czerwone porzeczki`,
-        value: 4600,
-        unit: Units.gramy,
-      },
-    ],
-    productStages: [
-      {
-        name: ProductionStage.Preparation,
-        date: 0,
-        description: `Porzeczki odrywamy z łodyżek i dokładnie myjemy. Następnie wyciskamy z nich sok. `,
-      },
-    ],
-  },
-  {
-    id: ``,
     name: `Wino śliwkowe`,
     ingredients: [
       {
-        name: `śliwki`,
+        name: `żółte śliwki`,
         value: 4000,
         unit: Units.gramy,
       },
@@ -208,6 +190,24 @@ export const RECIPES: Recipe[] = [
         name: ProductionStage.Preparation,
         date: 0,
         description: `Śliwki myjemy, usuwamy pestki a następnie umieszczamy w wiadrze. `,
+      },
+    ],
+  },
+  {
+    id: ``,
+    name: `Wino wiśniowe`,
+    ingredients: [
+      {
+        name: `wiśnie z kompotu bez konserwantów`,
+        value: 2000,
+        unit: Units.gramy,
+      },
+    ],
+    productStages: [
+      {
+        name: ProductionStage.Preparation,
+        date: 0,
+        description: `Wiśnie drylujemy i wraz z sokiem przelewamy do wiadra. `,
       },
     ],
   },

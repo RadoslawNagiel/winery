@@ -16,13 +16,13 @@ export const GUIDES: Guide[] = [
     • korkownica wraz z korkami <br>
     • sprzęt do czyszczenia i sterylizacji <br>
     • termometr <br>
-    • cukromierz z probówka <br>`,
+    • cukromierz z probówką <br>`,
     guides: [],
   },
   {
     slug: `sterylizacja`,
     name: `Sterylizacja`,
-    description: `Bardzo ważnym elementem produkcji wina, jest jak największe zachowanie czystości aparatury (wszystkiego co będzie miało kontakt z winem). Sprzętu nie wystarczy tylko umyć, ale zawsze należy go wysterylizować odpowiednimi środkami, takimi jak pirosiarczyn sodu, czy przeróżnymi innymi preparatami do sterylizacji i dezynfekcji. Środki te należy stosować zgodnie z zaleceniami producenta.`,
+    description: `Bardzo ważnym elementem produkcji wina jest jak największe zachowanie czystości aparatury (wszystkiego co będzie miało kontakt z winem). Sprzętu nie wystarczy tylko umyć, ale zawsze należy go wysterylizować odpowiednimi środkami takimi jak pirosiarczyn sodu czy przeróżnymi innymi preparatami do sterylizacji i dezynfekcji. Środki te należy stosować zgodnie z zaleceniami producenta.`,
     guides: [],
   },
   {
@@ -39,7 +39,7 @@ export const GUIDES: Guide[] = [
   {
     slug: `przygotowywanie-syropu-cukrowego`,
     name: `Przygotowywanie syropu cukrowego`,
-    description: `Cukier oraz wodę (lub część wina) umieszczamy w garnku. Całość podgrzewamy, często mieszając, do momentu całkowitego rozpuszczenia cukru. Syrop przed dodaniem do wina, należy ostudzić do temperatury mniejszej niż 30°C.<br>
+    description: `Cukier oraz wodę (lub część wina) umieszczamy w garnku. Całość podgrzewamy często mieszając do momentu całkowitego rozpuszczenia cukru. Syrop przed dodaniem do wina, należy ostudzić do temperatury mniejszej niż 30°C.<br>
     Objętość syropu zawierającego 1 kilogram cukru rozpuszczonego w litrze wody, wynosi około 1.6 litra.`,
     guides: [
       {
@@ -67,7 +67,7 @@ export const GUIDES: Guide[] = [
   {
     slug: `butelkowanie-wina`,
     name: `Butelkowanie wina`,
-    description: `Jeżeli wino nie posiada już osadu i jest całkowicie klarowne, możemy je zabutelkować. Do butelkowania potrzebne nam będą wysterylizowane butelki, wyparzone korki oraz korkownica. Wino nalewamy do butelek a następnie butelki zatykamy korkami przy użyciu korkownicy. Między korkiem a powierzchnią wina, powinno być około 13 mm przerwy. Na butelki warto nakleić etykiety zawierające datę produkcji, moc i rodzaj wina. Po zabutelkowaniu, wino powinno przebywać w takiej pozycji, aby korek miał stały kontakt z płynem, co zapobiega wyschnięciu korka. Wino najlepiej dojrzewa w temperaturze około 15°C. W zależności od mocy, wino może dojrzewać przez 9-24 miesiące. Im mocniejsze wino, tym dłużej powinno ono dojrzewać.`,
+    description: `Jeżeli wino nie posiada już osadu i jest całkowicie klarowne, możemy je zabutelkować. Do butelkowania potrzebne nam będą wysterylizowane butelki, wyparzone korki oraz korkownica. Wino nalewamy do butelek a następnie zatykamy je korkami przy użyciu korkownicy. Między korkiem a powierzchnią wina, powinno być około 13 mm przerwy. Na butelki warto nakleić etykiety zawierające datę produkcji, moc i rodzaj wina. Po zabutelkowaniu wino powinno przebywać w takiej pozycji, aby korek miał stały kontakt z płynem, co zapobiega wyschnięciu korka. Wino najlepiej dojrzewa w temperaturze około 15°C. W zależności od mocy, wino może dojrzewać przez 9-24 miesiące. Im mocniejsze wino, tym dłużej powinno ono dojrzewać.`,
     guides: [
       {
         name: `Sterylizacja`,
@@ -82,13 +82,14 @@ export const GUIDES: Guide[] = [
   {
     slug: `zatrzymanie-fermentacji`,
     name: `Zatrzymanie fermentacji`,
-    description: `Jeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że drożdże przestały pracować. Jeżeli nie planujemy już dosładzać wina (aby zmienić jego słodkość), nie musimy pozbywać się pozostałych drożdży. W przeciwnym wypadku musimy użyć jednej z poniższych metod.<br>
+    description: `JJeżeli przez rurkę nie wydostaje się już dwutlenek węgla i poziom wody w niej jest stale równy, oznacza to że drożdże przestały pracować. Jeżeli nie planujemy już dosładzać wina (aby zmienić jego słodkość), nie musimy pozbywać się pozostałych drożdży. W przeciwnym wypadku musimy użyć jednej z poniższych metod.<br>
     <b>1) Zabicie drożdży alkoholem</b><br>
     Zależnie od rodzaju drożdży, mają one różny poziom tolerancji na alkohol. Możemy pozbyć się drożdży, jeżeli moc wytworzonego alkoholu osiągnie ten poziom. Nie należy dolewać do wina wysokoprocentowego alkoholu w celu pozbycia się drożdży.<br>
     <b>2) Zabicie drożdży pirosiarczynem potasu</b><br>
     Pirosiarczynu potasu można używać nie tylko do dezynfekcji, ale również do pozbycia się drożdży. Dodatkowo stabilizuje on wino, konserwuje je i zabezpiecza. Pirosiarczyn może być jednak potem wyczuwalny w winie. Zależnie od rodzaju drożdży, zaleca się dodanie różnej ilości pirosiarczynu. Dla słabszych drożdży będzie to około 1 gram na 10 litrów wina. Dla mocniejszych, wartość ta wzrasta do około 2,5 grama na 10 litrów. Po dodaniu siarki należy sprawdzić czy fermentacja faktycznie ustała. <br>
     <b>3) Zabicie drożdży wysoką temperaturą</b><br>
-    Drożdże obumierają w wysokiej temperaturze. Przelewamy wino do garnka i podgrzewamy do ponad 50°C. Utrzymujemy tę temperaturę przez kilka minut a następnie pozostawiamy wino do ostudzenia. Po procesie tym należy sprawdzić czy fermentacja faktycznie ustała.`,
+    Drożdże obumierają w wysokiej temperaturze. Przelewamy wino do garnka i podgrzewamy do ponad 50°C. Utrzymujemy tę temperaturę przez kilka minut a następnie pozostawiamy wino do ostudzenia. Po procesie tym należy sprawdzić czy fermentacja faktycznie ustała.
+    `,
     guides: [
       {
         name: `Fermentacja`,
@@ -103,7 +104,7 @@ export const GUIDES: Guide[] = [
   {
     slug: `moc-wina`,
     name: `Moc wina`,
-    description: `Możemy zaplanować jaką moc będzie miało nasze wino. Każde 17 g cukru na litr roztworu da nam 1% alkoholu. Należy jednak pamiętać, że drożdże mają swoją maksymalną tolerancję na alkohol. Kiedy mamy już stworzony moszcz (bez dodatkowego cukru), możemy jego część przelać przez sito do probówki. Następnie w probówce umieszczamy cukromierz i zakręcamy nim, aby pozbyć się pęcherzyków powietrza, które mogły na nim osiąść. Aby pomiar był jak najbardziej dokładny, płyn powinien mieć temperaturę 20°C. Następnie odczytujemy z cukromierza liczbę w skali Ballinga. 1 stopień Blg to 10 g cukru na 1 kg roztworu. Zależnie od składników moszczu, ten pomiar będzie oznaczał co innego.<br>
+    description: `Możemy zaplanować jaką moc będzie miało nasze wino. Każde 17 g cukru na litr roztworu da nam w rezultacie 1% alkoholu. Należy jednak pamiętać, że drożdże mają swoją maksymalną tolerancję na alkohol. Kiedy mamy już stworzony moszcz (bez dodatkowego cukru), możemy jego część przelać przez sito do probówki. Następnie w probówce umieszczamy cukromierz i zakręcamy nim, aby pozbyć się pęcherzyków powietrza, które mogły na nim osiąść. Aby pomiar był jak najbardziej dokładny, płyn powinien mieć temperaturę 20°C. Następnie odczytujemy z cukromierza liczbę w skali Ballinga. 1 stopień BLG to 10 g cukru na 1 kg roztworu. Zależnie od składników moszczu, ten pomiar będzie oznaczał co innego.<br>
     <b>Przykład</b><br>
     Chcemy wyprodukować 5 litrów wina o mocy 10%. Po zbadaniu moszczu cukromierzem, otrzymujemy wynik 5 Blg. Oznacza to, że w 1kg roztworu znajduje się 50g cukru. Dla uproszczenia przyjmijmy, że 1 litr roztworu waży 1kg. Tak więc w litrze roztworu mamy 50g cukru. Chcemy otrzymać trunek o mocy 10%. Wykonujemy więc mnożenie 10 × 17g i wiemy, że łącznie potrzebujemy 170g na litr. Moszcz zawiera już 50g cukru, więc potrzebujemy dodać jeszcze 120g cukru na litr. Produkujemy 5 litrów, więc w sumie potrzebujemy dodać 600g cukru.`,
     guides: [
@@ -125,8 +126,7 @@ export const GUIDES: Guide[] = [
     • wytrawne - do 4-9 gramów (zależnie od kwaskowatości)<br>
     • półwytrawne - do 12-18 gramów (zależnie od kwaskowatości)<br>
     • półsłodkie - do 45 gramów<br>
-    • słodkie - ponad 45 gramów
-    `,
+    • słodkie - ponad 45 gramów`,
     guides: [
       {
         name: `Przygotowywanie syropu cukrowego`,

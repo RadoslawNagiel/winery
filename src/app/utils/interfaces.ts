@@ -7,7 +7,7 @@ export interface Wine {
   yeast: string;
   yeastTolerance: number;
   sweetness: Sweetness;
-  addedSugar: number;
+  startSugar: number;
   recipe: Recipe;
   done: boolean;
   numberOfBottles: number;

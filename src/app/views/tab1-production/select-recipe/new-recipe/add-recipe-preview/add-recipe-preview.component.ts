@@ -34,7 +34,7 @@ export class AddRecipePreviewComponent implements OnInit {
     createDate: 0,
     capacity: 10,
     power: 10,
-    addedSugar: 0,
+    startSugar: 0,
     yeast: `Drożdże winiarskie`,
     yeastTolerance: 12,
     sweetness: Sweetness.Półwytrawne,

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { DataService } from "./services/data.service";
-import { NotificationsService } from "./services/notifications.service";
 
 @Component({
   selector: "app-root",
@@ -8,17 +7,9 @@ import { NotificationsService } from "./services/notifications.service";
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
-  constructor(
-    private readonly dataService: DataService,
-    private readonly notificationsService: NotificationsService
-  ) {}
+  constructor(private readonly dataService: DataService) {}
 
   async ngOnInit() {
     await this.dataService.loadWines();
-    await this.notificationsService.scheduleNotifications();
-  }
-
-  async ngOnDestroy() {
-    await this.notificationsService.scheduleNotifications();
   }
 }

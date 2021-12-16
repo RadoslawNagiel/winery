@@ -13,6 +13,8 @@ export class NotificationsService {
   notId = 0;
   dayTimestamp = 86400000;
 
+  subscriptions: Subscription[] = [];
+
   constructor(private readonly dataService: DataService) {
     LocalNotifications.createChannel({
       id: `chanel-1`,
@@ -21,6 +23,20 @@ export class NotificationsService {
       importance: 5,
       visibility: 1,
     });
+  }
+
+  async ngOnInit() {
+    this.subscriptions.push(
+      this.dataService.notificationUpdate.subscribe(() => {
+        this.scheduleNotifications();
+      })
+    );
+  }
+
+  ngOnDestoy() {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 
   async showNotification(text: string, title: string, date: Date) {

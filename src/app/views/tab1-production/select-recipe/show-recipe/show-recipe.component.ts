@@ -40,14 +40,8 @@ export class ShowRecipeComponent implements OnInit {
       (description) => description.name === stageName
     ).description;
     if (stageName === ProductionStage.Preparation) {
-      const descriptions = PRODUC_STAGES_DESCRIPTIONS.find(
-        (description) => description.name === stageName
-      ).descriptions;
       description =
-        this.recipe.productStages[0].description +
-        ` ` +
-        descriptions[0] +
-        descriptions[1];
+        this.recipe.productStages[0].description + ` ` + description;
     }
     if (stageName === ProductionStage.StopFermentation) {
       return (

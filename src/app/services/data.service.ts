@@ -27,6 +27,7 @@ export class DataService {
   inProgresWinesListChange = new Subject();
   winesListChange = new Subject();
   recipesListChange = new Subject();
+  notificationUpdate = new Subject();
 
   subscriptions: Subscription[] = [];
 

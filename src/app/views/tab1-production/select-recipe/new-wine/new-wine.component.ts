@@ -12,6 +12,7 @@ import { Sweetness, Units, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
 import { ToastService } from "src/app/services/toast-service.service";
+import { cloneDeep } from "lodash";
 
 @Component({
   selector: "app-new-wine",
@@ -32,7 +33,7 @@ export class NewWineComponent implements OnInit {
     sweetness: 1,
     yeast: ``,
     yeastTolerance: 12,
-    addedSugar: 0,
+    startSugar: 0,
     recipe: {
       id: ``,
       name: ``,
@@ -58,8 +59,10 @@ export class NewWineComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.wine.recipe = this.dataService.allRecipes.find(
-      (recipe) => recipe.id === this.activatedRoute.snapshot.queryParams.index
+    this.wine.recipe = cloneDeep(
+      this.dataService.allRecipes.find(
+        (recipe) => recipe.id === this.activatedRoute.snapshot.queryParams.index
+      )
     );
     this.wine.name = this.wine.recipe.name;
     this.today = this.inputDateString(new Date());
@@ -81,13 +84,12 @@ export class NewWineComponent implements OnInit {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
-    const sugar = (this.wine.power - 6) * 17;
-    this.wine.recipe.ingredients.unshift({
-      name: `cukier`,
-      value: this.wine.capacity * sugar,
-      unit: Units.gramy,
-    });
+    for (let ingredient of this.wine.recipe.ingredients) {
+      ingredient.value =
+        Math.round(ingredient.value * this.wine.capacity * 100) / 1000;
+    }
     const wineIndex = this.dataService.addWine(this.wine);
+    this.dataService.notificationUpdate.next();
     await this.router.navigate([`/tabs/tab1/show-wine`], {
       queryParams: {
         index: wineIndex,

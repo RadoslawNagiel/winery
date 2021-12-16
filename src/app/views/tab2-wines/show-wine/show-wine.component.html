@@ -60,7 +60,7 @@
       *ngFor="let ingredient of wine.recipe.ingredients"
     >
       - {{ ingredient.name }}:
-      {{ (ingredient.value * wine.capacity) / 10 }}
+      {{ ingredient.value }}
       {{ ingredient.unit }}
     </div>
 

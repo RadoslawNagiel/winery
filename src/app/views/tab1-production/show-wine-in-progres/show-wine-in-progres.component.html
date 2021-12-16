@@ -37,12 +37,7 @@
       *ngFor="let ingredient of wine.recipe.ingredients"
     >
       - {{ ingredient.name }}:
-      <ng-container *ngIf="ingredient.name === 'cukier'; else noSugar">
-        {{ getSugarValue() }}
-      </ng-container>
-      <ng-template #noSugar>
-        {{ (ingredient.value * wine.capacity) / 10 }}
-      </ng-template>
+      {{ ingredient.value }}
       {{ ingredient.unit }}
     </div>
 
@@ -73,15 +68,9 @@
         "
       >
         <div *ngIf="nearestStage.name === ProductionStage.Preparation">
-          {{ wine.recipe.productStages[0].description }}
-          {{ nearestStage.descriptions[0] }}
-          <app-calc-glucose-syrup
-            [disableSugarEdit]="true"
-            [sugar]="getHalfSugar()"
-            [capacity]="getHalfSugar()"
-          ></app-calc-glucose-syrup>
-          Nastepnie dokonaj pomiaru zawartości cukru w listrze roztworu. Proces
-          pomiaru został opisany w poradniku
+          {{ wine.recipe.productStages[0].description }}<br />
+          Nastepnie dokonaj pomiaru zawartości cukru w roztworze. Proces pomiaru
+          został opisany w poradniku
           <span
             class="items-center reference whitespace-nowrap"
             (click)="openGuides('moc-wina')"
@@ -91,7 +80,6 @@
 
           <app-calc-blg
             [onlyBlg]="'true'"
-            [blg]="getBlg()"
             (onsugarChanged)="changeSugar($event)"
           ></app-calc-blg>
           <div class="font-semibold">
@@ -139,11 +127,16 @@
         <div class="pl-1">
           {{ getStageDescription(nearestStage.name) }}
         </div>
-        <div *ngIf="nearestStage.name === ProductionStage.Straining">
+        <div
+          *ngIf="
+            nearestStage.name === ProductionStage.Preparation ||
+            nearestStage.name === ProductionStage.Straining
+          "
+        >
           <app-calc-glucose-syrup
             [disableSugarEdit]="true"
-            [sugar]="getHalfSugarStraining()"
-            [capacity]="getHalfSugarStraining()"
+            [sugar]="getHalfSugar()"
+            [capacity]="getHalfSugar()"
           ></app-calc-glucose-syrup>
         </div>
         <div class="pl-2 pb-1 pt-1 flex flex-wrap">
