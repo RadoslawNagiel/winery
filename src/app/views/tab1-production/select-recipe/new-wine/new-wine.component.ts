@@ -28,7 +28,7 @@ export class NewWineComponent implements OnInit {
     id: ``,
     name: ``,
     createDate: 0,
-    capacity: 10,
+    capacity: null,
     power: 12,
     sweetness: 1,
     yeast: ``,
@@ -99,6 +99,7 @@ export class NewWineComponent implements OnInit {
 
   checkValidate() {
     this.nameValid = true;
+    this.yeastValid = true;
     this.capacityValid = true;
     let valid = true;
     if (this.wine.name === ``) {

@@ -17,7 +17,7 @@ export class AddRecipeComponent implements OnInit {
   recipe: Recipe = {
     id: ``,
     name: ``,
-    ingredients: [{ name: ``, value: 0, unit: null }],
+    ingredients: [{ name: ``, value: null, unit: null }],
     productStages: cloneDeep(PRODUC_STAGES),
   };
 

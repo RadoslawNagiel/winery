@@ -7,89 +7,86 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ng-container *ngIf="!showPreview">
-    <div class="standard-frame">
-      <div class="header-text py-1">Nazwa</div>
-      <ion-input
-        placeholder="Nazwa..."
-        [ngClass]="{ 'invalid-text': !nameValid }"
-        [(ngModel)]="recipe.name"
-      ></ion-input>
+<ion-content [fullscreen]="true" *ngIf="!showPreview">
+  <div class="standard-frame">
+    <div class="header-text py-1">Nazwa</div>
+    <ion-input
+      placeholder="Nazwa..."
+      [ngClass]="{ 'invalid-text': !nameValid }"
+      [(ngModel)]="recipe.name"
+    ></ion-input>
 
-      <app-text-info
-        [title]="'Składniki'"
-        [hintText]="
-          'Podaj składniki potrzebne do wytworzenia 10 litrów wina. Składniki nie
+    <app-text-info
+      [title]="'Składniki'"
+      [hintText]="
+        'Podaj składniki potrzebne do wytworzenia 10 litrów wina. Składniki nie
     powinny zawierać drożdży, wody oraz cukru.'
-        "
-      ></app-text-info>
+      "
+    ></app-text-info>
 
-      <div class="ingredient-container pt-1">
-        <span>Nazwa</span>
-        <span>Ilość</span>
-        <span>Jesdnostka</span>
-        <span></span>
-      </div>
-      <div *ngFor="let ingredient of recipe.ingredients; index as i">
-        <div class="ingredient-container py-2 items-center">
-          <ion-input
-            [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].name }"
-            placeholder="Nazwa..."
-            [(ngModel)]="ingredient.name"
-          ></ion-input>
-          <ion-input
-            class="text-center"
-            [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].value }"
-            placeholder="Waga..."
-            type="number"
-            [(ngModel)]="ingredient.value"
-          ></ion-input>
-          <ion-select
-            [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].unit }"
-            [(ngModel)]="ingredient.unit"
-            placeholder="..."
-            cancelText="Anuluj"
-            okText="Wybierz"
-          >
-            <ion-select-option value="g">Gramy</ion-select-option>
-            <ion-select-option value="l">Litry</ion-select-option>
-            <ion-select-option value="szt.">Sztuki</ion-select-option>
-          </ion-select>
-          <span
-            *ngIf="recipe.ingredients.length > 1"
-            class="circle-button-small"
-            (click)="deleteIngredientClick(i)"
-            >-</span
-          >
-        </div>
-        <hr />
-      </div>
-      <div class="flex justify-center pt-2">
-        <span class="circle-button-small" (click)="newIngredientClick()"
-          >+</span
+    <div class="ingredient-container pt-1">
+      <span>Nazwa</span>
+      <span>Ilość</span>
+      <span>Jesdnostka</span>
+      <span></span>
+    </div>
+    <div *ngFor="let ingredient of recipe.ingredients; index as i">
+      <div class="ingredient-container py-2 items-center">
+        <ion-input
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].name }"
+          placeholder="Nazwa..."
+          [(ngModel)]="ingredient.name"
+        ></ion-input>
+        <ion-input
+          class="text-center"
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].value }"
+          placeholder="Ilość..."
+          type="number"
+          [(ngModel)]="ingredient.value"
+        ></ion-input>
+        <ion-select
+          [ngClass]="{ 'invalid-text': !ingredientsValidElements[i].unit }"
+          [(ngModel)]="ingredient.unit"
+          placeholder="..."
+          cancelText="Anuluj"
+          okText="Wybierz"
+        >
+          <ion-select-option value="g">gramy</ion-select-option>
+          <ion-select-option value="l">litry</ion-select-option>
+          <ion-select-option value="szt.">sztuki</ion-select-option>
+        </ion-select>
+        <span
+          *ngIf="recipe.ingredients.length > 1"
+          class="circle-button-small"
+          (click)="deleteIngredientClick(i)"
+          >-</span
         >
       </div>
-      <app-text-info
-        [title]="'Przygotowanie moszczu'"
-        [hintText]="
-          'Opisz proces przygotowywania moszczu. Powinien on zawierać proces przygotowywania wymienionych przez Ciebie składników.'
-        "
-      ></app-text-info>
-      <ion-textarea
-        placeholder="Opis..."
-        [ngClass]="{ 'invalid-text': !mustDescriptionValid }"
-        [(ngModel)]="mustDescription"
-      ></ion-textarea>
-      <div class="pt-4 flex justify-end">
-        <span class="standard-button" (click)="addRecipe()">Dalej</span>
-      </div>
+      <hr />
     </div>
-  </ng-container>
-  <ng-container *ngIf="showPreview">
-    <app-add-recipe-preview
-      [recipe]="recipe"
-      (onBackClick)="showPreview = false"
-    ></app-add-recipe-preview>
-  </ng-container>
+    <div class="flex justify-center pt-2">
+      <span class="circle-button-small" (click)="newIngredientClick()">+</span>
+    </div>
+    <app-text-info
+      [title]="'Przygotowanie moszczu'"
+      [hintText]="
+        'Opisz proces przygotowywania moszczu. Powinien on zawierać proces przygotowywania wymienionych przez Ciebie składników.'
+      "
+    ></app-text-info>
+    <ion-textarea
+      placeholder="Opis..."
+      [ngClass]="{ 'invalid-text': !mustDescriptionValid }"
+      [(ngModel)]="mustDescription"
+    ></ion-textarea>
+    <div class="pt-4 flex justify-end">
+      <span class="standard-button" (click)="addRecipe()">Dalej</span>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="showPreview">
+  <app-add-recipe-preview
+    [recipe]="recipe"
+    (onBackClick)="showPreview = false"
+  ></app-add-recipe-preview>
 </ion-content>
