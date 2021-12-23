@@ -1,5 +1,4 @@
 import { AddRecipeComponent } from "./add-recipe.component";
-import { AddRecipePreviewModule } from "./add-recipe-preview/add-recipe-preview.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
@@ -13,11 +12,17 @@ import { TextInfoModule } from "src/app/shared/text-info/text-info.module";
     FormsModule,
     IonicModule,
     TextInfoModule,
-    AddRecipePreviewModule,
     RouterModule.forChild([
       {
         path: ``,
         component: AddRecipeComponent,
+      },
+      {
+        path: `preview`,
+        loadChildren: () =>
+          import(`./add-recipe-preview/add-recipe-preview.module`).then(
+            (m) => m.AddRecipePreviewModule
+          ),
       },
     ]),
   ],

@@ -1,15 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
-import { Recipe, Sweetness, Units, Wine } from "src/app/utils/interfaces";
+import { Component, OnInit } from "@angular/core";
+import { Sweetness, Wine } from "src/app/utils/interfaces";
 
 import { DataService } from "src/app/services/data.service";
+import { NewRecipeService } from "src/app/services/new-recipe.service";
 import { PRODUC_STAGES_DESCRIPTIONS } from "src/app/utils/product-stages";
 import { Router } from "@angular/router";
 import { ToastService } from "src/app/services/toast-service.service";
@@ -21,9 +14,6 @@ import { cloneDeep } from "lodash";
   styleUrls: ["./add-recipe-preview.component.scss"],
 })
 export class AddRecipePreviewComponent implements OnInit {
-  @Input() recipe!: Recipe;
-  @Output() onBackClick = new EventEmitter();
-
   dayTimestamp = 86400000;
 
   statesDays = [];
@@ -43,14 +33,17 @@ export class AddRecipePreviewComponent implements OnInit {
     numberOfBottles: 0,
     stagesDone: [],
   };
+  recipe: any;
 
   constructor(
     private readonly toastService: ToastService,
     private readonly dataService: DataService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly newRecipeService: NewRecipeService
   ) {}
 
   async ngOnInit() {
+    this.recipe = this.newRecipeService.recipe;
     this.wine.name = this.recipe.name;
     this.wine.recipe = this.recipe;
     this.statesDays = this.recipe.productStages.map(
@@ -123,7 +116,7 @@ export class AddRecipePreviewComponent implements OnInit {
     return PRODUC_STAGES_DESCRIPTIONS[0].descriptions[0];
   }
 
-  backClick() {
-    this.onBackClick.emit();
+  async backClick() {
+    await this.router.navigate([`/tabs/tab1/select-recipe/new-recipe`]);
   }
 }

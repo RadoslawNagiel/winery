@@ -5,6 +5,8 @@ import {
 } from "src/app/utils/product-stages";
 import { Recipe, Units } from "src/app/utils/interfaces";
 
+import { NewRecipeService } from "src/app/services/new-recipe.service";
+import { Router } from "@angular/router";
 import { ToastService } from "src/app/services/toast-service.service";
 import { cloneDeep } from "lodash";
 
@@ -26,18 +28,20 @@ export class AddRecipeComponent implements OnInit {
   nameValid = true;
   mustDescriptionValid = true;
 
-  showPreview = false;
-
   ingredientsValidElements: { name: boolean; value: boolean; unit: boolean }[] =
     [{ name: true, value: true, unit: true }];
 
-  constructor(private readonly toastService: ToastService) {}
+  constructor(
+    private readonly toastService: ToastService,
+    private readonly router: Router,
+    private readonly newRecipeService: NewRecipeService
+  ) {}
 
   async ngOnInit() {}
 
   newIngredientClick() {
     this.ingredientsValidElements.push({ name: true, value: true, unit: true });
-    this.recipe.ingredients.push({ name: ``, value: 0, unit: null });
+    this.recipe.ingredients.push({ name: ``, value: null, unit: null });
   }
 
   deleteIngredientClick(index: number) {
@@ -47,13 +51,14 @@ export class AddRecipeComponent implements OnInit {
     }
   }
 
-  addRecipe() {
+  async addRecipe() {
     this.recipe.productStages[0].description = this.mustDescription;
     if (!this.checkValidate()) {
       this.toastService.presentToastError(`Uzupełnij poprawnie pola`);
       return;
     }
-    this.showPreview = true;
+    this.newRecipeService.recipe = this.recipe;
+    await this.router.navigate([`/tabs/tab1/select-recipe/new-recipe/preview`]);
   }
 
   checkValidate() {

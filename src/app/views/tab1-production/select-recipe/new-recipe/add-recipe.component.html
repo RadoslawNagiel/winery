@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="!showPreview">
+<ion-content [fullscreen]="true">
   <div class="standard-frame">
     <div class="header-text py-1">Nazwa</div>
     <ion-input
@@ -82,11 +82,4 @@
       <span class="standard-button" (click)="addRecipe()">Dalej</span>
     </div>
   </div>
-</ion-content>
-
-<ion-content [fullscreen]="true" *ngIf="showPreview">
-  <app-add-recipe-preview
-    [recipe]="recipe"
-    (onBackClick)="showPreview = false"
-  ></app-add-recipe-preview>
 </ion-content>

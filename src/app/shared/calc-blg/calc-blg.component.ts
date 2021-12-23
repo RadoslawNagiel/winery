@@ -8,7 +8,7 @@ import { ToastService } from "src/app/services/toast-service.service";
   styleUrls: ["./calc-blg.component.scss"],
 })
 export class CalcBlgComponent implements OnInit {
-  @Input() blg = 1;
+  @Input() blg = 0;
   @Input() additionalSugar = 0;
   @Input() sugar = 10;
   @Input() weight = 1000;

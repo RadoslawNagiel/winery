@@ -77,11 +77,21 @@
           >
             <ion-icon name="book-outline"></ion-icon>&nbsp;Moc wina
           </span>
-
           <app-calc-blg
             [onlyBlg]="'true'"
+            [power]="wine.power"
+            [capacity]="wine.capacity"
             (onsugarChanged)="changeSugar($event)"
           ></app-calc-blg>
+          <div class="must-capacity-container">
+            <ion-input
+              class="text-center"
+              min="0"
+              type="number"
+              [(ngModel)]="mustCapacity"
+            ></ion-input>
+            <div>l - litraż moszczu</div>
+          </div>
           <div class="font-semibold">
             Wpisz pomiar do kalkulatora a następnie zatwierdź poniższym
             przyciskiem

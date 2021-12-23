@@ -46,6 +46,8 @@ export class ShowWineInProgresComponent implements OnInit {
   Sweetness = Sweetness;
   ProductionStage = ProductionStage;
 
+  mustCapacity = 0;
+
   constructor(
     private readonly dataService: DataService,
     private readonly router: Router,
@@ -208,18 +210,24 @@ export class ShowWineInProgresComponent implements OnInit {
   }
 
   changeSugar(sugar: number) {
-    this.wine.startSugar = sugar * this.wine.capacity;
+    this.wine.startSugar = sugar;
   }
 
   changeSugarAccept() {
-    this.mustCreated = true;
+    this.wine.startSugar *= this.mustCapacity;
     const fullSugar =
       this.wine.capacity * this.wine.power * 17 - this.wine.startSugar;
+    if (fullSugar < 0 || this.mustCapacity === 0) {
+      this.toastService.presentToastError(`Wprowadzono niepoprawne dane`);
+      return;
+    }
     this.wine.recipe.ingredients.unshift({
       name: `cukier`,
       value: fullSugar,
       unit: Units.gramy,
     });
+    this.dataService.inProgresWinesListChange.next();
+    this.mustCreated = true;
   }
 
   async openGuides(slug: string) {
