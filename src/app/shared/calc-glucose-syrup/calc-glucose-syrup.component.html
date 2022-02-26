@@ -11,8 +11,8 @@
         min="0"
         type="number"
         [disabled]="disableSugarEdit"
-        [(ngModel)]="sugar"
-        (change)="changeSugar()"
+        [(ngModel)]="sugarAmount"
+        (change)="changedSugarOrCapacity()"
       ></ion-input>
     </div>
     <div>
@@ -22,7 +22,7 @@
         min="0"
         type="number"
         [(ngModel)]="capacity"
-        (change)="changeSugar()"
+        (change)="changedSugarOrCapacity()"
       ></ion-input>
     </div>
     <div>
@@ -30,8 +30,8 @@
         class="text-center"
         min="0"
         type="number"
-        [(ngModel)]="syrup"
-        (change)="changeSyrup()"
+        [(ngModel)]="glucoseSyrup"
+        (change)="changedSyrup()"
       ></ion-input>
     </div>
   </div>

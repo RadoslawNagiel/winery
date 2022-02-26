@@ -32,18 +32,14 @@
       [(ngModel)]="wine.capacity"
     ></ion-input>
     <div class="header-text py-1">Drożdże</div>
-    <ion-input
-      [ngClass]="{ 'invalid-text': !yeastValid }"
-      placeholder="Nazwa..."
-      [(ngModel)]="wine.yeast"
-    ></ion-input>
+    <ion-input placeholder="Nazwa..." [(ngModel)]="wine.yeast"></ion-input>
     <div class="header-text pt-1">Tolerancja drożdży na alkohol</div>
     <div class="flex items-center">
       <div class="w-3/5">
         <ion-range
           class="p-0"
-          min="8"
-          max="22"
+          min="9"
+          max="21"
           snaps="true"
           (ionChange)="yeastToleranceChange()"
           [(ngModel)]="wine.yeastTolerance"
@@ -63,7 +59,7 @@
       <div class="w-3/5">
         <ion-range
           class="p-0"
-          min="7"
+          min="8"
           [max]="wine.yeastTolerance"
           snaps="true"
           [(ngModel)]="wine.power"

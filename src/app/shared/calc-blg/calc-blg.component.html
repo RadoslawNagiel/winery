@@ -7,7 +7,7 @@
         min="0"
         type="number"
         [(ngModel)]="blg"
-        (change)="changeBlg()"
+        (change)="changedBlgOrWeight()"
       ></ion-input>
     </div>
     <div>Blg moszczu</div>
@@ -16,7 +16,7 @@
       min="0"
       type="number"
       [(ngModel)]="weight"
-      (change)="changeBlg()"
+      (change)="changedBlgOrWeight()"
     ></ion-input>
     <div>g - waga litra roztworu</div>
     <ng-container *ngIf="!onlyBlg">
@@ -27,7 +27,7 @@
             min="0"
             type="number"
             [(ngModel)]="power"
-            (change)="changePower()"
+            (change)="changedPower()"
           ></ion-input>
         </div>
       </div>

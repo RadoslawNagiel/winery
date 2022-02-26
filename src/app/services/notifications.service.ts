@@ -1,7 +1,6 @@
-import { Channel, LocalNotifications } from "@capacitor/local-notifications";
-
 import { DataService } from "./data.service";
 import { Injectable } from "@angular/core";
+import { LocalNotifications } from "@capacitor/local-notifications";
 import { Subscription } from "rxjs";
 import { Wine } from "../utils/interfaces";
 import { cloneDeep } from "lodash";

@@ -7,7 +7,7 @@ import { ToastService } from "src/app/services/toast-service.service";
   templateUrl: "./calc-blg.component.html",
   styleUrls: ["./calc-blg.component.scss"],
 })
-export class CalcBlgComponent implements OnInit {
+export class CalcBlgComponent {
   @Input() blg = 0;
   @Input() additionalSugar = 0;
   @Input() sugar = 10;
@@ -17,51 +17,48 @@ export class CalcBlgComponent implements OnInit {
 
   @Output() onsugarChanged = new EventEmitter<number>();
 
-  ngOnInit() {
-    this.changeBlg();
-  }
-
   ngOnChanges(changes: any) {
-    if (changes.sugar || changes.capacity) {
+    if (changes.blg || changes.weight) {
+      this.changedBlgOrWeight();
     }
-    if (changes.syrup) {
+    if (changes.power) {
+      this.changedPower();
     }
   }
 
-  changeBlg() {
+  changedBlgOrWeight() {
     if (this.blg < 0) {
       this.blg = 0;
     }
     if (this.blg > 100) {
       this.blg = 100;
     }
-    if (this.additionalSugar < 0) {
-      this.additionalSugar = 0;
-    }
     if (this.weight < 0) {
       this.weight = 0;
     }
     if (this.additionalSugar > 0) {
-      this.changePower();
+      this.changedPower();
       return;
     }
-    this.sugar =
-      Math.round(
-        (this.blg * 10 * (this.weight / 1000) + this.additionalSugar) * 100
-      ) / 100;
-    this.power = Math.round((this.sugar / 17) * 100) / 100;
+
+    const sugar = this.blg * 10 * (this.weight / 1000) + this.additionalSugar;
+    this.sugar = Math.round(sugar * 100) / 100;
+
+    const power = this.sugar / 17;
+    this.power = Math.round(power * 100) / 100;
     this.onsugarChanged.emit(this.sugar);
   }
 
-  changePower() {
+  changedPower() {
     if (this.power < 0) {
       this.power = 0;
     }
+
     this.sugar = this.power * 17;
     this.additionalSugar = this.sugar - this.blg * 10 * (this.weight / 1000);
     if (this.additionalSugar < 0) {
       this.additionalSugar = 0;
-      this.changeBlg();
+      this.changedBlgOrWeight();
       return;
     }
     this.onsugarChanged.emit(this.sugar);

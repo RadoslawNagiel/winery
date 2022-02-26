@@ -3,7 +3,6 @@ import { Subject, Subscription } from "rxjs";
 
 import { GUIDES } from "../utils/guides";
 import { Injectable } from "@angular/core";
-import { NotificationsService } from "./notifications.service";
 import { PRODUC_STAGES } from "../utils/product-stages";
 import { RECIPES } from "../utils/recipes";
 import { Storage } from "@ionic/storage-angular";
