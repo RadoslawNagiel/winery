@@ -17,13 +17,8 @@ export class CalcBlgComponent {
 
   @Output() onsugarChanged = new EventEmitter<number>();
 
-  ngOnChanges(changes: any) {
-    if (changes.blg || changes.weight) {
-      this.changedBlgOrWeight();
-    }
-    if (changes.power) {
-      this.changedPower();
-    }
+  ngOnInit() {
+    this.changedBlgOrWeight();
   }
 
   changedBlgOrWeight() {
